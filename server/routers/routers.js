@@ -1,0 +1,3 @@
+/*
+ * Handle routes from endpoints.
+ */
