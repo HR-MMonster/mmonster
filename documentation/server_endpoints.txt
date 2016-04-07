@@ -1,0 +1,26 @@
+/
+  |
+    -- serve static (client/public)
+/signup
+  |
+    -- /:user
+      |
+        -- POST
+  |
+    -- /:group
+      |
+        -- POST
+
+/signin
+  |
+    -- POST
+
+/profile
+  |
+    -- /:user
+      |
+        -- GET PUT POST
+  |
+    -- /:group
+      |
+        -- GET PUT POST
