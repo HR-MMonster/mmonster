@@ -1,19 +1,23 @@
 mmonser
 |
- - - client
++--- client
 |
- -- documentation
-    |
-     - file_structure.txt
-    |
-     - database_schema.txt
++--- documentation
+|   |--- file_structure.txt
+|   |--- database_schema.txt
 |
- - - server
-     |
-      - controllers
-     |
-      - models
-     |
-      - routers
-     |
-      - test
++--- server
+|    +--- controllers
+|        |--- groupController
+|        |___ userController
+|
+|    +--- models
+|        |--- groupModel
+|        |___ userModel
+|
+|    +--- routers
+|        |--- profileRouter
+|        |--- signinRouter
+|        |___ signupRouter
+|
+|    +--- test
