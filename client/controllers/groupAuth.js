@@ -1,13 +1,11 @@
 angular.module('app.auth', [])
 
-.controller('PlayerAuthController', function ($window, $location, Auth) {
-  var PlayerAuthCtrl = this;
-  PlayerAuthCtrl.player = {};
+.controller('GroupAuthController', function ($window, $location, Auth) {
+  var GroupAuthCtrl = this;
+  GroupAuthCtrl.group = {};
 
-
-
-  PlayerAuthCtrl.signin = function () {
-    Auth.signin(PlayerAuthCtrl.player)
+  GroupAuthCtrl.signin = function () {
+    Auth.signin(GroupAuthCtrl.group)
       .then(function (token) {
         $window.localStorage.setItem('com.app', token);
         $location.path('./index.html');
@@ -17,8 +15,8 @@ angular.module('app.auth', [])
       });
   };
 
-  PlayerAuthCtrl.signup = function () {
-    Auth.signup(PlayerAuthCtrl.player)
+  GroupAuthCtrl.signup = function () {
+    Auth.signup(GroupAuthCtrl.group)
       .then(function (token) {
         $window.localStorage.setItem('com.app', token);
         $location.path('./index.html');
