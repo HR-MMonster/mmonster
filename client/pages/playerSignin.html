@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-controller='PlayerAuthController as PlayerAuthCtrl'>
+  <head>
+    <meta charset="utf-8" />
+    <title>MMONSTER</title>
+  </head>
+  <body>
+    <div id='signin'>
+      <h1>Player Sign-In</h1>
+      <form name="signinForm" ng-submit='PlayerAuthCtrl.signin()'>
+        <input type='text' ng-model='PlayerAuthCtrl.player.username'>
+        <input type="password" ng-model='PlayerAuthCtrl.player.password'>
+        <button>signin</button>
+      </form>
+      <a href="./playerSignup">Don't have a player account? <strong>Sign-Up</strong> ...</a>
+    </div>
+  </body>
+</html>

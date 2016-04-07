@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-controller='GroupAuthController'>
+  <head>
+    <meta charset="utf-8" />
+    <title>MMONSTER</title>
+  </head>
+  <body>
+    <div id='signup'>
+      <h1>Group Sign-Up</h1>
+      <form name="signupForm" ng-submit='GroupAuthCtrl.signup()'>
+        <input type='text' ng-model='GroupAuthCtrl.group.username'>
+        <input type="password" ng-model='GroupAuthCtrl.group.password'>
+        <button>signup</button>
+      </form>
+      <a href="./groupSignin">Already have a group account? <strong>Sign-In</strong> ...</a>
+    </div>
+  </body>
+</html>
+
