@@ -1,0 +1,19 @@
+mmonser
+|
+ - - client
+|
+ -- documentation
+    |
+     - file_structure.txt
+    |
+     - database_schema.txt
+|
+ - - server
+     |
+      - controllers
+     |
+      - models
+     |
+      - routers
+     |
+      - test
