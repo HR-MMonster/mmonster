@@ -3,7 +3,23 @@
 
   </head>
   <body>
-    <div class="user-profile" ng-controller="ProfileController as ProfileCtrl"></div>
-    <input type="text">
+   <body ng-app="app.PlayerProfile">
+  <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
+    <img ng-src={{ProfileCtrl.profile.profileImage}} />
+    <label for="realname">Name</label>
+    <input type="text" id="realname" ng-model='ProfileCtrl.profile.realname'>
+    <label for="location">Location</label>
+    <input type="text" id="location" ng-model='ProfileCtrl.profile.location'>
+    <label for="active-game">Active Game</label>
+    <input type="text" id="active-game" ng-model='ProfileCtrl.profile.activeGame'>
+    <a href="#" ng-click="ProfileCtrl.update()">Update Profile</a>
+    <select id="server" name="server">
+</select>
+  </div>
+
+  <ffxiv />
+
+  <script src="../lib/angular/angular.min.js"></script>
+  <script src="../controllers/Profile.js"></script>
   </body>
 </html>
