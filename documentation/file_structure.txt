@@ -3,21 +3,25 @@ mmonser
 +--- client
 |
 +--- documentation
-|   |--- file_structure.txt
 |   |--- database_schema.txt
+|   |--- file_structure.txt
+|   |___ server_endpoints.txt
 |
 +--- server
 |    +--- controllers
-|        |--- groupController
-|        |___ userController
-|
+|    |   |--- groupController
+|    |   |___ userController
+|    |
 |    +--- models
-|        |--- groupModel
-|        |___ userModel
-|
+|    |   |--- groupModel
+|    |   |___ userModel
+|    |
 |    +--- routers
-|        |--- profileRouter
-|        |--- signinRouter
-|        |___ signupRouter
-|
+|    |   |--- profileRouter
+|    |   |--- signinRouter
+|    |   |___ signupRouter
+|    |
 |    +--- test
+
+
+// TODO: Automate file structure creation through tree command and pipe into folder when grub is run
