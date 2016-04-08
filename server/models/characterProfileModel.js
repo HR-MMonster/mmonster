@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var userProfileSchema = new mongoose.Schema({
+var characterProfileSchema = new mongoose.Schema({
   gameName: {
     type: String,
     required: true
@@ -23,4 +23,4 @@ var userProfileSchema = new mongoose.Schema({
    *  }
    */
 
-module.exports = mongoose.model('gameProfileSchema');
+module.exports = mongoose.model('characterProfiles', characterProfileSchema);

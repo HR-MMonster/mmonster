@@ -24,19 +24,8 @@ var groups = [
   },
 ];
 
-
-var gameProfile = {
-  name    : "FFIVX",
-  dps     : 78, // damage per second
-  main    : "Dark Knight",   //
-  jobs    : ["Warrior", "Time Mage", "Red Mage", "Sage"], // store an array of jobs they can play
-  cleared : {},  // store an object or array ? with {levelName : boolean}
-  mic     : true,
-  server  : "Tonberry"
-};
-
-var gameProfile_v2 = {
-  name    : "FFIVX",
+var charProfile_v2 = {
+  gameName    : "FFIVX",
   dps     : 78, // damage per second
   main    : "Dark Knight",   //
   jobs    : {
@@ -55,9 +44,25 @@ var gameProfile_v2 = {
   server  : "Tonberry"
 };
 
-
-module.exports = users;
-
+var charProfile_v2 = {
+  gameName    : "FFIVX",
+  dps     : 78, // damage per second
+  main    : "Dark Knight",   //
+  jobs    : {
+    "Warrior": true,
+    "Time Mage": false,
+    "Red Mage": false,
+    "Sage": true
+  }, // store an array of jobs they can play
+  cleared : {
+    A1S: true,
+    A2S: true,
+    A3S: true,
+    A4S: false,
+  },  // store an object or array ? with {levelName : boolean}
+  mic     : true,
+  server  : "Tonberry"
+};
 // most important queries:
   // time available to play
   // job

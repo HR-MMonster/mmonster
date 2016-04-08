@@ -21,6 +21,10 @@ var UserSchema = new mongoose.Schema({
   summary: String,
   photo: String, // store path to file location
 
+  // user availability
+  startTime: Number,
+  endTime: Number,
+
 });
 
 UserSchema.methods.comparePasswords = function(passwordAttempt) {
