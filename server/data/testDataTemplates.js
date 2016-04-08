@@ -1,5 +1,4 @@
-var users = [
-  {
+var userTemplate = {
     "username"    : "grandMage",
     "password"    : "7gjk84njk",  // stores hash
     "name"        : "Travis",
@@ -7,25 +6,20 @@ var users = [
     "summary"     : "I like dogs and long walks on the beach",
     "startTime"   : 22, // num from 0-23, account for different time zones
     "endTime"     : 3,  // num from 0-23
-  },
+};
 
+var groupTemplate = {
+  "groupname"   : "mmonsteeeers",
+  "password"    : "hdyldhgj883",  // stores hash
+  "name"        : "Colin",
+  "email"       : "colin@me.com",
+  "summary"     : "Play or be played",
+  "startTime"   : 16, // num from 0-23, account for different time zones
+  "endTime"     : 2,  // num from 0-23
+};
 
-];
-
-var groups = [
-  {
-    "groupname"    : "mmonsteeeers",
-    "password"    : "hdyldhgj883",  // stores hash
-    "name"        : "Colin",
-    "email"       : "colin@me.com",
-    "summary"     : "Play or be played",
-    "startTime"   : 16, // num from 0-23, account for different time zones
-    "endTime"     : 2,  // num from 0-23
-  },
-];
-
-var charProfile_v2 = {
-  gameName    : "FFIVX",
+var charProfileTemplate = {
+  gameName: "FFIVX",
   dps     : 78, // damage per second
   main    : "Dark Knight",   //
   jobs    : {
@@ -44,23 +38,24 @@ var charProfile_v2 = {
   server  : "Tonberry"
 };
 
-var charProfile_v2 = {
-  gameName    : "FFIVX",
-  dps     : 78, // damage per second
+var groupProfileTemplate = {
+  gameName: "FFIVX",
+  minDps  : 70, // damage per second
+  maxDps  : 100,
   main    : "Dark Knight",   //
-  jobs    : {
+  jobs    : {       // jobs needed?
     "Warrior": true,
     "Time Mage": false,
     "Red Mage": false,
     "Sage": true
   }, // store an array of jobs they can play
-  cleared : {
+  cleared : {       // required levels cleared for a player???
     A1S: true,
     A2S: true,
     A3S: true,
     A4S: false,
   },  // store an object or array ? with {levelName : boolean}
-  mic     : true,
+  mic     : true,      // mic required
   server  : "Tonberry"
 };
 // most important queries:

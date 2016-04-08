@@ -1,6 +1,8 @@
 /*
  * Handle rest request for user.
  */
+var User = require('../models/userModel');
+var CharacterProfile = require('../models/characterProfileModel');
 
 exports.signinUser = function(req, res) {
 

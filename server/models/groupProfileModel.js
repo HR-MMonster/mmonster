@@ -1,12 +1,17 @@
 var mongoose = require('mongoose');
+var Group = require('./groupModel');
+var Schema = mongoose.Schema;
 
-var groupProfileSchema = new mongoose.Schema({
+var groupProfileSchema = new Schema({
   gameName: {
     type: String,
     required: true
   },
   server: String,
-  group: '?', // store group ref, see mongoose data population REQUIRED
+  group: {
+    type: Schema.Types.ObjectId,
+    ref: 'Group'
+    }, // store group ref, see mongoose data population REQUIRED
 });
 
 /*
@@ -17,4 +22,4 @@ var groupProfileSchema = new mongoose.Schema({
  *  or to be queried with to match users gameProfiles.
  */
 
-module.exports = mongoose.model('groupProfiles', groupProfileSchema);
+module.exports = mongoose.model('GroupProfile', groupProfileSchema);
