@@ -153,4 +153,8 @@ angular.module('app.PlayerProfile', [])
     console.log(FFXIVCtrl.profile.clears);
   };
 
+  FFXIVCtrl.update = function() {
+    console.log('sending PUT request for ffxiv profile')
+  }
+
 });
