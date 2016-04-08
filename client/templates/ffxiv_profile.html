@@ -2,38 +2,18 @@
   <h1>FFXIV Settings</h1>
 
   <label for="summary">Summary</label>
-  <input id="ffxivSummary" name="ffxivSummary" type="textarea">
+  <input id="ffxivSummary" name="ffxivSummary" type="textarea" ng-model="FFXIVCtrl.profile.summary">
 
   <h3>Jobs</h3>
   <label for="main">Main Job</label><br />
-  <input type="radio" name="main" value="paladin"> Paladin<br />
-  <input type="radio" name="main" value="warrior"> Warrior<br />
-  <input type="radio" name="main" value="dark Knight"> Dark Knight<br />
-  <input type="radio" name="main" value="white Mage"> White Mage<br />
-  <input type="radio" name="main" value="scholar"> Scholar<br />
-  <input type="radio" name="main" value="astrologian"> Astrologian<br />
-  <input type="radio" name="main" value="monk"> Monk<br />
-  <input type="radio" name="main" value="dragoon"> Dragoon<br />
-  <input type="radio" name="main" value="ninja"> Ninja<br />
-  <input type="radio" name="main" value="black Mage"> Black Mage<br />
-  <input type="radio" name="main" value="summoner"> Summoner<br />
-  <input type="radio" name="main" value="bard"> Bard<br />
-  <input type="radio" name="main" value="machinist"> Machinist<br />
+  <div ng-repeat="job in FFXIVCtrl.jobs">
+    <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main"> {{job}}
+  </div>
 
-  <label for="main">Jobs you can play</label><br />
-  <input type="checkbox" name="jobs" value="paladin"> Paladin<br />
-  <input type="checkbox" name="jobs" value="warrior"> Warrior<br />
-  <input type="checkbox" name="jobs" value="dark Knight"> Dark Knight<br />
-  <input type="checkbox" name="jobs" value="white Mage"> White Mage<br />
-  <input type="checkbox" name="jobs" value="scholar"> Scholar<br />
-  <input type="checkbox" name="jobs" value="astrologian"> Astrologian<br />
-  <input type="checkbox" name="jobs" value="monk"> Monk<br />
-  <input type="checkbox" name="jobs" value="dragoon"> Dragoon<br />
-  <input type="checkbox" name="jobs" value="ninja"> Ninja<br />
-  <input type="checkbox" name="jobs" value="black Mage"> Black Mage<br />
-  <input type="checkbox" name="jobs" value="summoner"> Summoner<br />
-  <input type="checkbox" name="jobs" value="bard"> Bard<br />
-  <input type="checkbox" name="jobs" value="machinist"> Machinist<br />
+  <label for="jobs">Jobs you can play</label><br />
+  <div ng-repeat="job in FFXIVCtrl.jobs">
+    <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]"> {{job}}
+  </div>
 
   <h3>Communication, Availability</h3>
 
@@ -42,35 +22,25 @@
     <option ng-repeat="s in FFXIVCtrl.servers" value="s">{{s}}</option>
   </select>
 
+  <br />
+
+  <label for="mic">Has microphone and voice comm's software</label>
+  <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" />
+
 
 
   <h3>Experience</h3>
 
   <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
-  <input type="text"><br />
+  <input type="text" ng-model="FFXIVCtrl.profile.dps"><br />
 
   <label for="main">Cleared Fights</label><br />
-  <input type="checkbox" name="clears" value="T1"> The Binding Coil of Bahamut: Turn 1<br />
-  <input type="checkbox" name="clears" value="T2"> The Binding Coil of Bahamut: Turn 2<br />
-  <input type="checkbox" name="clears" value="T3"> The Binding Coil of Bahamut: Turn 3<br />
-  <input type="checkbox" name="clears" value="T4"> The Binding Coil of Bahamut: Turn 4<br />
-  <input type="checkbox" name="clears" value="T5"> The Binding Coil of Bahamut: Turn 5<br />
-  <input type="checkbox" name="clears" value="T6"> The Binding Coil of Bahamut: Turn 6<br />
-  <input type="checkbox" name="clears" value="T7"> The Binding Coil of Bahamut: Turn 7<br />
-  <input type="checkbox" name="clears" value="T8"> The Binding Coil of Bahamut: Turn 8<br />
-  <input type="checkbox" name="clears" value="T9"> The Binding Coil of Bahamut: Turn 9<br />
-  <input type="checkbox" name="clears" value="T10"> The Binding Coil of Bahamut: Turn 10<br />
-  <input type="checkbox" name="clears" value="T11"> The Binding Coil of Bahamut: Turn 11<br />
-  <input type="checkbox" name="clears" value="T12"> The Binding Coil of Bahamut: Turn 12<br />
-  <input type="checkbox" name="clears" value="T13"> The Binding Coil of Bahamut: Turn 13<br />
-  <input type="checkbox" name="clears" value="A1S"> Alexander Gordias: The Fist of the Father<br />
-  <input type="checkbox" name="clears" value="A2S"> Alexander Gordias: The Cuff of the Father<br />
-  <input type="checkbox" name="clears" value="A3S"> Alexander Gordias: The Arm of the Father<br />
-  <input type="checkbox" name="clears" value="A4S"> Alexander Gordias: The Burden of the Father<br />
-  <input type="checkbox" name="clears" value="A5S"> Alexander Midas: The Fist of the Son (Savage)<br />
-  <input type="checkbox" name="clears" value="A6S"> Alexander Midas: The Cuff of the Son (Savage)<br />
-  <input type="checkbox" name="clears" value="A7S"> Alexander Midas: The Arm of the Son (Savage)<br />
-  <input type="checkbox" name="clears" value="A8S"> Alexander Midas: The Burden of the Son (Savage)<br />
+  <div ng-repeat="fight in FFXIVCtrl.fights">
+      <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+  </div>
+
+  <a href="#" ng-click="FFXIVCtrl.test()">Test button</a>
+  <a href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a>
 </div>
 
 
