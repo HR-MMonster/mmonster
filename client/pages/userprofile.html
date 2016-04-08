@@ -10,8 +10,11 @@
       <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
         <div class="profile-image">
           <!-- <img ng-src={{ProfileCtrl.profile.profileImage}} /> -->
-          <span class="btn btn-primary btn-file">
-            Update <input type="file">
+         <!--  <span class="btn btn-primary btn-file">
+            Update <input img-upload type="file" file-model="FFXIVCtrl.profilePic">
+          </span> -->
+          <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
+            Update
           </span>
         </div>
         <label for="realname">Name</label>
@@ -30,6 +33,7 @@
     <ffxiv />
   </div>
   <script src="../lib/angular/angular.min.js"></script>
+  <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
   <script src="../controllers/Profile.js"></script>
 </body>
 </html>
