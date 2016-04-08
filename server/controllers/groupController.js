@@ -19,7 +19,18 @@ exports.updateGroup = function(req, res) {
 
 };
 
-exports.updateGroups = function(req, res) {
+exports.createGroupProfile= function(req, res) {
 
 };
 
+exports.findGroupProfile= function(req, res) {
+
+};
+
+exports.findGroupProfiles= function(req, res) {
+
+};
+
+exports.updateGroupProfile= function(req, res) {
+
+};
