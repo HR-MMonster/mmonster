@@ -12,6 +12,7 @@ var signupRouter = require('./routers/signupRouter');
 app.use('/profile', profileRouter);
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
+// handle all other routes
 
 // MIDDLEWARE
 app.use(bodyParser.json());
