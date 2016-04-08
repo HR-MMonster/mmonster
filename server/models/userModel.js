@@ -1,10 +1,10 @@
 var Q = require('q');
 var mongoose = require('mongoose');
-var bcrypt = require('bycrypt-nodejs');
+var bcrypt = require('bcrypt-nodejs');
 var SALT_WORK_FACTOR = 10; // required for salt gen
-// N
+var Schema = mongoose.Schema;
 
-var UserSchema = new mongoose.Schema({
+var userSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -26,7 +26,7 @@ var UserSchema = new mongoose.Schema({
   endTime: Number,
 });
 
-UserSchema.methods.comparePasswords = function(passwordAttempt) {
+userSchema.methods.comparePasswords = function(passwordAttempt) {
   var savedPassword = this.password;
   // should return a promise that compares passwords
   return Q.promise(function(resolve, reject) {
@@ -40,7 +40,7 @@ UserSchema.methods.comparePasswords = function(passwordAttempt) {
   });
 };
 
-UserSchema.pre('save', function(next) {
+userSchema.pre('save', function(next) {
   var user = this;
   if (!user.isModified('password')) {
     return next(); // perform next middleware action on the controller
@@ -56,4 +56,4 @@ UserSchema.pre('save', function(next) {
   });
 });
 
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('User', userSchema);

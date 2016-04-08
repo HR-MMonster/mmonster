@@ -1,13 +1,18 @@
 var mongoose = require('mongoose');
+var User = require('./userModel');
+var Schema = mongoose.Schema;
 
-var characterProfileSchema = new mongoose.Schema({
+var characterProfileSchema = new Schema({
   gameName: {
     type: String,
     required: true
   },
   mic: Boolean, // user has a microphone connection?
   server: String, // should this be game specific?
-  user: '?', // should store user reference, look into population with mongoose
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }, // should store user reference, look into population with mongoose
 });
 
   /*
@@ -23,4 +28,4 @@ var characterProfileSchema = new mongoose.Schema({
    *  }
    */
 
-module.exports = mongoose.model('characterProfiles', characterProfileSchema);
+module.exports = mongoose.model('CharacterProfile', characterProfileSchema);

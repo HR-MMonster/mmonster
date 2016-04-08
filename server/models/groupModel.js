@@ -1,10 +1,11 @@
 var Q = require('q');
 var mongoose = require('mongoose');
-var bcrypt = require('bycrypt-nodejs');
+var bcrypt = require('bcrypt-nodejs');
 var SALT_WORK_FACTOR = 10; // required for salt gen
+var Schema = mongoose.Schema;
 
 
-var groupSchema = new mongoose.Schema({
+var groupSchema = new Schema({
   groupname: {
     type: String,
     required: true,
@@ -57,4 +58,4 @@ groupSchema.pre('save', function(next) {
 });
 
 // export the group model
-module.exports = mongoose.model('groups', GroupSchema);
+module.exports = mongoose.model('Group', groupSchema);
