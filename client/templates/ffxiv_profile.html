@@ -1,46 +1,58 @@
-<div class="ffxiv-profile">
+<div class="game-profile ffxiv-profile">
   <h1>FFXIV Settings</h1>
 
-  <label for="summary">Summary</label>
-  <input id="ffxivSummary" name="ffxivSummary" type="textarea" ng-model="FFXIVCtrl.profile.summary">
+  <section>
+    <label for="summary">Summary</label>
+    <textarea id="ffxivSummary" name="ffxivSummary" ng-model="FFXIVCtrl.profile.summary"></textarea>
+  </section>
 
-  <h3>Jobs</h3>
-  <label for="main">Main Job</label><br />
-  <div ng-repeat="job in FFXIVCtrl.jobs">
-    <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main"> {{job}}
-  </div>
-
-  <label for="jobs">Jobs you can play</label><br />
-  <div ng-repeat="job in FFXIVCtrl.jobs">
-    <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]"> {{job}}
-  </div>
-
-  <h3>Communication, Availability</h3>
-
-  <label for="server">Server</label>
-  <select id="server" name="server" ng-model="server">
-    <option ng-repeat="s in FFXIVCtrl.servers" value="s">{{s}}</option>
-  </select>
-
-  <br />
-
-  <label for="mic">Has microphone and voice comm's software</label>
-  <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" />
+  <section>
+    <h3>Jobs</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <label for="main">Main Job</label><br />
+        <div ng-repeat="job in FFXIVCtrl.jobs">
+          <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main"> {{job}}
+        </div>
+      </div>
 
 
+      <div class="col-sm-6">
+        <label for="jobs">Jobs you can play</label><br />
+        <div ng-repeat="job in FFXIVCtrl.jobs">
+          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]"> {{job}}
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h3>Experience</h3>
+  <section>
+    <h3>Communication, Availability</h3>
 
-  <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
-  <input type="text" ng-model="FFXIVCtrl.profile.dps"><br />
+    <label for="server">Server</label>
+    <select id="server" name="server" ng-model="server">
+      <option ng-repeat="s in FFXIVCtrl.servers" value="s">{{s}}</option>
+    </select>
+    <br />
+    <label for="mic">Has microphone and voice comm's software</label>
+    <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" />
+  </section>
 
-  <label for="main">Cleared Fights</label><br />
-  <div ng-repeat="fight in FFXIVCtrl.fights">
+
+  <section>
+    <h3>Experience</h3>
+
+    <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
+    <input type="text" ng-model="FFXIVCtrl.profile.dps"><br />
+
+    <label for="main">Cleared Fights</label><br />
+    <div ng-repeat="fight in FFXIVCtrl.fights">
       <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
-  </div>
+    </div>
 
-  <a href="#" ng-click="FFXIVCtrl.test()">Test button</a>
-  <a href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a>
+    <a href="#" ng-click="FFXIVCtrl.test()">Test button</a>
+    <a href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a>
+  </section>
 </div>
 
 

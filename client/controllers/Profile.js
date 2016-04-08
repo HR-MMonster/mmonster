@@ -1,4 +1,4 @@
-angular.module('app.PlayerProfile', [])
+angular.module('app.PlayerProfile', ['ngFileUpload'])
 .factory('Profile', function() {
   var get = function() {
     // return $http({
@@ -40,6 +40,11 @@ angular.module('app.PlayerProfile', [])
   // Profile.get().then(function(profile) {
   //   ProfileCtrl.profile = profile;
   // });
+
+  ProfileCtrl.upload = function(file) {
+    console.log('uploading stuffs');
+    console.log(file);
+  };
 
   ProfileCtrl.profile = Profile.get();
 
@@ -150,7 +155,7 @@ angular.module('app.PlayerProfile', [])
   ];
 
   FFXIVCtrl.test = function() {
-    console.log(FFXIVCtrl.profile.clears);
+    console.log(FFXIVCtrl.profileImage);
   };
 
   FFXIVCtrl.update = function() {
