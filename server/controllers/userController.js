@@ -24,18 +24,18 @@ exports.updateUser = function(req, res) {
 
 };
 
-exports.createGamerProfile = function(req, res) {
+exports.createCharacterProfile = function(req, res) {
 
 };
 
-exports.findGamerProfile = function(req, res) {
+exports.findCharacterProfile = function(req, res) {
 
 };
 
-exports.findGamerProfiles = function(req, res) {
+exports.findCharacterProfiles = function(req, res) {
 
 };
 
-exports.updateGamerProfile = function(req, res) {
+exports.updateCharacterProfile = function(req, res) {
 
 };

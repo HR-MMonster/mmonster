@@ -4,7 +4,7 @@
 var profileRouter = require('express').Router();
 var userController = require('../controllers/userController');
 var groupController = require('../controllers/groupController');
-var gamerProfileController = require('../controllers/gamerProfileController');
+var characterProfileController = require('../controllers/characterProfileController');
 var groupProfileController = require('../controllers/groupProfileController');
 
 profileRouter
@@ -17,18 +17,18 @@ profileRouter
   .put(userController.updateUser);
 
 profileRouter
-  .route('/users/:id/gamerProfiles')
-  .get(userController.findGamerProfiles)
-  .post(userController.createGamerProfile);
+  .route('/users/:id/characterProfiles')
+  .get(userController.findCharacterProfiles)
+  .post(userController.createCharacterProfile);
 
 profileRouter
-  .route('/users/:id/gamerProfiles/:id')
-  .get(userController.findGamerProfile)
-  .put(userController.updateGamerProfile);
+  .route('/users/:id/characterProfiles/:id')
+  .get(userController.findCharacterProfile)
+  .put(userController.updateCharacterProfile);
 
 profileRouter
-  .route('/gamerProfiles')
-  .get(gamerProfileController.findGamerProfiles);
+  .route('/characterProfiles')
+  .get(characterProfileController.findCharacterProfiles);
 
 profileRouter
   .route('/groups')
