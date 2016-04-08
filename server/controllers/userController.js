@@ -1,11 +1,37 @@
 /*
  * Handle rest request for user.
  */
+var Q = require('q');
 var User = require('../models/userModel');
 var CharacterProfile = require('../models/characterProfileModel');
 
-exports.signinUser = function(req, res) {
+var findUser = Q.nbind(User.findOne, User);
+var createUser = Q.nbind(User.create, User);
 
+exports.signinUser = function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  findUser({username: username})
+    .then(function(user) {
+      if (!user) {
+        next(new Error('User does not exist'));
+        // TODO: Where should the user be redirected
+      } else {
+        return user.comparePassword(password)
+          .then(function(foundUser) {
+            if (foundUser) {
+              // TODO: Add authentication check
+              // create a session for the user
+              // redirect to user profile page
+              res.redirect('/');
+            } else {
+              // Redirect user back to sign in
+              res.redirect('/');
+            }
+          });
+      }
+    })
 };
 
 exports.createUser = function(req, res) {
