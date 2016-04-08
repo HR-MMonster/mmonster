@@ -20,10 +20,10 @@ var groupSchema = new mongoose.Schema({
   email: String,
   summary: String,
   photo: String, // will store path to file location
-
   // group availability
   startTime: Number,
   endTime: Number,
+
 });
 
 groupSchema.methods.comparePasswords = function(passwordAttempt) {

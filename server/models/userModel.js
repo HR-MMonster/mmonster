@@ -24,7 +24,6 @@ var UserSchema = new mongoose.Schema({
   // user availability
   startTime: Number,
   endTime: Number,
-
 });
 
 UserSchema.methods.comparePasswords = function(passwordAttempt) {
