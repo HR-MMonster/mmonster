@@ -8,10 +8,10 @@ var CharacterProfile = require('../models/characterProfileModel');
 var findUser = Q.nbind(User.findOne, User);
 var createUser = Q.nbind(User.create, User);
 
-exports.signinUser = function(req, res) {
+exports.signinUser = function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
-
+  console.log(req.body);
   findUser({username: username})
     .then(function(user) {
       if (!user) {
@@ -32,10 +32,34 @@ exports.signinUser = function(req, res) {
           });
       }
     })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
-exports.createUser = function(req, res) {
-
+exports.createUser = function(req, res, next) {
+  var newUser = req.body;
+  console.log('New User', req);
+  findUser({username: newUser.username})
+    .then(function(found) {
+      if (found) {
+        next(new Error('User already exists"'));
+        // TODO: Alert client that user exists
+      } else {
+        return createUser(newUser);
+      }
+    })
+    .then(function(user) {
+      if (!user) {
+        next(new Error('User account not created'));
+        // TODO: Alert client that the accont was not created
+      } else {
+        res.redirect('/signin');
+      }
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
 exports.findUser = function(req, res) {
