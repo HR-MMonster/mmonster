@@ -24,7 +24,7 @@ var seedDatabase = function(data) {
       console.error('><>< Error seeding database with char profiles:', err);
       return;
     }
-    conosle.log('><>< Success seeding database');
+    console.log('><>< Success seeding database');
   });
 };
 
