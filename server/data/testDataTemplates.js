@@ -14,12 +14,12 @@ var groupTemplate = {
   "name"        : "Colin",
   "email"       : "colin@me.com",
   "summary"     : "Play or be played",
-  "startTime"   : 16, // num from 0-23, account for different time zones
-  "endTime"     : 2,  // num from 0-23
+  // "startTime"   : 16, // num from 0-23, account for different time zones
+  // "endTime"     : 2,  // num from 0-23
 };
 
 var charProfileTemplate = {
-  gameName: "FFIVX",
+  gameName: "FFXIV",
   dps     : 78, // damage per second
   main    : "Dark Knight",   //
   jobs    : {
@@ -39,7 +39,7 @@ var charProfileTemplate = {
 };
 
 var groupProfileTemplate = {
-  gameName: "FFIVX",
+  gameName: "FFXIV",
   minDps  : 70, // damage per second
   maxDps  : 100,
   main    : "Dark Knight",   //
