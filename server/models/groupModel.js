@@ -23,8 +23,7 @@ var groupSchema = new Schema({
   photo: String, // will store path to file location
   // group availability
   startTime: Number,
-  endTime: Number,
-
+  endTime: Number
 });
 
 groupSchema.methods.comparePasswords = function(passwordAttempt) {
