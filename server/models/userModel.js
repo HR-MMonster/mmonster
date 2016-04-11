@@ -23,7 +23,7 @@ var userSchema = new Schema({
 
   // user availability
   startTime: Number,
-  endTime: Number,
+  endTime: Number
 });
 
 userSchema.methods.comparePasswords = function(passwordAttempt) {

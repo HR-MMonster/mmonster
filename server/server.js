@@ -8,12 +8,12 @@ var port = process.env.PORT || 8000;
 var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/mmonsterdb';
 var app = express();
 
+// MIDDLEWARE
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // DATABASE INITIALIZATION
 mongoose.connect(dbUri);
-
-// MIDDLEWARE
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 // ROUTES
 // handle all other routes

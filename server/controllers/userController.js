@@ -11,7 +11,6 @@ var createUser = Q.nbind(User.create, User);
 exports.signinUser = function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
-  console.log(req.body);
   findUser({username: username})
     .then(function(user) {
       if (!user) {
@@ -39,7 +38,6 @@ exports.signinUser = function(req, res, next) {
 
 exports.createUser = function(req, res, next) {
   var newUser = req.body;
-  console.log('New User', req);
   findUser({username: newUser.username})
     .then(function(found) {
       if (found) {
