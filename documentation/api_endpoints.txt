@@ -1,30 +1,74 @@
-/
-  |
-    -- serve static (client/public)
-/signup
-  |
-    -- /:user
-      |
-        -- POST
-  |
-    -- /:group
-      |
-        -- POST
+/  
+|--- GET(serve static from /client)
 
-/signin
-  |
-    -- POST
++--- /signup
+    |
+    +--- /user
+        |--- GET
+        |___ POST -> success: /signin | failure: /signup
+    |
+    +--- /group
+        |--- GET
+        |___ POST -> success: /signin | failure: /signup
+|
++--- /signin
+    |--- GET
+    |___ POST -> success: /? | failure: /signin
+|
++--- /profile
+    |
+    +--- /users
+        |___ GET
+        |
+        +--- /images
+            |___ POST
+            |
+            +--- /:id
+                |___ GET
+        |
+        +--- /:id
+            |--- GET
+            |___ PUT
 
-/profile
-  |
-    -- /:user
-      |
-        -- GET PUT POST
-  |
-    -- /:group
-      |
-        -- GET PUT POST
+            +--- characterProfiles
+                |--- GET
+                |___ POST
+                |
+                +--- /:id
+                    |--- GET
+                    |--- DELETE
+                    |___ PUT
+    |
+    +--- /groups
+        |___ GET
 
-/search
-  |
-    -- /:query parameters
+        +--- /images
+            |___ POST
+            |
+            +--- /:id
+                |___ GET
+        |
+        +--- /:id
+            |--- GET
+            |___ PUT
+            |
+            +--- characterProfiles
+                |--- GET
+                |___ POST
+                |
+                +--- /:id
+                    |--- GET
+                    |--- DELETE
+                    |___ PUT
+    |
+    +--- /characterProfiles
+        |___ GET
+            |___ (query parameters)
+                |--- name
+                |--- date
+                +--- user
+                    |--- hours
+                    |--- ?
+        |
+        +---/:id
+            |___ GET

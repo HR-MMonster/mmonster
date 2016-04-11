@@ -9,11 +9,19 @@ mmonser
 |
 +--- server
 |    +--- controllers
+|    |   |--- characterProfileController
 |    |   |--- groupController
+|    |   |--- groupProfileController
 |    |   |___ userController
 |    |
+|    +--- data
+|    |   |--- testData
+|    |   |___ testDataTemplates
+|    |
 |    +--- models
+|    |   |--- characterProfileModel
 |    |   |--- groupModel
+|    |   |--- groupProfileModel
 |    |   |___ userModel
 |    |
 |    +--- routers
@@ -22,6 +30,8 @@ mmonser
 |    |   |___ signupRouter
 |    |
 |    +--- test
+|
+|___ server
 
 
 // TODO: Automate file structure creation through tree command and pipe into folder when grub is run
