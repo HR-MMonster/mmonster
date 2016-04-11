@@ -2,6 +2,7 @@
  * Handle routes from endpoints.
  */
 var profileRouter = require('express').Router();
+var multer = require('multer');
 var userController = require('../controllers/userController');
 var groupController = require('../controllers/groupController');
 var characterProfileController = require('../controllers/characterProfileController');
