@@ -9,9 +9,12 @@ angular.module('app.auth', [])
 
   PlayerAuthCtrl.signin = function () {
     Auth.signin(PlayerAuthCtrl.player)
-      .then(function (token) {
-        $window.localStorage.setItem('com.app', token);
+      .then(function (resp) {
+        $window.localStorage.setItem('com.app', resp);
         // use localStorage.setItem to add user id to local storage
+        // console.log(resp.data._id);
+        $window.localStorage.setItem('id', resp.data._id);
+        // debugger;
         $window.location.assign('/');
         // console.log('inside signin')
       })
@@ -48,7 +51,7 @@ angular.module('app.auth', [])
       data: user
     })
     .then(function (resp) {
-      return resp.data;
+      return resp;
     });
   };
 
