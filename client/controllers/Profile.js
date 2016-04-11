@@ -52,7 +52,7 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     Profile.update(ProfileCtrl.profile);
   };
 }])
-.directive('ffxiv-edit', function() {
+.directive('ffxivEdit', function() {
   return {
     restrict: 'E',
     templateUrl: '../templates/ffxiv_edit.html',
@@ -60,10 +60,12 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     controllerAs: 'FFXIVCtrl'
   };
 })
-.directive('ffxiv-public', function() {
+.directive('ffxivPublic', function() {
   return {
     restrict: 'E',
-    templateUrl: '../templates/ffxiv_public.html'
+    templateUrl: '../templates/ffxiv_public.html',
+    controller: 'FFXIVController',
+    controllerAs: 'FFXIVCtrl'
   };
 })
 .controller('FFXIVController', function() {
