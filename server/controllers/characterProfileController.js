@@ -6,9 +6,10 @@ var CharacterProfile = require('../models/characterProfileModel');
 var testData = require('../data/testData').characterProfiles;
 
 exports.findCharacterProfiles = function(req, res, next) {
-  var searchParams = req.body;
+  // var searchParams = req.body;
 
-  CharacterProfile.find(searchParams).exec(function(err, foundProfiles) {
+  CharacterProfile.find()
+  .exec(function(err, foundProfiles) {
     if (err) {
       console.error('><>< Error quering database for charProfiles:', err, '<><>');
     } else {
