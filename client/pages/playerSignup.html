@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html ng-controller='PlayerAuthController as PlayerAuthCtrl'>
+<html ng-app="app.auth" ng-controller="PlayerAuthController as PlayerAuthCtrl">
   <head>
+
+    <script src="../lib/angular/angular.min.js"></script>
+    <script src="../controllers/playerAuth.js"></script>
+
     <meta charset="utf-8" />
     <title>MMONSTER</title>
   </head>
   <body>
-    <div id='signup'>
+    <div id="signup">
       <h1>Player Sign-Up</h1>
-      <form name="signupForm" ng-submit='PlayerAuthCtrl.signup()'>
-        <input type='text' ng-model='PlayerAuthCtrl.player.username'>
-        <input type="password" ng-model='PlayerAuthCtrl.player.password'>
+      <form name="signupForm" ng-submit="PlayerAuthCtrl.signup()">
+        <input type="text" ng-model="PlayerAuthCtrl.player.username">
+        <input type="password" ng-model="PlayerAuthCtrl.player.password">
         <button>signup</button>
       </form>
-      <a href="./playerSignin">Already have a player account? <strong>Sign-In</strong> ...</a>
+      <a href="/pages/playerSignin.html">Already have a player account? Sign-In</a>
     </div>
   </body>
 </html>
