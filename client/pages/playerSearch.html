@@ -5,157 +5,77 @@
 -Cleared Fights
 -Server
 -DPS
--Time
+-Times
+
+
+-Create page that renders search results
 
 
 Post-MVP: 
 -Keyword search -->
 
-<html>
-  <head></head>
+<html ng-app="app.characterSearch" ng-controller="SearchCharacter as SearchChar">
+  <head>
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/userprofile.css">
+    <script src="../lib/angular/angular.min.js"></script>
+    <script src="../controllers/searchCtrls.js"></script>
+  </head>
 
   <body>
     <h1>Search for Character</h1>
-    <form>
-      <h3>Game</h3>
-        <select>
-          <option value="FFXIV">Final Fantasy XIV</option>
-        </select>
 
-      <h3>Play times</h3>
 
-      <!-- <h3>Summary Keyword</h3> -->
+    <section>
+      <h3>Jobs</h3>
+      <div class="row">
+        <div class="col-sm-6">
+          <label for="main">Main Job</label><br />
+          <div ng-repeat="job in FFXIVCtrl.jobs">
+            <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main"> {{job}}
+          </div>
+        </div>
 
-      <h3>Main Job (single input)</h3>
-<!--           'Paladin'
-          'Warrior'
-          'Dark Knight'
-          'White Mage''Scholar'
-          'Astrologian'
-          'Monk'
-          'Dragoon'
-          'Ninja'
-          'Black Mage'
-          'Summoner'
-          'Bard'
-          'Machinist' -->
 
-      <h3>Other Jobs (check boxes)</h3>
-<!--           'Paladin'
-          'Warrior'
-          'Dark Knight'
-          'White Mage''Scholar'
-          'Astrologian'
-          'Monk'
-          'Dragoon'
-          'Ninja'
-          'Black Mage'
-          'Summoner'
-          'Bard'
-          'Machinist' -->
+        <div class="col-sm-6">
+          <label for="jobs">Jobs you can play</label><br />
+          <div ng-repeat="job in FFXIVCtrl.jobs">
+            <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]"> {{job}}
+          </div>
+        </div>
+      </div>
+    </section>
 
-      
-      <h3>Server (dropdown menu)</h3>
+    <section>
+      <h3>Communication, Availability</h3>
 
-        <select name="server">
-          <option value="*">--</option>
+      <label for="server">Server</label>
+      <select id="server" name="server" ng-model="server">
+        <option ng-repeat="s in FFXIVCtrl.servers" value="s">{{s}}</option>
+      </select>
+      <br />
+      <label for="mic">Has microphone and voice comm's software</label>
+      <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" />
+    </section>
 
-          <option value="Adamantoise">Adamantoise</option>
-          <option value="Aegis">Aegis</option>
-          <option value="Alexander">Alexander</option>
-          <option value="Anima">Anima</option>
-          <option value="Asura">Asura</option>
-          <option value="Atomos">Atomos</option>
 
-          <option value="Bahamut">Bahamut</option>
-          <option value="Balmung">Balmung</option>
-          <option value="Behemoth">Behemoth</option>
-          <option value="Belias">Belias</option>
-          <option value="Brynhildr">Brynhildr</option>
+    <section>
+      <h3>Experience</h3>
 
-          <option value="Cactuar">Cactuar</option>
-          <option value="Carbuncle">Carbuncle</option>
-          <option value="Cerberus">Cerberus</option>
-          <option value="Chocobo">Chocobo</option>
-          <option value="Coeurl">Coeurl</option>
+      <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
+      <input type="text" ng-model="FFXIVCtrl.profile.dps"><br />
 
-          <option value="Diabolos">Diabolos</option>
-          <option value="Durandal">Durandal</option>
+      <label for="main">Cleared Fights</label><br />
+      <div ng-repeat="fight in FFXIVCtrl.fights">
+        <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+      </div>
 
-          <option value="Excalibur">Excalibur</option>
-          <option value="Exodus">Exodus</option>
+<!--       <a href="#" ng-click="FFXIVCtrl.test()">Test button</a>
+      <a href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a> -->
+    </section>
 
-          <option value="Faerie">Faerie</option>
-          <option value="Famfrit">Famfrit</option>
-          <option value="Fenrir">Fenrir</option>
 
-          <option value="Garuda">Garuda</option>
-          <option value="Gilgamesh">Gilgamesh</option>
-          <option value="Goblin">Goblin</option>
-          <option value="Gungnir">Gungnir</option>
-
-          <option value="Hades">Hades</option>
-          <option value="Hyperion">Hyperion</option>
-
-          <option value="Ifrit">Ifrit</option>
-          <option value="Ixion">Ixion</option>
-
-          <option value="Jenova">Jenova</option>
-
-          <option value="Kujata">Kujata</option>
-
-          <option value="Lamia">Lamia</option>
-          <option value="Leviathan">Leviathan</option>
-          <option value="Lich">Lich</option>
-
-          <option value="Malboro">Malboro</option>
-          <option value="Mandragora">Mandragora</option>
-          <option value="Masamune">Masamune</option>
-          <option value="Mateus">Mateus</option>
-          <option value="Midgardsormr">Midgardsormr</option>
-          <option value="Moogle">Moogle</option>
-
-          <option value="Odin">Odin</option>
-
-          <option value="Pandaemonium">Pandaemonium</option>
-          <option value="Phoenix">Phoenix</option>
-
-          <option value="Ragnarok">Ragnarok</option>
-          <option value="Ramuh">Ramuh</option>
-          <option value="Ridill">Ridill</option>
-
-          <option value="Sargatanas">Sargatanas</option>
-          <option value="Shinryu">Shinryu</option>
-          <option value="Shiva">Shiva</option>
-          <option value="Siren">Siren</option>
-
-          <option value="Tiamat">Tiamat</option>
-          <option value="Titan">Titan</option>
-          <option value="Tonberry">Tonberry</option>
-          <option value="Typhon">Typhon</option>
-
-          <option value="Ultima">Ultima</option>
-          <option value="Ultros">Ultros</option>
-          <option value="Unicorn">Unicorn</option>
-
-          <option value="Valefor">Valefor</option>
-
-          <option value="Yojimbo">Yojimbo</option>
-
-          <option value="Zalera">Zalera</option>
-          <option value="Zeromus">Zeromus</option>
-          <option value="Zodiark">Zodiark</option>
-
-        </select>
-
-      <h3>Mic? (yes/no)</h3>
-        <!-- <input type='radio' value=true> -->
-      <h3>DPS (minimum)</h3>
-      
-      <h3>Clears (check boxes)</h3>
-
-    </form>
-
+    <!-- <ffxiv /> -->
 
 
   </body>
