@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 var profileRouter = require('./routers/profileRouter');
 var signinRouter = require('./routers/signinRouter');
 var signupRouter = require('./routers/signupRouter');
@@ -21,6 +22,8 @@ app.use(express.static(__dirname + '/../client'));
 app.use('/profile', profileRouter);
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
+// TODO: Add logout functionality
+// app.use('/logout',)
 
 // SERVER INITIALIZATION
 app.listen(port, function(err) {
