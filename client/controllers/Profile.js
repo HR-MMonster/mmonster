@@ -1,30 +1,30 @@
 angular.module('app.PlayerProfile', ['ngFileUpload'])
-.factory('Profile', function() {
+.factory('Profile', function($http) {
   var get = function() {
-    // return $http({
-    //   method: 'GET',
-    //   url: '/profile'
-    // }).then(function(resp) {
-    //   return resp.data;
-    // });
+    return $http({
+      method: 'GET',
+      url: '/profile/users/570befca1b03fb3104ca1ec3'
+    }).then(function(resp) {
+      return resp.data;
+    });
 
-    return {
-      realname: 'Travis',
-      location: 'Japan',
-      activeGame: 'FFXIV',
-      profileImage: 'http://i.imgur.com/B43Ysgq.png?1',
-      games: {
-        'ffxiv': true
-      }
-    };
+    // return {
+    //   realname: 'Travis',
+    //   location: 'Japan',
+    //   activeGame: 'FFXIV',
+    //   profileImage: 'http://i.imgur.com/B43Ysgq.png?1',
+    //   games: {
+    //     'ffxiv': true
+    //   }
+    // };
   };
 
   var update = function(profile) {
-    // $http({
-    //   method: 'PUT',
-    //   url: '/profile',
-    //   data: profile
-    // });
+    $http({
+      method: 'PUT',
+      url: '/profile/users/570befca1b03fb3104ca1ec3',
+      data: profile
+    });
     console.log('running update');
   };
 
@@ -46,7 +46,10 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     console.log(file);
   };
 
-  ProfileCtrl.profile = Profile.get();
+  Profile.get().then(function(profile) {
+    console.log(profile);
+    ProfileCtrl.profile = profile;
+  });
 
   ProfileCtrl.update = function() {
     Profile.update(ProfileCtrl.profile);
