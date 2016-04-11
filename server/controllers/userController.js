@@ -29,10 +29,10 @@ exports.signinUser = function(req, res, next) {
               // TODO: Add authentication check
               // create a session for the user
               // redirect to user profile page
-              res.redirect('/');
+              res.status(200).json(user);
             } else {
               // Redirect user back to sign in
-              res.redirect('/');
+              res.status(400).end();
               //TODO: Confirm route for signin
               // res.redirect('/signin');
             }
