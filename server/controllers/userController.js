@@ -6,7 +6,10 @@ var User = require('../models/userModel');
 var CharacterProfile = require('../models/characterProfileModel');
 
 var findUser = Q.nbind(User.findOne, User);
+var findUsers = Q.nbind(User.find, User);
+var findUserAndUpdate = Q.nbind(User.findOneAndUpdate, User);
 var createUser = Q.nbind(User.create, User);
+var createCharacterProfile;
 
 exports.signinUser = function(req, res, next) {
   var username = req.body.username;
@@ -65,18 +68,57 @@ exports.createUser = function(req, res, next) {
 };
 
 exports.findUser = function(req, res) {
-
+  var user = req.body;
+  var id = req.params.id;
+  findUser({_id: id})
+    .then(function(user) {
+      if (!user) {
+        next(new Error('User ' + id + ' not found'));
+      } else {
+        res.json(user);
+      }
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
 exports.findUsers = function(req, res) {
-
+  findUsers()
+    .then(function(users) {
+      if (!users) {
+        next(new Error('No users found'));
+      } else {
+        res.json(users);
+      }
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
+/*
+ * Update the user using the passed parameters.
+ * @returns the old user upon success.
+ */
 exports.updateUser = function(req, res) {
-
+  var updates = req.body;
+  var id = req.params.id;
+  findUserAndUpdate({_id: id}, updates).then(function (user) {
+    if (!user) {
+      next( new Error('User not found'));
+    } else {
+      res.json(user);
+    }
+  })
 };
 
 exports.createCharacterProfile = function(req, res) {
+  var characterProfile = req.body;
+  var userID = req.params.id;
+  if (characterProfile.user !== userID) {
+    characterProfile.user = userID;
+  }
 
 };
 
