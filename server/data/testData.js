@@ -1,4 +1,4 @@
-var users = [
+exports.users = [
   {
     "username"    : "grandMage",
     "password"    : "7gjk84njk",  // stores hash
@@ -72,6 +72,7 @@ exports.characterProfiles = [
         A4S: false,
       }),  // store an object or array ? with {levelName : boolean}
     },
+    user: "570bfba6c82432fa1274e666"
   },
   {
     gameName: "FFXIV",
@@ -93,6 +94,7 @@ exports.characterProfiles = [
         A4S: false,
       }),  // store an object or array ? with {levelName : boolean}
     },
+    user: "570bfba6c82432fa1274e664"
   },
 ];
 
