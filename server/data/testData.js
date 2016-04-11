@@ -54,82 +54,109 @@ var groups = [
 exports.characterProfiles = [
   {
     gameName: "FFXIV",
-    dps     : 78, // damage per second
-    main    : "Dark Knight",   //
-    jobs    : {
-      "Warrior": true,
-      "Time Mage": false,
-      "Red Mage": false,
-      "Sage": true
-    }, // store an array of jobs they can play
-    cleared : {
-      A1S: true,
-      A2S: false,
-      A3S: false,
-      A4S: false,
-    },  // store an object or array ? with {levelName : boolean}
     mic     : true,
-    server  : "Tonberry"
+    server  : "Tonberry",
+    gameOptions: {
+      dps     : 78, // damage per second
+      main    : "Dark Knight",   //
+      jobs    : JSON.stringify({
+        "Warrior": true,
+        "Time Mage": false,
+        "Red Mage": false,
+        "Sage": true
+      }), // store an array of jobs they can play
+      cleared : JSON.stringify({
+        A1S: true,
+        A2S: true,
+        A3S: true,
+        A4S: false,
+      }),  // store an object or array ? with {levelName : boolean}
+    },
   },
   {
     gameName: "FFXIV",
-    dps     : 66, // damage per second
-    main    : "Red Mage",   //
-    jobs    : {
-      "Warrior": false,
-      "Time Mage": true,
-      "Red Mage": false,
-      "Sage": true,
-      "Mystic Knight": true
-    }, // store an array of jobs they can play
-    cleared : {
-      A1S: true,
-      A2S: true,
-      A3S: true,
-      A4S: false,
-    },  // store an object or array ? with {levelName : boolean}
-    mic     : false,
-    server  : "HappySappy"
-  },
-  {
-    gameName: "FFXIV",
-    dps     : 78, // damage per second
-    main    : "Dancer",   //
-    jobs    : {
-      "Warrior": true,
-      "Time Mage": false,
-      "Red Mage": false,
-      "Sage": true
-    }, // store an array of jobs they can play
-    cleared : {
-      A1S: true,
-      A2S: true,
-      A3S: true,
-      A4S: true,
-    },  // store an object or array ? with {levelName : boolean}
     mic     : true,
-    server  : "Deuce"
-  },
-  {
-    gameName: "FFXIV",
-    dps     : 45, // damage per second
-    main    : "Summoner",   //
-    jobs    : {
-      "Warrior": true,
-      "Time Mage": false,
-      "Red Mage": false,
-      "Sage": true
-    }, // store an array of jobs they can play
-    cleared : {
-      A1S: true,
-      A2S: true,
-      A3S: false,
-      A4S: false,
-    },  // store an object or array ? with {levelName : boolean}
-    mic     : false,
-    server  : "Roxbury"
+    server  : "Tonberry",
+    gameOptions: {
+      dps     : 78, // damage per second
+      main    : "Dark Knight",   //
+      jobs    : JSON.stringify({
+        "Warrior": true,
+        "Time Mage": false,
+        "Red Mage": false,
+        "Sage": true
+      }), // store an array of jobs they can play
+      cleared : JSON.stringify({
+        A1S: true,
+        A2S: true,
+        A3S: true,
+        A4S: false,
+      }),  // store an object or array ? with {levelName : boolean}
+    },
   },
 ];
+
+
+
+//   {
+//     gameName: "FFXIV",
+//     dps     : 66, // damage per second
+//     main    : "Red Mage",   //
+//     jobs    : {
+//       "Warrior": false,
+//       "Time Mage": true,
+//       "Red Mage": false,
+//       "Sage": true,
+//       "Mystic Knight": true
+//     }, // store an array of jobs they can play
+//     cleared : {
+//       A1S: true,
+//       A2S: true,
+//       A3S: true,
+//       A4S: false,
+//     },  // store an object or array ? with {levelName : boolean}
+//     mic     : false,
+//     server  : "HappySappy"
+//   },
+//   {
+//     gameName: "FFXIV",
+//     dps     : 78, // damage per second
+//     main    : "Dancer",   //
+//     jobs    : {
+//       "Warrior": true,
+//       "Time Mage": false,
+//       "Red Mage": false,
+//       "Sage": true
+//     }, // store an array of jobs they can play
+//     cleared : {
+//       A1S: true,
+//       A2S: true,
+//       A3S: true,
+//       A4S: true,
+//     },  // store an object or array ? with {levelName : boolean}
+//     mic     : true,
+//     server  : "Deuce"
+//   },
+//   {
+//     gameName: "FFXIV",
+//     dps     : 45, // damage per second
+//     main    : "Summoner",   //
+//     jobs    : {
+//       "Warrior": true,
+//       "Time Mage": false,
+//       "Red Mage": false,
+//       "Sage": true
+//     }, // store an array of jobs they can play
+//     cleared : {
+//       A1S: true,
+//       A2S: true,
+//       A3S: false,
+//       A4S: false,
+//     },  // store an object or array ? with {levelName : boolean}
+//     mic     : false,
+//     server  : "Roxbury"
+//   },
+// ];
 
 
 // most important queries:

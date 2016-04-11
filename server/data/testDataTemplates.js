@@ -20,22 +20,24 @@ var groupTemplate = {
 
 var charProfileTemplate = {
   gameName: "FFXIV",
-  dps     : 78, // damage per second
-  main    : "Dark Knight",   //
-  jobs    : {
-    "Warrior": true,
-    "Time Mage": false,
-    "Red Mage": false,
-    "Sage": true
-  }, // store an array of jobs they can play
-  cleared : {
-    A1S: true,
-    A2S: true,
-    A3S: true,
-    A4S: false,
-  },  // store an object or array ? with {levelName : boolean}
+  gameOptions: {
+    dps     : 78, // damage per second
+    main    : "Dark Knight",   //
+    jobs    : {
+      "Warrior": true,
+      "Time Mage": false,
+      "Red Mage": false,
+      "Sage": true
+    }, // store an array of jobs they can play
+    cleared : {
+      A1S: true,
+      A2S: true,
+      A3S: true,
+      A4S: false,
+    },  // store an object or array ? with {levelName : boolean}
+  },
   mic     : true,
-  server  : "Tonberry"
+  server  : "Tonberry",
 };
 
 var groupProfileTemplate = {
