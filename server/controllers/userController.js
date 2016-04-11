@@ -9,7 +9,10 @@ var findUser = Q.nbind(User.findOne, User);
 var findUsers = Q.nbind(User.find, User);
 var findUserAndUpdate = Q.nbind(User.findOneAndUpdate, User);
 var createUser = Q.nbind(User.create, User);
-var createCharacterProfile;
+var findCharacterProfile = Q.nbind(CharacterProfile.findOne, CharacterProfile);
+var findCharacterProfiles = Q.nbind(CharacterProfile.find, CharacterProfile);
+var findCharacterProfileAndUpdate = Q.nbind(CharacterProfile.findOneAndUpdate, CharacterProfile);
+var createCharacterProfile = Q.nbind(CharacterProfile.create, CharacterProfile);
 
 exports.signinUser = function(req, res, next) {
   var username = req.body.username;
@@ -104,13 +107,17 @@ exports.findUsers = function(req, res) {
 exports.updateUser = function(req, res) {
   var updates = req.body;
   var id = req.params.id;
-  findUserAndUpdate({_id: id}, updates).then(function (user) {
+  findUserAndUpdate({_id: id}, updates)
+    .then(function (user) {
     if (!user) {
       next( new Error('User not found'));
     } else {
       res.json(user);
     }
-  })
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
 exports.createCharacterProfile = function(req, res) {
@@ -119,17 +126,64 @@ exports.createCharacterProfile = function(req, res) {
   if (characterProfile.user !== userID) {
     characterProfile.user = userID;
   }
-
+  createCharacterProfile(characterProfile)
+    .then(function(profile) {
+      if (!profile) {
+        next(new Error('Character profile not created'));
+      } else {
+        res.json(profile);
+      }
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
 exports.findCharacterProfile = function(req, res) {
+  var characterID= req.params.id;
 
+  findCharacterProfile({_id: characterID})
+    .then(function(profile) {
+      if (!profile) { //TODO: Check to verify that a response is sent to the client
+        next(new Error('No character profiles'));
+      } else {
+        res.json(profile);
+      }
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
 exports.findCharacterProfiles = function(req, res) {
+  var userID = req.params.id;
 
+  findCharacterProfiles({user: userID})
+    .then(function(profiles) {
+      if (!profiles) { //TODO: Check to verify that a response is sent to the client
+        next(new Error('No character profiles for user ' + userID));
+      } else {
+        res.json(profiles);
+      }
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
 
 exports.updateCharacterProfile = function(req, res) {
+  var characterID = req.params.id;
+  var updates = req.body;
 
+  findCharacterProfileAndUpdate({_id: characterID}, updates)
+    .then(function (profile) {
+      if (!profile) {
+        next( new Error('Character profile not found'));
+      } else {
+        res.json(profile);
+      }
+    })
+    .fail(function(err) {
+      next(err);
+    });
 };
