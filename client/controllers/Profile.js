@@ -1,9 +1,18 @@
 angular.module('app.PlayerProfile', ['ngFileUpload'])
-.factory('Profile', function($http) {
+.factory('Profile', function($http, $location, $window) {
+  var urlID = $location.absUrl().split('#');
+  if (urlID.length > 1) {
+    urlID = urlID[1].slice(1);
+  } else {
+    urlID = $window.localStorage.getItem('id');
+  }
+
+  console.log(urlID);
+
   var get = function() {
     return $http({
       method: 'GET',
-      url: '/profile/users/570befca1b03fb3104ca1ec3'
+      url: '/profile/users/' + urlID
     }).then(function(resp) {
       return resp.data;
     });
@@ -47,7 +56,6 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   };
 
   Profile.get().then(function(profile) {
-    console.log(profile);
     ProfileCtrl.profile = profile;
   });
 

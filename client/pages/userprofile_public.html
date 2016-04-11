@@ -9,8 +9,9 @@
     <div class="userinfo">
       <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
         <img ng-src="{{ProfileCtrl.profile.profileImage}}" />
-        <p>Name: {{ProfileCtrl.profile.realname}}</p>
+        <p>Name: {{ProfileCtrl.profile.username}}</p>
         <p>Location: {{ProfileCtrl.profile.location}}</p>
+        <p>Email: {{ProfileCtrl.profile.email}}</p>
         <p>Active Game: {{ProfileCtrl.profile.activeGame}}</p>
       </div>
 
