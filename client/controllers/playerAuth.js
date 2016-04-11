@@ -10,9 +10,9 @@ angular.module('app.auth', [])
   PlayerAuthCtrl.signin = function () {
     Auth.signin(PlayerAuthCtrl.player)
       .then(function (token) {
-        console.log('inside signin')
         $window.localStorage.setItem('com.app', token);
-        $location.path('/');
+        $window.location.assign('/');
+        // console.log('inside signin')
       })
       .catch(function (error) {
         console.error(error);
@@ -22,9 +22,11 @@ angular.module('app.auth', [])
   PlayerAuthCtrl.signup = function () {
     Auth.signup(PlayerAuthCtrl.player)
       .then(function (token) {
-        console.log('logging line 24');
+        // console.log('logging line 24');
         $window.localStorage.setItem('com.app', token);
-        $location.path('/');
+        $window.location.assign('/');
+        
+        // $location.path('/index.html');
       })
       .catch(function (error) {
         console.error(error);
@@ -53,7 +55,7 @@ angular.module('app.auth', [])
     //POST data to be stored into database as new object
     return $http({
       method: 'POST',
-      url: '/signup/user',
+      url: '/signup',
       data: user
     })
     .then(function (resp) {
