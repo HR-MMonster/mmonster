@@ -1,0 +1,47 @@
+<div class="game-profile ffxiv-profile">
+  <h1>FFXIV Settings</h1>
+
+  <section>
+    <p>Summary: {{FFXIVCtrl.profile.summary}}</p>
+  </section>
+
+  <section>
+    <h3>Jobs</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <label for="main">Main Job</label><br />
+        <div ng-repeat="job in FFXIVCtrl.jobs">
+          <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main" disabled="disabled"> {{job}}
+        </div>
+      </div>
+
+
+      <div class="col-sm-6">
+        <label for="jobs">Jobs they play</label><br />
+        <div ng-repeat="job in FFXIVCtrl.jobs">
+          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]" disabled="disabled"> {{job}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Communication, Availability</h3>
+    <p>Server: {{FFXIVCtrl.profile.server}}</p>
+    <br />
+    <label for="mic">Has microphone and voice comm's software</label>
+    <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" disabled="disabled"/>
+  </section>
+
+
+  <section>
+    <h3>Experience</h3>
+    <p>Dummy DPS (Incl. food, pots, party buff: {{FFXIVCtrl.profile.dps}}</p>
+    <label for="main">Cleared Fights</label><br />
+    <div ng-repeat="fight in FFXIVCtrl.fights">
+    <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile.clears[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
+    </div>
+  </section>
+</div>
+
+
