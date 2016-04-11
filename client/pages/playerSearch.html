@@ -14,10 +14,10 @@
 Post-MVP: 
 -Keyword search -->
 
-<html ng-app="app.characterSearch" ng-controller="SearchCharacter as SearchChar">
+<html ng-app="app.characterSearch" ng-controller="searchChar as searchCtrl">
   <head>
     <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../styles/userprofile.css">
+    <!-- <link rel="stylesheet" href="../styles/userprofile.css"> -->
     <script src="../lib/angular/angular.min.js"></script>
     <script src="../controllers/searchCtrls.js"></script>
   </head>
@@ -31,16 +31,16 @@ Post-MVP:
       <div class="row">
         <div class="col-sm-6">
           <label for="main">Main Job</label><br />
-          <div ng-repeat="job in FFXIVCtrl.jobs">
-            <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main"> {{job}}
+          <div ng-repeat="job in searchCtrl.jobs">
+            <input type="radio" name="main" value="{{job}}" ng-model="searchCtrl.profile.main"> {{job}}
           </div>
         </div>
 
 
         <div class="col-sm-6">
           <label for="jobs">Jobs you can play</label><br />
-          <div ng-repeat="job in FFXIVCtrl.jobs">
-            <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]"> {{job}}
+          <div ng-repeat="job in searchCtrl.jobs">
+            <input type="checkbox" name="jobs" value="{{job}}" ng-model="searchCtrl.profile.jobs[job]"> {{job}}
           </div>
         </div>
       </div>
@@ -51,11 +51,17 @@ Post-MVP:
 
       <label for="server">Server</label>
       <select id="server" name="server" ng-model="server">
-        <option ng-repeat="s in FFXIVCtrl.servers" value="s">{{s}}</option>
+        <option ng-repeat="s in searchCtrl.servers" value="s">{{s}}</option>
       </select>
       <br />
       <label for="mic">Has microphone and voice comm's software</label>
-      <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" />
+      <input type="checkbox" name="mic" id="mic" ng-model="searchCtrl.profile.mic" />
+
+<!--       <label></label>
+      <select>
+        
+      </select> -->
+
     </section>
 
 
@@ -63,16 +69,18 @@ Post-MVP:
       <h3>Experience</h3>
 
       <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
-      <input type="text" ng-model="FFXIVCtrl.profile.dps"><br />
+      <input type="text" ng-model="searchCtrl.profile.dps"><br />
 
       <label for="main">Cleared Fights</label><br />
-      <div ng-repeat="fight in FFXIVCtrl.fights">
-        <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+      <div ng-repeat="fight in searchCtrl.fights">
+        <input type="checkbox" name="clears" ng-model= "searchCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
       </div>
 
-<!--       <a href="#" ng-click="FFXIVCtrl.test()">Test button</a>
-      <a href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a> -->
+<!--       <a href="#" ng-click="searchCtrl.test()">Test button</a>
+      <a href="#" ng-click="searchCtrl.update()">Save Profile Changes</a> -->
     </section>
+
+
 
 
     <!-- <ffxiv /> -->

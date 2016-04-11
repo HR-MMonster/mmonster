@@ -1,47 +1,24 @@
-//consolidate into ffvixSearch controller
-
 angular.module('app.characterSearch', [])
 
-.controller('ffxivSearch', function ($window, $location, Search) {
+.controller('searchChar', function ($window, $location) {
   var searchCtrl = this;
+  searchCtrl.profile = {};
 
 
   searchCtrl.queryDB = function() {
     // Search.
     //passes th
-  }
+  };
 
   searchCtrl.jobResult = function() {
     
-  }
-
-})
-
-
-
-
-
-
-
-
-
-.directive('ffxiv', function() {
-  return {
-    restrict: 'E',
-    // templateUrl: '../templates/ffxiv_profile.html', //create new template
-    controller: 'FFXIVController',
-    controllerAs: 'FFXIVCtrl'
   };
-})
 
-.controller('FFXIVController', function() {
-  var FFXIVCtrl = this;
-  FFXIVCtrl.profile = {};
 
-  FFXIVCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
-  FFXIVCtrl.jobs = ['Paladin', 'Warrior', 'Dark Knight', 'White Mage', 'Scholar', 'Astrologian', 'Monk', 'Dragoon', 'Ninja', 'Black Mage', 'Summoner', 'Bard', 'Machinist'];
+  searchCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
+  searchCtrl.jobs = ['Paladin', 'Warrior', 'Dark Knight', 'White Mage', 'Scholar', 'Astrologian', 'Monk', 'Dragoon', 'Ninja', 'Black Mage', 'Summoner', 'Bard', 'Machinist'];
 
-  FFXIVCtrl.fights = [
+  searchCtrl.fights = [
     {
       name: 'The Binding Coil of Bahamut: Turn 1',
       abr: 'T1'
@@ -125,16 +102,16 @@ angular.module('app.characterSearch', [])
     {
       name: 'Alexander Midas: The Burden of the Son (Savage)',
       abr: 'A8S'
-    },
+    }
   ];
+  
+  // searchCtrl.playTimes;
 
-  FFXIVCtrl.test = function() {
-    console.log(FFXIVCtrl.profileImage);
-  };
+  // searchCtrl.
 
-  FFXIVCtrl.update = function() {
-    console.log('sending PUT request for ffxiv profile');
-  };
 });
+
+
+
 
 
