@@ -12,7 +12,7 @@ var characterProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }, // should store user reference, look into population with mongoose
+  } // should store user reference, look into population with mongoose
 });
 
   /*

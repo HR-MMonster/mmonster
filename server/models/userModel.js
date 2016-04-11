@@ -46,13 +46,20 @@ userSchema.pre('save', function(next) {
     return next(); // perform next middleware action on the controller
   }
 
-  bycrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
     if (err) {
       return next(err);
+    } else {
+      bcrypt.hash(user.password, salt, null, function (err, hash) {
+        if (err) {
+          return next(err);
+        } else {
+          user.password = hash;
+          user.salt = salt;
+          next();
+        }
+      });
     }
-    user.password = hash;
-    user.salt = salt;
-    next();
   });
 });
 
