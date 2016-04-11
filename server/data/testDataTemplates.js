@@ -14,32 +14,34 @@ var groupTemplate = {
   "name"        : "Colin",
   "email"       : "colin@me.com",
   "summary"     : "Play or be played",
-  "startTime"   : 16, // num from 0-23, account for different time zones
-  "endTime"     : 2,  // num from 0-23
+  // "startTime"   : 16, // num from 0-23, account for different time zones
+  // "endTime"     : 2,  // num from 0-23
 };
 
 var charProfileTemplate = {
-  gameName: "FFIVX",
-  dps     : 78, // damage per second
-  main    : "Dark Knight",   //
-  jobs    : {
-    "Warrior": true,
-    "Time Mage": false,
-    "Red Mage": false,
-    "Sage": true
-  }, // store an array of jobs they can play
-  cleared : {
-    A1S: true,
-    A2S: true,
-    A3S: true,
-    A4S: false,
-  },  // store an object or array ? with {levelName : boolean}
+  gameName: "FFXIV",
+  gameOptions: {
+    dps     : 78, // damage per second
+    main    : "Dark Knight",   //
+    jobs    : {
+      "Warrior": true,
+      "Time Mage": false,
+      "Red Mage": false,
+      "Sage": true
+    }, // store an array of jobs they can play
+    cleared : {
+      A1S: true,
+      A2S: true,
+      A3S: true,
+      A4S: false,
+    },  // store an object or array ? with {levelName : boolean}
+  },
   mic     : true,
-  server  : "Tonberry"
+  server  : "Tonberry",
 };
 
 var groupProfileTemplate = {
-  gameName: "FFIVX",
+  gameName: "FFXIV",
   minDps  : 70, // damage per second
   maxDps  : 100,
   main    : "Dark Knight",   //

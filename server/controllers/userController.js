@@ -14,6 +14,11 @@ var findCharacterProfiles = Q.nbind(CharacterProfile.find, CharacterProfile);
 var findCharacterProfileAndUpdate = Q.nbind(CharacterProfile.findOneAndUpdate, CharacterProfile);
 var createCharacterProfile = Q.nbind(CharacterProfile.create, CharacterProfile);
 
+var testUsers = require('../data/testData').users;
+var testCharProfiles = require('../data/testData').characterProfiles;
+var seedCharProfiles = CharacterProfile.seedCharProfiles;
+// console.log(testUsers);
+
 exports.signinUser = function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
@@ -187,3 +192,16 @@ exports.updateCharacterProfile = function(req, res) {
       next(err);
     });
 };
+
+var seedUsers = function(users) {
+  User.create(users, function(err, users) {
+    if (err) {
+      console.error('<><> Error seeding users:', err);
+      return;
+    }
+    console.log('<><> success seeding users');
+    seedCharProfiles(testCharProfiles);
+  });
+};
+
+// seedUsers(testUsers);
