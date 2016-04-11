@@ -21,15 +21,13 @@
         |___ GET
         |
         +--- /images
-            |___ POST
-            |
             +--- /:id
                 |___ GET
         |
         +--- /:id
             |--- GET
             |___ PUT
-
+            |
             +--- characterProfiles
                 |--- GET
                 |___ POST
@@ -38,6 +36,9 @@
                     |--- GET
                     |--- DELETE
                     |___ PUT
+            |
+            +--- images
+                |___ POST
     |
     +--- /groups
         |___ GET
@@ -72,3 +73,6 @@
         |
         +---/:id
             |___ GET
+|
++--- /logout
+    |___ GET -> success: / | failure: /
