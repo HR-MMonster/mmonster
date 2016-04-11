@@ -1,0 +1,21 @@
+USER
+    username: String - required - unique
+    password: String - required - unique
+    salt: String
+    name: String
+    email: String
+    summary: String
+    photo: String // store path to file location
+    startTime: Number
+    endTime: Number
+ 
+GROUP
+    groupname: String - required - unique
+    password: String - required - unique
+    salt: String
+    name: String
+    email: String
+    summary: String
+    photo: String // will store path to file location
+    startTime: Number
+    endTime: Number
