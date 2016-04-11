@@ -56,45 +56,85 @@ exports.characterProfiles = [
     gameName: "FFXIV",
     mic     : true,
     server  : "Tonberry",
-    gameOptions: {
-      dps     : 78, // damage per second
-      main    : "Dark Knight",   //
-      jobs    : JSON.stringify({
-        "Warrior": true,
-        "Time Mage": false,
-        "Red Mage": false,
-        "Sage": true
-      }), // store an array of jobs they can play
-      cleared : JSON.stringify({
-        A1S: true,
-        A2S: true,
-        A3S: true,
-        A4S: false,
-      }),  // store an object or array ? with {levelName : boolean}
-    },
-    user: "570bfba6c82432fa1274e666"
+    dps: 45,
+    main: "warrior",
+    paladin: true,
+    warrior: false,
+    darkKnight: true,
+    whiteMage: true,
+    scholar: false,
+    astrologian: true,
+    monk: true,
+    dragoon: false,
+    ninja: true,
+    blackMage: true,
+    summoner: true,
+    bard: true,
+    machinist: false,
+    T1: true,
+    T2: true,
+    T3: true,
+    T4: true,
+    T5: true,
+    T6: true,
+    T7: false,
+    T8: false,
+    T9: false,
+    T10: false,
+    T11: false,
+    T12: false,
+    T13: false,
+    A1S: false,
+    A2S: false,
+    A3S: false,
+    A4S: false,
+    A5S: false,
+    A6S: false,
+    A7S: false,
+    A8S: false,
+    user: "570c0fb98c3322591ce56e26"
   },
   {
     gameName: "FFXIV",
     mic     : true,
     server  : "Tonberry",
-    gameOptions: {
-      dps     : 78, // damage per second
-      main    : "Dark Knight",   //
-      jobs    : JSON.stringify({
-        "Warrior": true,
-        "Time Mage": false,
-        "Red Mage": false,
-        "Sage": true
-      }), // store an array of jobs they can play
-      cleared : JSON.stringify({
-        A1S: true,
-        A2S: true,
-        A3S: true,
-        A4S: false,
-      }),  // store an object or array ? with {levelName : boolean}
-    },
-    user: "570bfba6c82432fa1274e664"
+    dps: 45,
+    main: "warrior",
+    paladin: true,
+    warrior: false,
+    darkKnight: true,
+    whiteMage: true,
+    scholar: true,
+    astrologian: true,
+    monk: true,
+    dragoon: false,
+    ninja: true,
+    blackMage: true,
+    summoner: true,
+    bard: false,
+    machinist: true,
+    T1: true,
+    T2: true,
+    T3: true,
+    T4: true,
+    T5: true,
+    T6: true,
+    T7: true,
+    T8: true,
+    T9: true,
+    T10: true,
+    T11: true,
+    T12: true,
+    T13: false,
+    A1S: false,
+    A2S: false,
+    A3S: false,
+    A4S: false,
+    A5S: false,
+    A6S: false,
+    A7S: false,
+    A8S: false,
+    user: "570c0fb98c3322591ce56e29"
   },
 ];
 
