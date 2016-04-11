@@ -17,7 +17,7 @@ exports.signinUser = function(req, res, next) {
         next(new Error('User does not exist'));
         // TODO: Where should the user be redirected
       } else {
-        return user.comparePassword(password)
+        return user.comparePasswords(password)
           .then(function(foundUser) {
             if (foundUser) {
               // TODO: Add authentication check
@@ -27,6 +27,8 @@ exports.signinUser = function(req, res, next) {
             } else {
               // Redirect user back to sign in
               res.redirect('/');
+              //TODO: Confirm route for signin
+              // res.redirect('/signin');
             }
           });
       }
@@ -52,7 +54,9 @@ exports.createUser = function(req, res, next) {
         next(new Error('User account not created'));
         // TODO: Alert client that the accont was not created
       } else {
-        res.redirect('/signin');
+        res.redirect('/');
+        //res.redirect('/signin');
+        //TODO: Confirm route for signin
       }
     })
     .fail(function(err) {
