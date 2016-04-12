@@ -1,5 +1,5 @@
 angular.module('app.PlayerProfile', ['ngFileUpload'])
-.factory('Profile', function($http, $location, $window) {
+.factory('Profile', function($http, $location, $window, Upload) {
   var urlID = $location.absUrl().split('#');
   if (urlID.length > 1) {
     urlID = urlID[1].slice(1);
@@ -16,16 +16,6 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     }).then(function(resp) {
       return resp.data;
     });
-
-    // return {
-    //   realname: 'Travis',
-    //   location: 'Japan',
-    //   activeGame: 'FFXIV',
-    //   profileImage: 'http://i.imgur.com/B43Ysgq.png?1',
-    //   games: {
-    //     'ffxiv': true
-    //   }
-    // };
   };
 
   var update = function(profile) {
@@ -37,9 +27,22 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     console.log('running update');
   };
 
+  var updatePhoto = function(photo) {
+    Upload.upload({
+      url: '/profile/users/' + urlID + '/photos',
+      data: {userPhoto: photo}
+    }).then(function (resp) {
+      console.log('Success');
+      console.log(resp);
+    }, function (resp) {
+      console.log('Error status: ' + resp.status);
+    });
+  };
+
   return {
     get: get,
-    update: update
+    update: update,
+    updatePhoto: updatePhoto
   };
 })
 .controller('ProfileController', ['Profile', function(Profile) {
@@ -50,12 +53,10 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   //   ProfileCtrl.profile = profile;
   // });
 
-  ProfileCtrl.upload = function(file) {
-    console.log('uploading stuffs');
-    console.log(file);
-  };
+  ProfileCtrl.upload = Profile.updatePhoto;
 
   Profile.get().then(function(profile) {
+    console.log(profile);
     ProfileCtrl.profile = profile;
   });
 
