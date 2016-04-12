@@ -22,6 +22,7 @@ var seedCharProfiles = CharacterProfile.seedCharProfiles;
 exports.signinUser = function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
+
   findUser({username: username})
     .then(function(user) {
       if (!user) {
@@ -51,6 +52,7 @@ exports.signinUser = function(req, res, next) {
 
 exports.createUser = function(req, res, next) {
   var newUser = req.body;
+
   findUser({username: newUser.username})
     .then(function(found) {
       if (found) {
@@ -65,9 +67,19 @@ exports.createUser = function(req, res, next) {
         next(new Error('User account not created'));
         // TODO: Alert client that the accont was not created
       } else {
-        res.redirect('/');
-        //res.redirect('/signin');
-        //TODO: Confirm route for signin
+        // TODO: Create a character profile for the user
+        var characterProfile = {gameName: 'FFXIV', user: user._id};
+         createCharacterProfile(characterProfile)
+         .then(function(profile) {
+           if (!profile) {
+             next(new Error('Character profile not created'));
+           } else {
+            // res.redirect('/');
+             //res.redirect('/signin');
+             res.status(200).json(user);
+             //TODO: Confirm route for signin
+           }
+         });
       }
     })
     .fail(function(err) {
@@ -181,7 +193,7 @@ exports.updateCharacterProfile = function(req, res) {
   var updates = req.body;
 
   findCharacterProfileAndUpdate({_id: characterID}, updates)
-    .then(function (profile) {
+    .then(function(profile) {
       if (!profile) {
         next( new Error('Character profile not found'));
       } else {
@@ -190,6 +202,20 @@ exports.updateCharacterProfile = function(req, res) {
     })
     .fail(function(err) {
       next(err);
+    });
+};
+
+exports.uploadPhoto = function(req, res) {
+  var userID = req.params.id;
+  var photoFileDescription = req.file;
+  var updates = {photo: '/uploads/' + photoFileDescription.filename};
+  findUserAndUpdate({_id: userID}, updates)
+    .then(function(profile) {
+      if (!profile) {
+        next(new Error('No user profile found for user ' + userID));
+      } else {
+        res.json(profile);
+      }
     });
 };
 

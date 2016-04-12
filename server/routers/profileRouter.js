@@ -2,11 +2,12 @@
  * Handle routes from endpoints.
  */
 var profileRouter = require('express').Router();
-var multer = require('multer');
 var userController = require('../controllers/userController');
 var groupController = require('../controllers/groupController');
 var characterProfileController = require('../controllers/characterProfileController');
 var groupProfileController = require('../controllers/groupProfileController');
+var multer = require('multer');
+var upload = multer({dest: __dirname + '/../../client/uploads/'});
 
 profileRouter
   .route('/users')
@@ -26,6 +27,18 @@ profileRouter
   .route('/users/:id/characterProfiles/:id')
   .get(userController.findCharacterProfile)
   .put(userController.updateCharacterProfile);
+
+/*
+profileRouter
+  .route('/users/:id/photos')
+  .get(userController.getProfilePhoto)
+  .post;
+*/
+
+profileRouter
+  .route('/users/:id/photos')
+  .post(upload.single('userPhoto'), userController.uploadPhoto);
+
 
 profileRouter
   .route('/characterProfiles')
