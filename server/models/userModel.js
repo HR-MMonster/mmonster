@@ -20,9 +20,6 @@ var userSchema = new Schema({
   email: String,
   summary: String,
   photo: String, // store path to file location
-
-  chararcterProfile:
-  // user availability
   startTime: Number,
   endTime: Number
 });

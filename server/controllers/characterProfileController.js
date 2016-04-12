@@ -61,4 +61,4 @@ var seedDatabase = function(data) {
   });
 };
 
-// seedDatabase(testData);
+seedDatabase(testData);

@@ -1,42 +1,52 @@
-exports.users = [
+exports.users = users = [
   {
-    "username"    : "grandMage",
-    "password"    : "7gjk84njk",  // stores hash
-    "name"        : "Travis",
-    "email"       : "travis@me.com",
-    "summary"     : "I like dogs and long walks on the beach",
-    "startTime"   : 18, // num from 0-23, account for different time zones
-    "endTime"     : 23,  // num from 0-23
+    "_id": "570c79619b9fec00444e616b",
+    "salt": "$2a$10$Itr6Y/t5k8ZGqKVSFo4Qou",
+    "username": "grandMage",
+    "password": "$2a$10$Itr6Y/t5k8ZGqKVSFo4QounP4CiOf4jLq14zQQxlTFGJYF4culbBW",
+    "name": "Travis",
+    "email": "travis@me.com",
+    "summary": "I like dogs and long walks on the beach",
+    "startTime": 18,
+    "endTime": 23,
+    "__v": 0
   },
   {
-    "username"    : "lamachina",
-    "password"    : "kdhfihd787",  // stores hash
-    "name"        : "Colin",
-    "email"       : "colin@gmail.com",
-    "summary"     : "I like one thing in life, and that's machining on FFR",
-    "startTime"   : 22, // num from 0-23, account for different time zones
-    "endTime"     : 3,  // num from 0-23
+    "_id": "570c79619b9fec00444e616d",
+    "salt": "$2a$10$yVQo6uBJqU8h07s1xEfbdO",
+    "username": "summonho",
+    "password": "$2a$10$yVQo6uBJqU8h07s1xEfbdOZ09jbf5szqMk6kj349Kn4oH6ZV8JY3G",
+    "name": "Elia",
+    "email": "kd@me.com",
+    "summary": "Can't touch this",
+    "startTime": 19,
+    "endTime": 24,
+    "__v": 0
   },
   {
-    "username"    : "summonho",
-    "password"    : "fkladhfo7765e",  // stores hash
-    "name"        : "Elia",
-    "email"       : "kd@me.com",
-    "summary"     : "Can't touch this",
-    "startTime"   : 19, // num from 0-23, account for different time zones
-    "endTime"     : 24,  // num from 0-23
+    "_id": "570c79619b9fec00444e616c",
+    "salt": "$2a$10$PwazdvTlfdE0XFvi4fx9Hu",
+    "username": "lamachina",
+    "password": "$2a$10$PwazdvTlfdE0XFvi4fx9HuuYdxdTg4BXSF03bcWw/CpR2rC4AAAm2",
+    "name": "Colin",
+    "email": "colin@gmail.com",
+    "summary": "I like one thing in life, and that's machining on FFR",
+    "startTime": 22,
+    "endTime": 3,
+    "__v": 0
   },
   {
-    "username"    : "god",
-    "password"    : "hewhohasnoname",  // stores hash
-    "name"        : "dont say it in vain",
-    "email"       : "alpha@omega.com",
-    "summary"     : "Piss me off or get hellfire",
-    "startTime"   : 13, // num from 0-23, account for different time zones
-    "endTime"     : 23,  // num from 0-23
-  },
-
-
+    "_id": "570c79619b9fec00444e616e",
+    "salt": "$2a$10$hkuITkmDg8bQtwvOB2wQi.",
+    "username": "god",
+    "password": "$2a$10$hkuITkmDg8bQtwvOB2wQi.wUNuAKglxks7HVzKxDq2eE5dq3PRQdi",
+    "name": "dont say it in vain",
+    "email": "alpha@omega.com",
+    "summary": "Piss me off or get hellfire",
+    "startTime": 13,
+    "endTime": 23,
+    "__v": 0
+  }
 ];
 
 var groups = [
@@ -51,7 +61,7 @@ var groups = [
   },
 ];
 
-exports.characterProfiles = [
+exports.characterProfiles = characterProfiles = [
   {
     gameName: "FFXIV",
     mic     : true,
@@ -92,7 +102,7 @@ exports.characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: "570c315c978d75d53024a172"
+    user: users[0]
   },
   {
     gameName: "FFXIV",
@@ -134,7 +144,7 @@ exports.characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: "570c315c978d75d53024a174"
+    user: users[1]
   },
   {
     gameName: "FFXIV",
@@ -176,7 +186,7 @@ exports.characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: "570c315c978d75d53024a173"
+    user: users[2]
   },
   {
     gameName: "FFXIV",
@@ -218,7 +228,7 @@ exports.characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: "570c315c978d75d53024a175"
+    user: users[3]
   },
   // {
   //   gameName: "FFXIV",

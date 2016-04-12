@@ -9,10 +9,10 @@ var characterProfileSchema = new Schema({
     type: String,
     required: true
   },
+  user:[userSchema], // should store user reference, look into population with mongoose
   // gameOptions: [ffxivSchema], // use a nested structue here
   mic: Boolean, // user has a microphone connection?
   server: String, // should this be game specific?
-  user:[userSchema], // should store user reference, look into population with mongoose
   dps: Number,
   main: String,
   paladin: Boolean,
