@@ -7,7 +7,16 @@ var groupController = require('../controllers/groupController');
 var characterProfileController = require('../controllers/characterProfileController');
 var groupProfileController = require('../controllers/groupProfileController');
 var multer = require('multer');
-var upload = multer({dest: __dirname + '/../../client/uploads/'});
+var storage = multer.diskStorage({
+  destination: function(req, file, callback) {
+    callback(null, __dirname + '/../../client/uploads/');
+  },
+  filename: function(req, file, callback) {
+    callback(null, file.fieldname + '-' + Date.now() + '.' +  mimeExtension[file.mimetype])
+  }
+});
+
+var upload = multer({storage: storage});
 
 profileRouter
   .route('/users')
@@ -27,13 +36,6 @@ profileRouter
   .route('/users/:id/characterProfiles/:id')
   .get(userController.findCharacterProfile)
   .put(userController.updateCharacterProfile);
-
-/*
-profileRouter
-  .route('/users/:id/photos')
-  .get(userController.getProfilePhoto)
-  .post;
-*/
 
 profileRouter
   .route('/users/:id/photos')
@@ -66,5 +68,11 @@ profileRouter
 profileRouter
   .route('/groupProfiles')
   .get(groupProfileController.findGroupProfiles);
+
+mimeExtension = {
+  'image/jpeg': 'jpeg',
+  'image/png': 'png',
+  'image/gif': 'gif'
+};
 
 module.exports = profileRouter;

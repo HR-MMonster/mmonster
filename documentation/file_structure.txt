@@ -1,6 +1,7 @@
 mmonser
 |
 +--- client
+|    +--- uploads
 |
 +--- documentation
 |   |--- database_schema.txt

@@ -67,7 +67,7 @@ exports.createUser = function(req, res, next) {
         next(new Error('User account not created'));
         // TODO: Alert client that the accont was not created
       } else {
-        // TODO: Create a character profile for the user
+        // A generic FFIV character profile is created for a new user
         var characterProfile = {gameName: 'FFXIV', user: user._id};
          createCharacterProfile(characterProfile)
          .then(function(profile) {
@@ -208,13 +208,15 @@ exports.updateCharacterProfile = function(req, res) {
 exports.uploadPhoto = function(req, res) {
   var userID = req.params.id;
   var photoFileDescription = req.file;
+
+  // TODO: Determine file type and save correct extension
   var updates = {photo: '/uploads/' + photoFileDescription.filename};
   findUserAndUpdate({_id: userID}, updates)
     .then(function(profile) {
       if (!profile) {
         next(new Error('No user profile found for user ' + userID));
       } else {
-        res.json(profile);
+        res.json(updates);
       }
     });
 };
