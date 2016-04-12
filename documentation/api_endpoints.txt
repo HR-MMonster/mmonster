@@ -5,7 +5,7 @@
     |
     +--- /user
         |--- GET
-        |___ POST -> success: /signin | failure: /signup
+        |___ POST -> success: /signin | failure: /signup (post user image on signup)
     |
     +--- /group
         |--- GET
@@ -20,13 +20,9 @@
     +--- /users
         |___ GET
         |
-        +--- /images
-            +--- /:id
-                |___ GET
-        |
         +--- /:id
             |--- GET
-            |___ PUT
+            |___ PUT (allow update of user image)
             |
             +--- characterProfiles
                 |--- GET
@@ -38,7 +34,7 @@
                     |___ PUT
             |
             +--- images
-                |___ POST
+                |___ PUT
     |
     +--- /groups
         |___ GET
