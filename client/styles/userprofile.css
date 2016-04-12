@@ -1,6 +1,10 @@
-h1, h2, h3, h4, h5, p, div {
+h1, h2, h3, h4, h5, p, div, input {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: #eee;
 }
 
 section {
@@ -33,7 +37,10 @@ img {
 
 .user-profile {
   margin: 20px auto;
+  background-color: white;
   width: 500px;
+  border: 1px solid #333;
+  padding: 15px;
 }
 
 .clearfix:after {
@@ -54,15 +61,22 @@ img {
   display: block;
 }
 
+.user-profile .row {
+  margin-bottom: 20px;
+}
+
 .game-profile {
   border: 1px solid grey;
   margin-top: 30px;
   padding: 50px;
   border-radius: 10px;
+  background-color: white;
 }
 
 input[type=text], textarea {
   padding: 5px;
+  width: 90%;
+  margin: auto;
 }
 
 textarea {
@@ -100,11 +114,10 @@ input[type=file] {
 .profile-image {
   height: 200px;
   width: 200px;
-  background-image: url('http://i.imgur.com/B43Ysgq.png?1');
-  float: left;
+  background-size: cover;
   position: relative;
-  margin-right: 20px;
   overflow: hidden;
+  margin: 0 auto 20px;
 }
 
 .profile-image .btn{
@@ -113,4 +126,27 @@ input[type=file] {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
+}
+
+#starttime {
+  width: 80%;
+}
+
+.center {
+  text-align: center;
+}
+
+a {
+  display: inline-block;
+  color: white;
+  background-color: #3E8CE2;
+  padding: 10px;
+}
+
+.rz-bubble:after {
+  content: ":00";
+}
+
+rzslider .rz-pointer {
+  background-color: #1B88D8
 }

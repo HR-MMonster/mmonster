@@ -1,6 +1,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../lib/angularjs-slider/dist/rzslider.min.css">
   <link rel="stylesheet" href="../styles/userprofile.css">
 </head>
 <body>
@@ -8,20 +9,35 @@
    <body ng-app="app.PlayerProfile">
     <div class="userinfo">
       <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
-        <div class="profile-image">
-          <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
-            Update
-          </span>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="profile-image" ng-style="{'background-image': 'url(' + ProfileCtrl.profile.photo + ')'}">
+              <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
+                Update
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h4>Basic Info:</h4>
+            <label for="realname">Name</label>
+            <input type="text" id="username" ng-model='ProfileCtrl.profile.username'>
+            <label for="location">Location</label>
+            <input type="text" id="location" ng-model='ProfileCtrl.profile.location'>
+            <label for="location">Email</label>
+            <input type="text" id="Email" ng-model='ProfileCtrl.profile.email'>
+          </div>
         </div>
-        <label for="realname">Name</label>
-        <input type="text" id="username" ng-model='ProfileCtrl.profile.username'>
-        <label for="location">Location</label>
-        <input type="text" id="location" ng-model='ProfileCtrl.profile.location'>
-        <label for="location">Email</label>
-        <input type="text" id="Email" ng-model='ProfileCtrl.profile.email'>
-        <label for="active-game">Active Game</label>
-        <input type="text" id="active-game" ng-model='ProfileCtrl.profile.activeGame'>
+        <h4>Availability</h4>
+        <label for="starttime">Start Time</label>
+        <rzslider
+         rz-slider-model="ProfileCtrl.profile.startTime"
+         rz-slider-options="ProfileCtrl.slider"></rzslider>
+         <label for="endtime">End Time</label>
+        <rzslider
+         rz-slider-model="ProfileCtrl.profile.endTime"
+         rz-slider-options="ProfileCtrl.slider"></rzslider>
         <a href="#" ng-click="ProfileCtrl.update()">Update Profile</a>
+        <a href="#" ng-click="ProfileCtrl.test()"></a>
       </div>
 
     </div>
@@ -32,6 +48,7 @@
   </div>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
+  <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
   <script src="../controllers/Profile.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-angular.module('app.PlayerProfile', ['ngFileUpload'])
-.factory('Profile', function($http, $location, $window) {
+angular.module('app.PlayerProfile', ['ngFileUpload', 'rzModule'])
+.factory('Profile', function($http, $location, $window, Upload) {
   var urlID = $location.absUrl().split('#');
   if (urlID.length > 1) {
     urlID = urlID[1].slice(1);
@@ -16,46 +16,84 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     }).then(function(resp) {
       return resp.data;
     });
-
-    // return {
-    //   realname: 'Travis',
-    //   location: 'Japan',
-    //   activeGame: 'FFXIV',
-    //   profileImage: 'http://i.imgur.com/B43Ysgq.png?1',
-    //   games: {
-    //     'ffxiv': true
-    //   }
-    // };
   };
 
   var update = function(profile) {
+    console.log(profile);
     $http({
       method: 'PUT',
-      url: '/profile/users/570befca1b03fb3104ca1ec3',
+      url: '/profile/users/' + urlID,
       data: profile
     });
     console.log('running update');
   };
 
+  var getFFXIV = function() {
+    return $http({
+      method: 'GET',
+      url: '/profile/users/' + urlID + '/characterProfiles'
+    }).then(function(resp) {
+      return resp.data[0];
+    });
+  };
+
+  var updateFFXIV = function(profile) {
+    $http({
+      method: 'PUT',
+      url: '/profile/users/' + urlID + '/characterProfiles/' + profile._id,
+      data: profile
+    }).then(function(resp) {
+      console.log(resp.data);
+    }, function(resp) {
+      console.log('err status code: ' + resp.statusCode);
+    });
+  };
+
+  var updatePhoto = function(photo) {
+    return Upload.upload({
+      url: '/profile/users/' + urlID + '/photos',
+      data: {userPhoto: photo}
+    }).then(function (resp) {
+      console.log('Success');
+      return resp.data.photo;
+    }, function (resp) {
+      console.log('Error status: ' + resp.status);
+    });
+  };
+
   return {
     get: get,
-    update: update
+    update: update,
+    updatePhoto: updatePhoto,
+    getFFXIV: getFFXIV,
+    updateFFXIV: updateFFXIV
   };
 })
 .controller('ProfileController', ['Profile', function(Profile) {
   var ProfileCtrl = this;
   ProfileCtrl.profile = {};
 
+  ProfileCtrl.slider = {
+    floor: 0,
+    ceil: 23
+  };
+
   // Profile.get().then(function(profile) {
   //   ProfileCtrl.profile = profile;
   // });
+  ProfileCtrl.test = function() {
+    console.log(ProfileCtrl.profile);
+    console.log(ProfileCtrl.startTime);
+  };
 
   ProfileCtrl.upload = function(file) {
-    console.log('uploading stuffs');
-    console.log(file);
+    Profile.updatePhoto(file).then(function(img) {
+      if (img) ProfileCtrl.profile.photo = img;
+    });
   };
 
   Profile.get().then(function(profile) {
+    console.log(profile);
     ProfileCtrl.profile = profile;
   });
 
@@ -79,12 +117,29 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     controllerAs: 'FFXIVCtrl'
   };
 })
-.controller('FFXIVController', function() {
+.controller('FFXIVController', function(Profile) {
   var FFXIVCtrl = this;
-  FFXIVCtrl.profile = {};
+  FFXIVCtrl.profile = Profile.getFFXIV().then(function(profile) {
+    console.log(profile);
+    FFXIVCtrl.profile = profile;
+  });
 
   FFXIVCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
-  FFXIVCtrl.jobs = ['Paladin', 'Warrior', 'Dark Knight', 'White Mage', 'Scholar', 'Astrologian', 'Monk', 'Dragoon', 'Ninja', 'Black Mage', 'Summoner', 'Bard', 'Machinist'];
+  FFXIVCtrl.jobs = [
+    {name: 'Paladin', model: 'Paladin'},
+    {name: 'Warrior', model: 'Warrior'},
+    {name: 'Dark Knight', model: 'DarkKnight'},
+    {name: 'White Mage', model: 'WhiteMage'},
+    {name: 'Scholar', model: 'Scholar'},
+    {name: 'Astrologian', model: 'Astrologian'},
+    {name: 'Monk', model: 'Monk'},
+    {name: 'Dragoon', model: 'Dragoon'},
+    {name: 'Ninja', model: 'Ninja'},
+    {name: 'Black Mage', model: 'BlackMage'},
+    {name: 'Summoner', model: 'Summoner'},
+    {name: 'Bard', model: 'Bard'},
+    {name: 'Machinist', model: 'Machinist'}
+  ];
 
   FFXIVCtrl.fights = [
   {
@@ -174,10 +229,10 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   ];
 
   FFXIVCtrl.test = function() {
-    console.log(FFXIVCtrl.profileImage);
+    console.log(FFXIVCtrl.profile);
   };
 
   FFXIVCtrl.update = function() {
-    console.log('sending PUT request for ffxiv profile');
+    Profile.updateFFXIV(FFXIVCtrl.profile);
   };
 });

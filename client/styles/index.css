@@ -5,6 +5,7 @@ h1, h2, h3, h4, h5, p, div {
 
 body {
   background: url('http://i1.2pcdn.com/node14/image/article/201503/02/20150302051124a0e181ux5aphq7q8.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 h1 {
