@@ -62,24 +62,24 @@ exports.findCharacterProfiles = function(req, res, next) {
            // console.log(foundProfiles[i]);
            var charProfile = foundProfiles[i];
            var user = charProfile.user;
-           console.log('user start time:', user.startTime, '\nuser end time: ', user.endTime);
-           console.log('queryStartTime:', queryStartTime, '\nqueryEndTime:', queryEndTime);
+           // console.log('user start time:', user.startTime, '\nuser end time: ', user.endTime);
+           // console.log('queryStartTime:', queryStartTime, '\nqueryEndTime:', queryEndTime);
            var startTimeDiff = timeDiff(queryStartTime, user.startTime);
-           console.log('start time diff:', startTimeDiff);
+           // console.log('start time diff:', startTimeDiff);
            var userTimeDiff = timeDiff(user.startTime, user.endTime);
-           console.log('user time diff:', userTimeDiff);
+           // console.log('user time diff:', userTimeDiff);
            var queryTimeDiff = timeDiff(queryStartTime, queryEndTime);
-           console.log('query time diff:', queryTimeDiff);
+           // console.log('query time diff:', queryTimeDiff);
            if ((startTimeDiff + userTimeDiff) <= queryTimeDiff) {
-            console.log('found a match, pushing id');
+            // console.log('found a match, pushing id');
             usersThatMatch.push(user);
-            console.log(charProfile['_id']);
+            // console.log(charProfile['_id']);
             charProfilesThatMatch.push(''+charProfile['_id']);
            } else {
-            console.log('not a match,', (startTimeDiff + userTimeDiff), 'is larger than query time diff: ', queryTimeDiff);
+            // console.log('not a match,', (startTimeDiff + userTimeDiff), 'is larger than query time diff: ', queryTimeDiff);
            }
         }
-        console.log('character profiles ids that match', charProfilesThatMatch);
+        // console.log('character profiles ids that match', charProfilesThatMatch);
         if (!charProfilesThatMatch) {
           res.json();
         } else {
@@ -116,65 +116,4 @@ var seedDatabase = function(data) {
   });
 };
 
-// seedDatabase(testData);
-  //         User.find(foundProfiles)
-  //           .and({
-  //         'startTime': {$lte: startTime},
-  //         'endTime': {$gte: endTime}
-  //        })
-  //         .select('_id')
-  //         .exec(function(err, foundUsers) {
-  //           if (err) {
-  //             next(err);
-  //           }
-  //           CharacterProfile.find(foundUsers)
-  //             .populate('user')
-  //             .exec(function(err, finalProfiles) {
-  //               res.json(finalProfiles);
-  //             })
-  //         })
-  //       });
-  //     } else {
-  //       CharacterProfile.find(req.query)
-  //         .populate('user')
-  //         .select('_id')
-  //         .exec(function(err, foundProfiles) {
-  //           if (err) {
-  //             next(err);
-  //           }
-  //           User.find(foundProfiles)
-  //             .and({
-  //           'startTime': {$gte: startTime},
-  //           'endTime': {$lte: endTime}
-  //          })
-  //           .select('_id')
-  //           .exec(function(err, foundUsers) {
-  //             if (err) {
-  //               next(err);
-  //             }
-  //             CharacterProfile.find(foundUsers)
-  //               .populate('user')
-  //               .exec(function(err, finalProfiles) {
-  //                 res.json(finalProfiles);
-  //               })
-  //           })
-  //         });
-  //     }
-  // }
 
-  // if (startTime <= endTime) {
-  //   CharacterProfile.find(req.query)
-  //     .populate('user')
-  //     .and({
-  //       'user.startTime': {$gte: startTime},
-  //       'user.endTime': {$lte: endTime}
-  //     })
-  //     // .where({endTime: {$lte: endTime}})
-  //     .exec(function(err, foundProfiles) {
-  //       if (err) {
-  //         next(err);
-  //       } else {
-  //         res.send(200, foundProfiles);
-  //       }
-  //     });
-  //   }
