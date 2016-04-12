@@ -4,6 +4,7 @@
 var Q = require('q');
 var User = require('../models/userModel').model;
 var CharacterProfile = require('../models/characterProfileModel');
+var util = require('../lib/utility');
 
 var findUser = Q.nbind(User.findOne, User);
 var findUsers = Q.nbind(User.find, User);
@@ -17,7 +18,6 @@ var createCharacterProfile = Q.nbind(CharacterProfile.create, CharacterProfile);
 var testUsers = require('../data/testData').users;
 var testCharProfiles = require('../data/testData').characterProfiles;
 var seedCharProfiles = CharacterProfile.seedCharProfiles;
-// console.log(testUsers);
 
 exports.signinUser = function(req, res, next) {
   var username = req.body.username;
@@ -32,10 +32,11 @@ exports.signinUser = function(req, res, next) {
         return user.comparePasswords(password)
           .then(function(foundUser) {
             if (foundUser) {
+              util.createSession(req, res, {_id: user._id});
               // TODO: Add authentication check
               // create a session for the user
               // redirect to user profile page
-              res.status(200).json(user);
+              //res.status(200).json(user._id);
             } else {
               // Redirect user back to sign in
               res.status(400).end();
@@ -87,13 +88,13 @@ exports.createUser = function(req, res, next) {
     });
 };
 
-exports.findUser = function(req, res) {
+exports.findUser = function(req, res, next) {
   var user = req.body;
-  var id = req.params.id;
-  findUser({_id: id})
+  var userID = req.params.uid;
+  findUser({_id: userID})
     .then(function(user) {
       if (!user) {
-        next(new Error('User ' + id + ' not found'));
+        next(new Error('User ' + userID + ' not found'));
       } else {
         res.json(user);
       }
@@ -103,7 +104,7 @@ exports.findUser = function(req, res) {
     });
 };
 
-exports.findUsers = function(req, res) {
+exports.findUsers = function(req, res, next) {
   findUsers()
     .then(function(users) {
       if (!users) {
@@ -121,10 +122,10 @@ exports.findUsers = function(req, res) {
  * Update the user using the passed parameters.
  * @returns the old user upon success.
  */
-exports.updateUser = function(req, res) {
+exports.updateUser = function(req, res, next) {
   var updates = req.body;
-  var id = req.params.id;
-  findUserAndUpdate({_id: id}, updates)
+  var userID = req.params.uid;
+  findUserAndUpdate({_id: userID}, updates)
     .then(function (user) {
     if (!user) {
       next( new Error('User not found'));
@@ -137,9 +138,9 @@ exports.updateUser = function(req, res) {
     });
 };
 
-exports.createCharacterProfile = function(req, res) {
+exports.createCharacterProfile = function(req, res, next) {
   var characterProfile = req.body;
-  var userID = req.params.id;
+  var userID = req.params.uid;
   if (characterProfile.user !== userID) {
     characterProfile.user = userID;
   }
@@ -156,9 +157,8 @@ exports.createCharacterProfile = function(req, res) {
     });
 };
 
-exports.findCharacterProfile = function(req, res) {
-  var characterID= req.params.id;
-
+exports.findCharacterProfile = function(req, res, next) {
+  var characterID= req.params.cpid;
   findCharacterProfile({_id: characterID})
     .then(function(profile) {
       if (!profile) { //TODO: Check to verify that a response is sent to the client
@@ -172,8 +172,8 @@ exports.findCharacterProfile = function(req, res) {
     });
 };
 
-exports.findCharacterProfiles = function(req, res) {
-  var userID = req.params.id;
+exports.findCharacterProfiles = function(req, res, next) {
+  var userID = req.params.uid;
 
   findCharacterProfiles({user: userID})
     .then(function(profiles) {
@@ -188,8 +188,8 @@ exports.findCharacterProfiles = function(req, res) {
     });
 };
 
-exports.updateCharacterProfile = function(req, res) {
-  var characterID = req.params.id;
+exports.updateCharacterProfile = function(req, res, next) {
+  var characterID = req.params.cpid;
   var updates = req.body;
 
   findCharacterProfileAndUpdate({_id: characterID}, updates)
@@ -205,8 +205,8 @@ exports.updateCharacterProfile = function(req, res) {
     });
 };
 
-exports.uploadPhoto = function(req, res) {
-  var userID = req.params.id;
+exports.uploadPhoto = function(req, res, next) {
+  var userID = req.params.uid;
   var photoFileDescription = req.file;
 
   // TODO: Determine file type and save correct extension

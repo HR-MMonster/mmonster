@@ -22,19 +22,19 @@
         |
         +--- /:id
             |--- GET
-            |___ PUT (allow update of user image)
+            |___ PUT (allow update of user image ??) - session required
             |
             +--- characterProfiles
                 |--- GET
-                |___ POST
+                |___ POST - session required
                 |
                 +--- /:id
                     |--- GET
                     |--- DELETE
-                    |___ PUT
+                    |___ PUT - session required
             |
-            +--- images
-                |___ PUT
+            +--- photos
+                |___ POST
     |
     +--- /groups
         |___ GET
@@ -47,16 +47,16 @@
         |
         +--- /:id
             |--- GET
-            |___ PUT
+            |___ PUT - session required
             |
             +--- characterProfiles
                 |--- GET
-                |___ POST
+                |___ POST - session required
                 |
                 +--- /:id
                     |--- GET
                     |--- DELETE
-                    |___ PUT
+                    |___ PUT - session required
     |
     +--- /characterProfiles
         |___ GET
