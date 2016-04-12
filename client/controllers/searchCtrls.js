@@ -1,3 +1,7 @@
+//Need to restructure query object to latest notation for user objects
+//nested 
+
+
 angular.module('app.characterSearch', [])
 
 .controller('searchChar', function ($window, $location, $http) {
