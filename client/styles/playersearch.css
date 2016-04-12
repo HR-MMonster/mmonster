@@ -1,0 +1,7 @@
+.rz-bubble:after {
+  content: ":00";
+}
+
+rzslider .rz-pointer {
+  background-color: #1B88D8;
+}

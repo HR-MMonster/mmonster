@@ -2,7 +2,7 @@
 //nested 
 
 
-angular.module('app.characterSearch', [])
+angular.module('app.characterSearch', ['rzModule'])
 
 .controller('ffxivSearchChar', function ($window, $location, $http) {
   var ffxivSearchCtrl = this;
@@ -34,7 +34,7 @@ angular.module('app.characterSearch', [])
     })
     .then(function(users) {
       console.log('inside then');
-      console.log(users);
+      console.log(users.data);
       ffxivSearchCtrl.users = users;
       // console.log(ffxivSearchCtrl.users);
     })
@@ -46,6 +46,11 @@ angular.module('app.characterSearch', [])
     // receive response and display directly to html
   };
 
+
+  ffxivSearchCtrl.slider = {
+    floor: 0,
+    ceil: 23
+  };
 
 
   ffxivSearchCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
