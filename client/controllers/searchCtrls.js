@@ -19,19 +19,37 @@ angular.module('app.characterSearch', [])
     //sanitize the falses -> loop through the user object and set any falses to undefined
     //needs to be able to 
     console.log('QUERY 1: ', query);
-    for(var prop in query) {
-      if(query[prop] === false) {
-        query[prop] = undefined;
-      }
+
+    var sanitizeFalse = function(obj) {
+      for(var prop in obj) {
+        if(typeof obj[prop] === 'object') {
+          sanitizeFalse(obj[prop]);
+        } else if(obj[prop] === false) {
+          obj[prop] = undefined;
+        }
+      };
+      return obj
     };
+
+    sanitizeFalse(query);
+
+
     console.log('QUERY 2: ', query);
-    post request with query object as body
+    // post request with query object as body
     return $http({
       method: 'GET',
       url: 'profile/characterProfiles',
-
-      //angular get request with query
+      data: query
     })
+    .then(function(users) {
+      console.log('inside then')
+      searchCtrl.users = users;
+    })
+    .catch(function (error) {
+      console.log('inside catch')
+      console.error(error);
+    });
+      //angular get request with query
     // receive response and display directly to html
   };
 

@@ -25,9 +25,10 @@ angular.module('app.auth', [])
 
   PlayerAuthCtrl.signup = function () {
     Auth.signup(PlayerAuthCtrl.player)
-      .then(function (token) {
+      .then(function (resp) {
         // console.log('logging line 24');
-        $window.localStorage.setItem('com.app', token);
+        $window.localStorage.setItem('com.app', resp);
+        $window.localStorage.setItem('id', resp.data._id);
         $window.location.assign('/');
         
         // $location.path('/index.html');
@@ -63,7 +64,7 @@ angular.module('app.auth', [])
       data: user
     })
     .then(function (resp) {
-      return resp.data.token;
+      return resp;
     });
   };
 
