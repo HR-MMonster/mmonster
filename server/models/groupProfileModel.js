@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var Group = require('./groupModel');
+var Group = require('./groupModel').model;
+var groupSchema = require('./groupModel').scema
 var Schema = mongoose.Schema;
 
 var groupProfileSchema = new Schema({
@@ -8,10 +9,7 @@ var groupProfileSchema = new Schema({
     required: true
   },
   server: String,
-  group: {
-    type: Schema.Types.ObjectId,
-    ref: 'Group'
-    }, // store group ref, see mongoose data population REQUIRED
+  group: [groupSchema], // store group ref, see mongoose data population REQUIRED
 });
 
 /*
