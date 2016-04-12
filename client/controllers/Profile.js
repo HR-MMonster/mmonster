@@ -21,10 +21,31 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   var update = function(profile) {
     $http({
       method: 'PUT',
-      url: '/profile/users/570befca1b03fb3104ca1ec3',
+      url: '/profile/users/' + urlID,
       data: profile
     });
     console.log('running update');
+  };
+
+  var getFFXIV = function() {
+    return $http({
+      method: 'GET',
+      url: '/profile/users/' + urlID + '/characterProfiles'
+    }).then(function(resp) {
+      return resp.data[0];
+    });
+  };
+
+  var updateFFXIV = function(profile) {
+    $http({
+      method: 'PUT',
+      url: '/profile/users/' + urlID + '/characterProfiles/' + profile._id,
+      data: profile
+    }).then(function(resp) {
+      console.log(resp.data);
+    }, function(resp) {
+      console.log('err status code: ' + resp.statusCode);
+    });
   };
 
   var updatePhoto = function(photo) {
@@ -42,7 +63,9 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   return {
     get: get,
     update: update,
-    updatePhoto: updatePhoto
+    updatePhoto: updatePhoto,
+    getFFXIV: getFFXIV,
+    updateFFXIV: updateFFXIV
   };
 })
 .controller('ProfileController', ['Profile', function(Profile) {
@@ -80,9 +103,12 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
     controllerAs: 'FFXIVCtrl'
   };
 })
-.controller('FFXIVController', function() {
+.controller('FFXIVController', function(Profile) {
   var FFXIVCtrl = this;
-  FFXIVCtrl.profile = {};
+  FFXIVCtrl.profile = Profile.getFFXIV().then(function(profile) {
+    console.log(profile);
+    FFXIVCtrl.profile = profile;
+  });
 
   FFXIVCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
   FFXIVCtrl.jobs = ['Paladin', 'Warrior', 'Dark Knight', 'White Mage', 'Scholar', 'Astrologian', 'Monk', 'Dragoon', 'Ninja', 'Black Mage', 'Summoner', 'Bard', 'Machinist'];
@@ -175,10 +201,10 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   ];
 
   FFXIVCtrl.test = function() {
-    console.log(FFXIVCtrl.profileImage);
+    console.log(FFXIVCtrl.profile);
   };
 
   FFXIVCtrl.update = function() {
-    console.log('sending PUT request for ffxiv profile');
+    Profile.updateFFXIV(FFXIVCtrl.profile);
   };
 });

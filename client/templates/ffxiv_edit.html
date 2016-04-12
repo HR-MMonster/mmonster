@@ -20,7 +20,7 @@
       <div class="col-sm-6">
         <label for="jobs">Jobs you can play</label><br />
         <div ng-repeat="job in FFXIVCtrl.jobs">
-          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]"> {{job}}
+          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile[job]"> {{job}}
         </div>
       </div>
     </div>
@@ -30,8 +30,8 @@
     <h3>Communication, Availability</h3>
 
     <label for="server">Server</label>
-    <select id="server" name="server" ng-model="server">
-      <option ng-repeat="s in FFXIVCtrl.servers" value="s">{{s}}</option>
+    <select id="server" name="server" ng-model="FFXIVCtrl.profile.server">
+      <option ng-repeat="s in FFXIVCtrl.servers" value="{{s}}">{{s}}</option>
     </select>
     <br />
     <label for="mic">Has microphone and voice comm's software</label>
@@ -47,7 +47,7 @@
 
     <label for="main">Cleared Fights</label><br />
     <div ng-repeat="fight in FFXIVCtrl.fights">
-      <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+      <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
     </div>
 
     <a href="#" ng-click="FFXIVCtrl.test()">Test button</a>

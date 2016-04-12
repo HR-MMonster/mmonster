@@ -19,7 +19,7 @@
       <div class="col-sm-6">
         <label for="jobs">Jobs they play</label><br />
         <div ng-repeat="job in FFXIVCtrl.jobs">
-          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile.jobs[job]" disabled="disabled"> {{job}}
+          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile[job]" disabled="disabled"> {{job}}
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
     <p>Dummy DPS (Incl. food, pots, party buff: {{FFXIVCtrl.profile.dps}}</p>
     <label for="main">Cleared Fights</label><br />
     <div ng-repeat="fight in FFXIVCtrl.fights">
-    <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile.clears[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
+    <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
     </div>
   </section>
 </div>
