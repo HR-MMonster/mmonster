@@ -1,4 +1,4 @@
-angular.module('app.PlayerProfile', ['ngFileUpload'])
+angular.module('app.PlayerProfile', ['ngFileUpload', 'rzModule'])
 .factory('Profile', function($http, $location, $window, Upload) {
   var urlID = $location.absUrl().split('#');
   if (urlID.length > 1) {
@@ -19,6 +19,7 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   };
 
   var update = function(profile) {
+    console.log(profile);
     $http({
       method: 'PUT',
       url: '/profile/users/' + urlID,
@@ -72,9 +73,18 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   var ProfileCtrl = this;
   ProfileCtrl.profile = {};
 
+  ProfileCtrl.slider = {
+    floor: 0,
+    ceil: 23
+  };
+
   // Profile.get().then(function(profile) {
   //   ProfileCtrl.profile = profile;
   // });
+  ProfileCtrl.test = function() {
+    console.log(ProfileCtrl.profile);
+    console.log(ProfileCtrl.startTime);
+  };
 
   ProfileCtrl.upload = function(file) {
     Profile.updatePhoto(file).then(function(img) {
@@ -210,16 +220,5 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
 
   FFXIVCtrl.update = function() {
     Profile.updateFFXIV(FFXIVCtrl.profile);
-  };
-})
-.directive('backImg', function(){
-  return function(scope, element, attrs){
-    console.log('changing background image');
-    console.log(attrs.backImg);
-    var url = attrs.backImg;
-    element.css({
-      'background-image': 'url(' + url +')',
-      'background-size' : 'cover'
-    });
   };
 });
