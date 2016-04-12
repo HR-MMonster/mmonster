@@ -15,13 +15,17 @@ var userSchema = new Schema({
     required: true
   },
   salt: String,
-
   name: String,
   email: String,
-  summary: String,
   photo: String, // store path to file location
-  startTime: Number,
-  endTime: Number
+  startTime: {
+    type: Number,
+    default: 12
+  },
+  endTime: {
+    type: Number,
+    default: 12
+  }
 });
 
 userSchema.methods.comparePasswords = function(passwordAttempt) {

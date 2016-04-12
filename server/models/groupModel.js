@@ -16,14 +16,17 @@ exports.schema = groupSchema = new Schema({
     required: true
   },
   salt: String,
-
   name: String,
   email: String,
-  summary: String,
-  image: String, // will store path to file location
-  // group availability
-  startTime: Number,
-  endTime: Number
+  photo: String,
+  startTime: {
+    type: Number,
+    default: 12
+  },
+  endTime: {
+    type: Number,
+    default: 12
+  }
 });
 
 groupSchema.methods.comparePasswords = function(passwordAttempt) {
