@@ -228,7 +228,7 @@ var seedUsers = function(users) {
       return;
     }
     console.log('<><> success seeding users');
-    seedCharProfiles(testCharProfiles);
+    // seedCharProfiles(testCharProfiles);
   });
 };
 

@@ -8,7 +8,7 @@ var testData = require('../data/testData').characterProfiles;
 
 exports.findCharacterProfiles = function(req, res, next) {
   // findAll
-  // console.log(req.query);
+  console.log(req.query);
   var userParams = {
     path: 'user',
     select: '-password -salt',
@@ -16,21 +16,18 @@ exports.findCharacterProfiles = function(req, res, next) {
   };
 
   if (req.query.dps) {
-    req.query.dps = {$gt: req.query.dps};
+    req.query.dps = {$gte: req.query.dps};
   }
 
-  if (req.query.startTime) {
-    userParams.match.startTime = {$gte: req.query.startTime};
+  if (req.query.startTime && req.query.endTime) {
+    userParams.match = {$and: [{ startTime: { $gte: +req.query.startTime } }, { endTime: { $lte: +req.query.endTime } }]};
     delete req.query.startTime;
-  }
-
-  if (req.query.endTime) {
-    userParams.match.endTime = {$lte: req.query.endTime};
     delete req.query.endTime;
   }
+
   // check searchParams for a startTime and endTime
   // iinput these params into the populate
-    // take care of overlap of midnight
+  //   take care of overlap of midnight
 
   var searchParams = req.query;
 
