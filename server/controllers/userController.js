@@ -4,6 +4,7 @@
 var Q = require('q');
 var User = require('../models/userModel').model;
 var CharacterProfile = require('../models/characterProfileModel');
+var util = require('../lib/utility');
 
 var findUser = Q.nbind(User.findOne, User);
 var findUsers = Q.nbind(User.find, User);
@@ -32,10 +33,12 @@ exports.signinUser = function(req, res, next) {
         return user.comparePasswords(password)
           .then(function(foundUser) {
             if (foundUser) {
+              util.createSession(req, res, {_id: user._id});
+              console.log("After create session", req.session);
               // TODO: Add authentication check
               // create a session for the user
               // redirect to user profile page
-              res.status(200).json(user);
+              //res.status(200).json(user._id);
             } else {
               // Redirect user back to sign in
               res.status(400).end();
@@ -87,7 +90,7 @@ exports.createUser = function(req, res, next) {
     });
 };
 
-exports.findUser = function(req, res) {
+exports.findUser = function(req, res, next) {
   var user = req.body;
   var id = req.params.id;
   findUser({_id: id})
@@ -103,7 +106,7 @@ exports.findUser = function(req, res) {
     });
 };
 
-exports.findUsers = function(req, res) {
+exports.findUsers = function(req, res, next) {
   findUsers()
     .then(function(users) {
       if (!users) {
@@ -121,7 +124,7 @@ exports.findUsers = function(req, res) {
  * Update the user using the passed parameters.
  * @returns the old user upon success.
  */
-exports.updateUser = function(req, res) {
+exports.updateUser = function(req, res, next) {
   var updates = req.body;
   var id = req.params.id;
   findUserAndUpdate({_id: id}, updates)
@@ -137,7 +140,7 @@ exports.updateUser = function(req, res) {
     });
 };
 
-exports.createCharacterProfile = function(req, res) {
+exports.createCharacterProfile = function(req, res, next) {
   var characterProfile = req.body;
   var userID = req.params.id;
   if (characterProfile.user !== userID) {
@@ -156,7 +159,7 @@ exports.createCharacterProfile = function(req, res) {
     });
 };
 
-exports.findCharacterProfile = function(req, res) {
+exports.findCharacterProfile = function(req, res, next) {
   var characterID= req.params.id;
 
   findCharacterProfile({_id: characterID})
@@ -172,7 +175,7 @@ exports.findCharacterProfile = function(req, res) {
     });
 };
 
-exports.findCharacterProfiles = function(req, res) {
+exports.findCharacterProfiles = function(req, res, next) {
   var userID = req.params.id;
 
   findCharacterProfiles({user: userID})
@@ -188,7 +191,7 @@ exports.findCharacterProfiles = function(req, res) {
     });
 };
 
-exports.updateCharacterProfile = function(req, res) {
+exports.updateCharacterProfile = function(req, res, next) {
   var characterID = req.params.id;
   var updates = req.body;
 
@@ -205,7 +208,7 @@ exports.updateCharacterProfile = function(req, res) {
     });
 };
 
-exports.uploadPhoto = function(req, res) {
+exports.uploadPhoto = function(req, res, next) {
   var userID = req.params.id;
   var photoFileDescription = req.file;
 
