@@ -9,7 +9,10 @@ var groupProfileSchema = new Schema({
     required: true
   },
   server: String,
-  group: [groupSchema],
+  group: {
+    type: Schema.Types.ObjectId,
+    ref: 'Group'
+  },
 });
 
 module.exports = mongoose.model('GroupProfile', groupProfileSchema);

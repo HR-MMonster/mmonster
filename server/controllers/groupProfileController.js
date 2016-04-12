@@ -7,6 +7,7 @@ var Group = require('../models/groupModel').model;
 
 exports.findGroupProfiles = function(req, res, next) {
   GroupProfile.find(req.params)
+    .populate('group')
     .exec(function(err, groups) {
       if (err) {
         next(err);
