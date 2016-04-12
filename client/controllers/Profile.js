@@ -125,7 +125,21 @@ angular.module('app.PlayerProfile', ['ngFileUpload', 'rzModule'])
   });
 
   FFXIVCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
-  FFXIVCtrl.jobs = ['Paladin', 'Warrior', 'Dark Knight', 'White Mage', 'Scholar', 'Astrologian', 'Monk', 'Dragoon', 'Ninja', 'Black Mage', 'Summoner', 'Bard', 'Machinist'];
+  FFXIVCtrl.jobs = [
+    {name: 'Paladin', model: 'Paladin'},
+    {name: 'Warrior', model: 'Warrior'},
+    {name: 'Dark Knight', model: 'DarkKnight'},
+    {name: 'White Mage', model: 'WhiteMage'},
+    {name: 'Scholar', model: 'Scholar'},
+    {name: 'Astrologian', model: 'Astrologian'},
+    {name: 'Monk', model: 'Monk'},
+    {name: 'Dragoon', model: 'Dragoon'},
+    {name: 'Ninja', model: 'Ninja'},
+    {name: 'Black Mage', model: 'BlackMage'},
+    {name: 'Summoner', model: 'Summoner'},
+    {name: 'Bard', model: 'Bard'},
+    {name: 'Machinist', model: 'Machinist'}
+  ];
 
   FFXIVCtrl.fights = [
   {

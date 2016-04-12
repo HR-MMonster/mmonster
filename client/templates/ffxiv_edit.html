@@ -12,7 +12,7 @@
       <div class="col-sm-6">
         <label for="main">Main Job</label><br />
         <div ng-repeat="job in FFXIVCtrl.jobs">
-          <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main"> {{job}}
+          <input type="radio" name="main" value="{{job.name}}" ng-model="FFXIVCtrl.profile.main"> {{job.name}}
         </div>
       </div>
 
@@ -20,7 +20,7 @@
       <div class="col-sm-6">
         <label for="jobs">Jobs you can play</label><br />
         <div ng-repeat="job in FFXIVCtrl.jobs">
-          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile[job]"> {{job}}
+          <input type="checkbox" name="jobs" value="{{job.model}}" ng-model="FFXIVCtrl.profile[job.model]"> {{job.name}}
         </div>
       </div>
     </div>
