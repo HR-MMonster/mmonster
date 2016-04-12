@@ -22,5 +22,5 @@ var seedGroupProfiles = function(groupProfiles) {
       return;
     }
     console.log('success seeding groups');
-  })
+  });
 };

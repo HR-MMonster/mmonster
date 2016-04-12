@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Group = require('./groupModel').model;
-var groupSchema = require('./groupModel').scema
+var groupSchema = require('./groupModel').schema
 var Schema = mongoose.Schema;
 
 var groupProfileSchema = new Schema({

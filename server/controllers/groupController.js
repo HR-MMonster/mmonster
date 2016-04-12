@@ -7,7 +7,7 @@ var Group = require('../models/groupModel');
 var GroupProfile = require('../models/groupProfileModel');
 
 var findGroup = Q.nbind(Group.findOne, Group);
-var findGroups = Q.nbind(Group.find, User);
+var findGroups = Q.nbind(Group.find, Group);
 var findGroupAndUpdate = Q.bind(Group.findOneAndUpdate);
 var createGroup = Q.nbind(Group.create, Group);
 var findGroupProfile = Q.nbind(GroupProfile.findOne, GroupProfile);
