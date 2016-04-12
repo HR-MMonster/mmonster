@@ -28,12 +28,10 @@ mongoose.connect(dbUri);
 // ROUTES
 // handle all other routes
 app.use(express.static(__dirname + '/../client'));
-app.use('/profile', util.checkUser, profileRouter);
+app.use('/profile', profileRouter);
 app.use('/signin', signinRouter);
 app.use('/signup', signupRouter);
 app.use('/logout', util.endSession);
-// TODO: Add logout functionality
-// app.use('/logout',)
 
 // SERVER INITIALIZATION
 app.listen(port, function(err) {

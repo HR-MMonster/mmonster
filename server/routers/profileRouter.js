@@ -6,6 +6,7 @@ var userController = require('../controllers/userController');
 var groupController = require('../controllers/groupController');
 var characterProfileController = require('../controllers/characterProfileController');
 var groupProfileController = require('../controllers/groupProfileController');
+var util = require('../lib/utility');
 var multer = require('multer');
 var storage = multer.diskStorage({
   destination: function(req, file, callback) {
@@ -23,23 +24,23 @@ profileRouter
   .get(userController.findUsers);
 
 profileRouter
-  .route('/users/:id')
+  .route('/users/:uid')
   .get(userController.findUser)
-  .put(userController.updateUser);
+  .put(util.restrictUserOwnerOnly, userController.updateUser);
 
 profileRouter
-  .route('/users/:id/characterProfiles')
+  .route('/users/:uid/characterProfiles')
   .get(userController.findCharacterProfiles)
-  .post(userController.createCharacterProfile);
+  .post(util.restrictUserOwnerOnly, userController.createCharacterProfile);
 
 profileRouter
-  .route('/users/:id/characterProfiles/:id')
+  .route('/users/:uid/characterProfiles/:cpid')
   .get(userController.findCharacterProfile)
-  .put(userController.updateCharacterProfile);
+  .put(util.restrictUserOwnerOnly, userController.updateCharacterProfile);
 
 profileRouter
-  .route('/users/:id/photos')
-  .post(upload.single('userPhoto'), userController.uploadPhoto);
+  .route('/users/:uid/photos')
+  .post(util.restrictUserOwnerOnly, upload.single('userPhoto'), userController.uploadPhoto);
 
 
 profileRouter

@@ -11,10 +11,26 @@ module.exports.createSession = function(req, res, newUser) {
 };
 
 module.exports.checkUser = function(req, res, next) {
-  if (req.session.user) {
-    next();
-  } else {
+  if (!req.session.user) {
     res.status(401).end();
+  } else {
+    next();
+  }
+};
+
+module.exports.restrictUserOwnerOnly = function(req, res, next) {
+  if (req.session.user !== req.params.uid) {
+    res.status(401).end();
+  } else {
+    next();
+  }
+};
+
+module.exports.restrictGroupOwnerOnly = function(req, res, next) {
+  if (req.session.user !== req.params.gid) {
+    res.status(401).end();
+  } else {
+    next();
   }
 };
 
