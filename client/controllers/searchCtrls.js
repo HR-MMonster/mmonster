@@ -25,14 +25,14 @@ angular.module('app.characterSearch', [])
       }
     };
     console.log('QUERY 2: ', query);
-    //post request with query object as body
-    // return $http({
-    //   method: 'GET',
-    //   url: 'profile/characterProfiles',
+    post request with query object as body
+    return $http({
+      method: 'GET',
+      url: 'profile/characterProfiles',
 
-    //   //angular get request with query
-    // })
-    //receive response and display directly to html
+      //angular get request with query
+    })
+    // receive response and display directly to html
   };
 
 
