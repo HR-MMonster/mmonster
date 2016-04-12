@@ -1,23 +1,7 @@
-<!-- TODO: Populate search fields for:
-
--Game
--Main Job
--Cleared Fights
--Server
--DPS
--Times
-
-
--Create page that renders search results
-
-
-Post-MVP: 
--Keyword search -->
 
 <html ng-app="app.characterSearch" ng-controller="searchChar as searchCtrl">
   <head>
     <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="../styles/userprofile.css"> -->
     <script src="../lib/angular/angular.min.js"></script>
     <script src="../controllers/searchCtrls.js"></script>
   </head>
@@ -56,11 +40,19 @@ Post-MVP:
       <br />
       <label for="mic">Has microphone and voice comm's software</label>
       <input type="checkbox" name="mic" id="mic" ng-model="searchCtrl.profile.mic" />
+      <br />
 
-<!--       <label></label>
-      <select>
-        
-      </select> -->
+      <label for="startTime">Start Time</label>
+        <!-- <input type="time" name="startTime" id="startTime" ng-model="searchCtrl.profile.startTime">         -->
+        <input type="range" name="startTime" min="0" max="24" ng-model="searchCtrl.profile.startTime">
+        <br />
+
+      <label for="endTime">End Time</label>
+        <!-- <input type="time" name="endTime" id="endTime" ng-model="searchCtrl.profile.endTime">         -->
+        <input type="range" name="endTime" min="0" max="24" ng-model="searchCtrl.profile.endTime">
+        <br />
+
+
 
     </section>
 
@@ -76,14 +68,15 @@ Post-MVP:
         <input type="checkbox" name="clears" ng-model= "searchCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
       </div>
 
-<!--       <a href="#" ng-click="searchCtrl.test()">Test button</a>
-      <a href="#" ng-click="searchCtrl.update()">Save Profile Changes</a> -->
+      <a href="#" ng-click="searchCtrl.test()">Test button</a>
+      <!-- <a href="#" ng-click="searchCtrl.update()">Save Profile Changes</a> -->
     </section>
 
+    <section>
+      <h3>Run Search</h3>
+      <button type="button" ng-click="searchCtrl.search()">RUN SEARCH</button>
+    </section>
 
-
-
-    <!-- <ffxiv /> -->
 
 
   </body>
