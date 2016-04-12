@@ -5,7 +5,7 @@ var SALT_WORK_FACTOR = 10; // required for salt gen
 var Schema = mongoose.Schema;
 
 
-var groupSchema = new Schema({
+exports.schema = groupSchema = new Schema({
   groupname: {
     type: String,
     required: true,
@@ -20,7 +20,7 @@ var groupSchema = new Schema({
   name: String,
   email: String,
   summary: String,
-  photo: String, // will store path to file location
+  image: String, // will store path to file location
   // group availability
   startTime: Number,
   endTime: Number
@@ -64,4 +64,4 @@ groupSchema.pre('save', function(next) {
 });
 
 // export the group model
-module.exports = mongoose.model('Group', groupSchema);
+exports.model = mongoose.model('Group', groupSchema);

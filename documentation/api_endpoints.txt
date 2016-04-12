@@ -1,4 +1,4 @@
-/  
+/
 |--- GET(serve static from /client)
 
 +--- /signup
@@ -61,14 +61,20 @@
     +--- /characterProfiles
         |___ GET
             |___ (query parameters)
-                |--- name
-                |--- date
+                |--- dps
+                |--- startTime
+                |--- endTime
                 +--- user
-                    |--- hours
-                    |--- ?
+                    |--- [nested user document properties]
         |
         +---/:id
             |___ GET
+    |
+    +---- /groupProfiles
+        |___ GET
+            |____ (query params)
+                |----TODO
+
 |
 +--- /logout
     |___ GET -> success: / | failure: /

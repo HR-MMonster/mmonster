@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var User = require('./userModel');
+var User = require('./userModel').model;
+var userSchema = require('./userModel').schema;
 var ffxivSchema = require('./ffxivModel').ffxivSchema;
 var Schema = mongoose.Schema;
 
@@ -8,28 +9,29 @@ var characterProfileSchema = new Schema({
     type: String,
     required: true
   },
-  // gameOptions: [ffxivSchema], // use a nested structue here
-  mic: Boolean, // user has a microphone connection?
-  server: String, // should this be game specific?
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }, // should store user reference, look into population with mongoose
+  },
+  mic: Boolean,
+  server: String,
   dps: Number,
+  // startTime: Number,
+  // endTime: Number,
   main: String,
-  paladin: Boolean,
-  warrior: Boolean,
-  darkKnight: Boolean,
-  whiteMage: Boolean,
-  scholar: Boolean,
-  astrologian: Boolean,
-  monk: Boolean,
-  dragoon: Boolean,
-  ninja: Boolean,
-  blackMage: Boolean,
-  summoner: Boolean,
-  bard: Boolean,
-  machinist: Boolean,
+  Paladin: Boolean,
+  Warrior: Boolean,
+  DarkKnight: Boolean,
+  WhiteMage: Boolean,
+  Scholar: Boolean,
+  Astrologian: Boolean,
+  Monk: Boolean,
+  Dragoon: Boolean,
+  Ninja: Boolean,
+  BlackMage: Boolean,
+  Summoner: Boolean,
+  Bard: Boolean,
+  Machinist: Boolean,
   T1: Boolean,
   T2: Boolean,
   T3: Boolean,
@@ -52,18 +54,5 @@ var characterProfileSchema = new Schema({
   A7S: Boolean,
   A8S: Boolean
 });
-
-  /*
-   *  The remaining props of the user userProfile
-   *  can be passed in as props of the model object at initial save.
-   *  This can be decided on the client side and is unopinionated.
-   *  Should include properties specific to the game and relevant user attributes,
-   *  such as for FFXIV:
-   *  { dps     : 78, // damage per second
-   *    main    : "Dark Knight",   //
-   *    jobs    : ["Warrior", "Time Mage", "Red Mage", "Sage"], // store an array of jobs they can play OR a hash if works better for client side
-   *    cleared : {},  // store an object with {levelName1 : boolean, levelName2: boolean, ...}
-   *  }
-   */
 
 module.exports = mongoose.model('CharacterProfile', characterProfileSchema);
