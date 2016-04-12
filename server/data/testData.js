@@ -20,7 +20,7 @@ exports.users = users = [
     "email": "kd@me.com",
     "summary": "Can't touch this",
     "startTime": 19,
-    "endTime": 24,
+    "endTime": 2,
     "__v": 0
   },
   {
@@ -102,7 +102,7 @@ exports.characterProfiles = characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: users[0]
+    user: users[0]['_id']
   },
   {
     gameName: "FFXIV",
@@ -144,7 +144,7 @@ exports.characterProfiles = characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: users[1]
+    user: users[1]['_id']
   },
   {
     gameName: "FFXIV",
@@ -186,7 +186,7 @@ exports.characterProfiles = characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: users[2]
+    user: users[2]['_id']
   },
   {
     gameName: "FFXIV",
@@ -228,7 +228,7 @@ exports.characterProfiles = characterProfiles = [
     A6S: false,
     A7S: false,
     A8S: false,
-    user: users[3]
+    user: users[3]['_id']
   },
   // {
   //   gameName: "FFXIV",
