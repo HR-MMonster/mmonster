@@ -30,11 +30,11 @@ angular.module('app.characterSearch', [])
     return $http({
       method: 'GET',
       url: '../profile/characterProfiles',
-      data: query
+      params: query
     })
     .then(function(users) {
-      // console.log('inside then');
-      // console.log(users);
+      console.log('inside then');
+      console.log(users);
       ffxivSearchCtrl.users = users;
       // console.log(ffxivSearchCtrl.users);
     })
