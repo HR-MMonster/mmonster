@@ -15,10 +15,11 @@ var characterProfileSchema = new Schema({
   },
   mic: Boolean,
   server: String,
-  dps: Number,
-  // startTime: Number,
-  // endTime: Number,
-  main: String,
+  dps: Number,    // damage per second
+  summary: String,
+  profileLink: String,
+  main: String,  // main job
+  ign: String, // in game name
   Paladin: Boolean,
   Warrior: Boolean,
   DarkKnight: Boolean,

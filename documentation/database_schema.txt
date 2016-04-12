@@ -5,7 +5,7 @@ USER
     name: String
     email: String
     summary: String
-    image: String // store path to file location
+    photo: String // store path to file location
     startTime: Number
     endTime: Number
 
@@ -16,7 +16,7 @@ GROUP
     name: String
     email: String
     summary: String
-    image: String // will store path to file location
+    photo: String // will store path to file location
     startTime: Number
     endTime: Number
 
@@ -26,20 +26,23 @@ CHARACTER_PROFILE
     mic: Boolean
     server: String
     dps: Number
+    summary: String
+    profileLink: String
     main: String
-    paladin: Boolean
-    warrior: Boolean
-    darkKnight: Boolean
-    whiteMage: Boolean
-    scholar: Boolean
-    astrologian: Boolean
-    monk: Boolean
-    dragoon: Boolean
-    ninja: Boolean
-    blackMage: Boolean
-    summoner: Boolean
-    bard: Boolean
-    machinist: Boolean
+    ign: String
+    Paladin: Boolean
+    Warrior: Boolean
+    DarkKnight: Boolean
+    WhiteMage: Boolean
+    Scholar: Boolean
+    Astrologian: Boolean
+    Monk: Boolean
+    Dragoon: Boolean
+    Ninja: Boolean
+    BlackMage: Boolean
+    Summoner: Boolean
+    Bard: Boolean
+    Machinist: Boolean
     T1: Boolean
     T2: Boolean
     T3: Boolean
@@ -66,5 +69,6 @@ CHARACTER_PROFILE
 GROUP_PROFILE
     gameName: String - required
     server: String
-    group: [groupSchema] -- nested group - one to one
+    group: ObjectId references Group model
+    summary: String
 
