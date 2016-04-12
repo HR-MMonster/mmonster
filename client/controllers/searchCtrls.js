@@ -1,6 +1,6 @@
 angular.module('app.characterSearch', [])
 
-.controller('searchChar', function ($window, $location) {
+.controller('searchChar', function ($window, $location, $http) {
   var searchCtrl = this;
   searchCtrl.profile = {};
   
@@ -25,12 +25,14 @@ angular.module('app.characterSearch', [])
     // post request with query object as body
     return $http({
       method: 'GET',
-      url: 'profile/characterProfiles',
+      url: '../profile/characterProfiles',
       data: query
     })
     .then(function(users) {
-      console.log('inside then')
+      // console.log('inside then');
+      // console.log(users);
       searchCtrl.users = users;
+      // console.log(searchCtrl.users);
     })
     .catch(function (error) {
       console.log('inside catch')
