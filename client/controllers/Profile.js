@@ -49,12 +49,12 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   };
 
   var updatePhoto = function(photo) {
-    Upload.upload({
+    return Upload.upload({
       url: '/profile/users/' + urlID + '/photos',
       data: {userPhoto: photo}
     }).then(function (resp) {
       console.log('Success');
-      console.log(resp);
+      return resp.data.photo;
     }, function (resp) {
       console.log('Error status: ' + resp.status);
     });
@@ -76,7 +76,11 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
   //   ProfileCtrl.profile = profile;
   // });
 
-  ProfileCtrl.upload = Profile.updatePhoto;
+  ProfileCtrl.upload = function(file) {
+    Profile.updatePhoto(file).then(function(img) {
+      if (img) ProfileCtrl.profile.photo = img;
+    });
+  };
 
   Profile.get().then(function(profile) {
     console.log(profile);
@@ -206,5 +210,16 @@ angular.module('app.PlayerProfile', ['ngFileUpload'])
 
   FFXIVCtrl.update = function() {
     Profile.updateFFXIV(FFXIVCtrl.profile);
+  };
+})
+.directive('backImg', function(){
+  return function(scope, element, attrs){
+    console.log('changing background image');
+    console.log(attrs.backImg);
+    var url = attrs.backImg;
+    element.css({
+      'background-image': 'url(' + url +')',
+      'background-size' : 'cover'
+    });
   };
 });

@@ -8,7 +8,7 @@
    <body ng-app="app.PlayerProfile">
     <div class="userinfo">
       <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
-        <div class="profile-image">
+        <div class="profile-image" ng-style="{'background-image': 'url(' + ProfileCtrl.profile.photo + ')'}">
           <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
             Update
           </span>
