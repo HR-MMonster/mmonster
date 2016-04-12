@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var User = require('./userModel');
+var User = require('./userModel').model;
+var userSchema = require('./userModel').schema;
 var ffxivSchema = require('./ffxivModel').ffxivSchema;
 var Schema = mongoose.Schema;
 
@@ -11,10 +12,7 @@ var characterProfileSchema = new Schema({
   // gameOptions: [ffxivSchema], // use a nested structue here
   mic: Boolean, // user has a microphone connection?
   server: String, // should this be game specific?
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  }, // should store user reference, look into population with mongoose
+  user:[userSchema], // should store user reference, look into population with mongoose
   dps: Number,
   main: String,
   paladin: Boolean,

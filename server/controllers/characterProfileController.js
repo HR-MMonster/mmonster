@@ -14,13 +14,17 @@ exports.findCharacterProfiles = function(req, res, next) {
     select: '-password -salt',
     match: {}
   };
+  var startTime = null;
+  var endTime = null;
 
   if (req.query.dps) {
     req.query.dps = {$gte: req.query.dps};
   }
 
   if (req.query.startTime && req.query.endTime) {
-    userParams.match = {$and: [{ startTime: { $gte: +req.query.startTime } }, { endTime: { $lte: +req.query.endTime } }]};
+    // userParams.match = {$and: [{ startTime: { $gte: +req.query.startTime } }, { endTime: { $lte: +req.query.endTime } }]};
+    startTime = req.query.startTime;
+    endTime = req.query.endTime;
     delete req.query.startTime;
     delete req.query.endTime;
   }
@@ -33,9 +37,12 @@ exports.findCharacterProfiles = function(req, res, next) {
 
   CharacterProfile.find(searchParams)
   .populate(userParams)
+  // .where(user.startTime).gt(startTime)
+  // .where(user.endTime).lt(endTime)
+  .and([{ 'user.startTime': { $gte: +startTime } }, { 'user.endTime': { $lte: +endTime } }])
   .exec(function(err, foundProfiles) {
     if (err) {
-      console.error('><>< Error quering database for charProfiles:', err, '<><>');
+      console.error('><>< Error querying database for charProfiles:', err, '<><>');
     } else {
       res.send(200, foundProfiles);
     }

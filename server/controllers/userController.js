@@ -2,7 +2,7 @@
  * Handle rest request for user.
  */
 var Q = require('q');
-var User = require('../models/userModel');
+var User = require('../models/userModel').model;
 var CharacterProfile = require('../models/characterProfileModel');
 
 var findUser = Q.nbind(User.findOne, User);

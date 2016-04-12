@@ -21,6 +21,7 @@ var userSchema = new Schema({
   summary: String,
   photo: String, // store path to file location
 
+  chararcterProfile:
   // user availability
   startTime: Number,
   endTime: Number
@@ -63,4 +64,5 @@ userSchema.pre('save', function(next) {
   });
 });
 
-module.exports = mongoose.model('User', userSchema);
+exports.model = mongoose.model('User', userSchema);
+exports.schema = userSchema;
