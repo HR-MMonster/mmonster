@@ -21,12 +21,12 @@
         </div>
 
 
-        <div class="col-sm-6">
+<!--         <div class="col-sm-6">
           <label for="jobs">Jobs you can play</label><br />
           <div ng-repeat="job in searchCtrl.jobs">
             <input type="checkbox" name="jobs" value="{{job}}" ng-model="searchCtrl.profile.jobs[job]"> {{job}}
           </div>
-        </div>
+        </div> -->
       </div>
     </section>
 
@@ -34,10 +34,11 @@
       <h3>Communication, Availability</h3>
 
       <label for="server">Server</label>
-      <select id="server" name="server" ng-model="server">
-        <option ng-repeat="s in searchCtrl.servers" value="s">{{s}}</option>
+      <select id="server" name="server" ng-model="searchCtrl.profile.server">
+        <option ng-repeat="s in searchCtrl.servers" value="{{s}}">{{s}}</option>
       </select>
       <br />
+
       <label for="mic">Has microphone and voice comm's software</label>
       <input type="checkbox" name="mic" id="mic" ng-model="searchCtrl.profile.mic" />
       <br />
@@ -65,18 +66,20 @@
 
       <label for="main">Cleared Fights</label><br />
       <div ng-repeat="fight in searchCtrl.fights">
-        <input type="checkbox" name="clears" ng-model= "searchCtrl.profile.clears[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+        <input type="checkbox" name="clears" ng-model= "searchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
       </div>
 
-      <a href="#" ng-click="searchCtrl.test()">Test button</a>
+      <!-- <a href="#" ng-click="searchCtrl.test()">Test button</a> -->
       <!-- <a href="#" ng-click="searchCtrl.update()">Save Profile Changes</a> -->
     </section>
+
 
     <section>
       <h3>Run Search</h3>
       <button type="button" ng-click="searchCtrl.search()">RUN SEARCH</button>
       <br />
     </section>
+
 
     <section>
       <h3>Results</h3>

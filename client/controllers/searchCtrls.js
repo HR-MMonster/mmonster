@@ -1,6 +1,6 @@
 angular.module('app.characterSearch', [])
 
-.controller('searchChar', function ($window, $location) {
+.controller('searchChar', function ($window, $location, $http) {
   var searchCtrl = this;
   searchCtrl.profile = {};
   
@@ -12,38 +12,27 @@ angular.module('app.characterSearch', [])
 
   searchCtrl.search = function() {
     //capture the user profile stats from a button click
-    var user = searchCtrl.profile;
-    console.log('USER: ', user);
+    var query = searchCtrl.profile;
     //reformat the object according to DB team's standard
-    var query = user;
     //sanitize the falses -> loop through the user object and set any falses to undefined
-    //needs to be able to 
-    console.log('QUERY 1: ', query);
-
-    var sanitizeFalse = function(obj) {
-      for(var prop in obj) {
-        if(typeof obj[prop] === 'object') {
-          sanitizeFalse(obj[prop]);
-        } else if(obj[prop] === false) {
-          obj[prop] = undefined;
-        }
-      };
-      return obj
+    // console.log('QUERY 1: ', query);
+    for(var prop in query) {
+      if(query[prop] === false) {
+        query[prop] = undefined;
+      }
     };
-
-    sanitizeFalse(query);
-
-
-    console.log('QUERY 2: ', query);
+    // console.log('QUERY 2: ', query);
     // post request with query object as body
     return $http({
       method: 'GET',
-      url: 'profile/characterProfiles',
+      url: '../profile/characterProfiles',
       data: query
     })
     .then(function(users) {
-      console.log('inside then')
+      // console.log('inside then');
+      // console.log(users);
       searchCtrl.users = users;
+      // console.log(searchCtrl.users);
     })
     .catch(function (error) {
       console.log('inside catch')
