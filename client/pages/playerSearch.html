@@ -1,5 +1,4 @@
-
-<html ng-app="app.characterSearch" ng-controller="searchChar as searchCtrl">
+<html ng-app="app.characterSearch" ng-controller="ffxivSearchChar as ffxivSearchCtrl">
   <head>
     <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
     <script src="../lib/angular/angular.min.js"></script>
@@ -7,93 +6,8 @@
   </head>
 
   <body>
-    <h1>Search for Character</h1>
 
-
-    <section>
-      <h3>Jobs</h3>
-      <div class="row">
-        <div class="col-sm-6">
-          <label for="main">Main Job</label><br />
-          <div ng-repeat="job in searchCtrl.jobs">
-            <input type="radio" name="main" value="{{job}}" ng-model="searchCtrl.profile.main"> {{job}}
-          </div>
-        </div>
-
-
-<!--         <div class="col-sm-6">
-          <label for="jobs">Jobs you can play</label><br />
-          <div ng-repeat="job in searchCtrl.jobs">
-            <input type="checkbox" name="jobs" value="{{job}}" ng-model="searchCtrl.profile.jobs[job]"> {{job}}
-          </div>
-        </div> -->
-      </div>
-    </section>
-
-    <section>
-      <h3>Communication, Availability</h3>
-
-      <label for="server">Server</label>
-      <select id="server" name="server" ng-model="searchCtrl.profile.server">
-        <option ng-repeat="s in searchCtrl.servers" value="{{s}}">{{s}}</option>
-      </select>
-      <br />
-
-      <label for="mic">Has microphone and voice comm's software</label>
-      <input type="checkbox" name="mic" id="mic" ng-model="searchCtrl.profile.mic" />
-      <br />
-
-      <label for="startTime">Start Time</label>
-        <!-- <input type="time" name="startTime" id="startTime" ng-model="searchCtrl.profile.startTime">         -->
-        <input type="range" name="startTime" min="0" max="24" ng-model="searchCtrl.profile.startTime">
-        <br />
-
-      <label for="endTime">End Time</label>
-        <!-- <input type="time" name="endTime" id="endTime" ng-model="searchCtrl.profile.endTime">         -->
-        <input type="range" name="endTime" min="0" max="24" ng-model="searchCtrl.profile.endTime">
-        <br />
-
-
-
-    </section>
-
-
-    <section>
-      <h3>Experience</h3>
-
-      <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
-      <input type="text" ng-model="searchCtrl.profile.dps"><br />
-
-      <label for="main">Cleared Fights</label><br />
-      <div ng-repeat="fight in searchCtrl.fights">
-        <input type="checkbox" name="clears" ng-model= "searchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
-      </div>
-
-      <!-- <a href="#" ng-click="searchCtrl.test()">Test button</a> -->
-      <!-- <a href="#" ng-click="searchCtrl.update()">Save Profile Changes</a> -->
-    </section>
-
-
-    <section>
-      <h3>Run Search</h3>
-      <button type="button" ng-click="searchCtrl.search()">RUN SEARCH</button>
-      <br />
-    </section>
-
-
-    <section>
-      <h3>Results</h3>
-      <div ng-repeat="user in searchCtrl.users">
-        <span>{{user.username}}</span>
-        <span>{{user.main}}</span>
-        <span>{{user.server}}</span>
-        <span>{{user.dps}}</span>
-        <span>{{user.startTime}}</span>
-        <span>{{user.endTime}}</span>
-
-      </div>
-      
-    </section>
+    <ffxiv-search-temp />
 
 
 
