@@ -31,19 +31,26 @@
 
   <section>
     <h3>Communication, Availability</h3>
-    <p>Server: {{FFXIVCtrl.profile.server}}</p>
-    <br />
-    <label for="mic">Has microphone and voice comm's software</label>
-    <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" disabled="disabled"/>
+    <div class="field">
+      <p>Server: {{FFXIVCtrl.profile.server}}</p>
+    </div>
+    <div class="field">
+      <label for="mic">Has microphone and voice comm's software</label>
+      <input type="checkbox" name="mic" id="mic" ng-model="FFXIVCtrl.profile.mic" disabled="disabled"/>
+    </div>
   </section>
 
 
   <section>
     <h3>Experience</h3>
-    <p>Dummy DPS (Incl. food, pots, party buff: {{FFXIVCtrl.profile.dps}}</p>
-    <label for="main">Cleared Fights</label><br />
-    <div ng-repeat="fight in FFXIVCtrl.fights">
-    <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
+    <div class="field">
+      <p>Dummy DPS (Incl. food, pots, party buff: {{FFXIVCtrl.profile.dps}}</p>
+    </div>
+    <div class="field">
+      <label for="main">Cleared Fights</label><br />
+      <div ng-repeat="fight in FFXIVCtrl.fights">
+        <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
+      </div>
     </div>
   </section>
 </div>
