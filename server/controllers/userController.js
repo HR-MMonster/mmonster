@@ -5,6 +5,7 @@ var Q = require('q');
 var User = require('../models/userModel');
 var CharacterProfile = require('../models/characterProfileModel');
 var util = require('../lib/utility');
+var dataGen = require('../data/testDataTemplates');
 
 var findUser = Q.nbind(User.findOne, User);
 var findUsers = Q.nbind(User.find, User);
@@ -14,8 +15,6 @@ var findCharacterProfile = Q.nbind(CharacterProfile.findOne, CharacterProfile);
 var findCharacterProfiles = Q.nbind(CharacterProfile.find, CharacterProfile);
 var findCharacterProfileAndUpdate = Q.nbind(CharacterProfile.findOneAndUpdate, CharacterProfile);
 var createCharacterProfile = Q.nbind(CharacterProfile.create, CharacterProfile);
-
-var dataGen = require('../data/testDataTemplates');
 
 
 exports.signinUser = function(req, res, next) {
@@ -219,7 +218,7 @@ var seedUsers = function() {
       } else if (users.length) {
         console.log('already users in database');
       } else {
-        var newUsers = dataGen.generateUsers(5);
+        var newUsers = dataGen.generateUsers(20);
         User.create(newUsers, function(err, users) {
         if (err) {
           console.error('<><> Error seeding users:', err);

@@ -7,6 +7,7 @@ var groupProfileSchema = new Schema({
     type: String,
     required: true
   },
+  dps: Number,
   server: String,
   group: {
     type: Schema.Types.ObjectId,

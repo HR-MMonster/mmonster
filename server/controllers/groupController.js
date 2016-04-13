@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var Group = require('../models/groupModel');
 var GroupProfile = require('../models/groupProfileModel');
 var dataGen = require('../data/testDataTemplates');
+var util = require('../lib/utility');
 
 var findGroup = Q.nbind(Group.findOne, Group);
 var findGroups = Q.nbind(Group.find, Group);
@@ -20,6 +21,7 @@ var createGroupProfile = Q.nbind(GroupProfile.create, GroupProfile);
 exports.signinGroup = function(req, res, next) {
   var groupname = req.body.groupname;
   var password = req.body.password;
+
   findGroup({groupname: groupname})
     .then(function(group) {
       if (!group) {
@@ -28,11 +30,14 @@ exports.signinGroup = function(req, res, next) {
       return group.comparePasswords(password)
         .then(function(foundGroup) {
           if (foundGroup) {
-            res.status(200).json(group);
+            util.createSession(req, res, {_id: group._id}); // is this user._id ???
           } else {
             res.status(400).end();
           }
         })
+    })
+    .fail(function(err) {
+      next(err);
     });
 };
 
@@ -181,7 +186,7 @@ exports.updateGroupProfile= function(req, res, next) {
 };
 
 var seedGroups = function() {
-  Group.find({})
+  Group.find()
     .exec(function(err, groups) {
       if (err) {
         console.error('error seeding groups');
@@ -189,9 +194,8 @@ var seedGroups = function() {
       } else if (groups.length) {
         console.log('already groups in database');
       } else {
-        var groups = dataGen.generateGroups(5);
-        Group.create(groups)
-          .exec(function(err, groups) {
+        var groups = dataGen.generateGroups(20);
+        Group.create(groups, function(err, groups) {
             if (err) {
               console.error('error seeding groups:', err);
               return;

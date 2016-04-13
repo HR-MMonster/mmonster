@@ -22,7 +22,7 @@ var timeDiff = function(start, end) {
 
 exports.findCharacterProfiles = function(req, res, next) {
   // find by query parameters
-  console.log(req.query);
+  // console.log(req.query);
   if (req.query.dps) {
     req.query.dps = { $gte: req.query.dps };
   }
