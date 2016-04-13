@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html ng-controller='GroupAuthController'>
+<html ng-app="groupAuth" ng-controller="GroupAuthController as GroupAuthCtrl">
   <head>
+
+    <script src="../lib/angular/angular.min.js"></script>
+    <script src="../controllers/groupAuth.js"></script>
+
     <meta charset="utf-8" />
     <title>MMONSTER</title>
   </head>
@@ -12,8 +17,16 @@
         <input type="password" ng-model='GroupAuthCtrl.group.password'>
         <button>signup</button>
       </form>
-      <a href="./groupSignin.html">Already have a group account? Sign-In</a>
+      <a href="/pages/groupSignin.html">Already have a group account? Sign-In</a>
     </div>
   </body>
 </html>
+
+
+
+
+
+
+
+
 
