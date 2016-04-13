@@ -44,17 +44,12 @@ img {
 }
 
 .clearfix:after {
-  clear: both;
-  content: ".";
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-.clearfix {
-  display: inline-block;
-}
-.clearfix {
-  display: block;
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
 }
 
 .user-profile input {
@@ -136,8 +131,8 @@ input[type=file] {
   text-align: center;
 }
 
-a {
-  display: inline-block;
+a.button {
+  display: block;
   color: white;
   background-color: #3E8CE2;
   padding: 10px;
@@ -148,5 +143,5 @@ a {
 }
 
 rzslider .rz-pointer {
-  background-color: #1B88D8
+  background-color: #1B88D8;
 }
