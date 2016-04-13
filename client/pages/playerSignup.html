@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html ng-app="playerAuth" ng-controller="PlayerAuthController as PlayerAuthCtrl">
-  <head>
-
-    <script src="../lib/angular/angular.min.js"></script>
-    <script src="../controllers/playerAuth.js"></script>
-
-    <meta charset="utf-8" />
-    <title>MMONSTER</title>
-  </head>
-  <body>
-    <div id="signup">
-      <h1>Player Sign-Up</h1>
-      <form name="signupForm" ng-submit="PlayerAuthCtrl.signup()">
-        <input type="text" ng-model="PlayerAuthCtrl.player.username">
-        <input type="password" ng-model="PlayerAuthCtrl.player.password">
-        <button>signup</button>
-      </form>
-      <a href="/pages/playerSignin.html">Already have a player account? Sign-In</a>
+<head>
+  <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles/login.css">
+  <script src="../lib/angular/angular.min.js"></script>
+  <script src="../controllers/playerAuth.js"></script>
+  <meta charset="utf-8" />
+  <title>MMONSTER</title>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">MMOnster</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/pages/playerSearch.html">Search</a></li>
+        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
+        <li><a href="/pages/playerSignin.html">Log In</a></li>
+      </ul>
     </div>
-  </body>
+  </div>
+</nav>
+<div id="signup">
+  <h1>Player Sign-Up</h1>
+  <form name="signupForm" ng-submit="PlayerAuthCtrl.signup()">
+    <input type="text" ng-model="PlayerAuthCtrl.player.username">
+    <input type="password" ng-model="PlayerAuthCtrl.player.password">
+    <button>signup</button>
+  </form>
+  <a href="/pages/playerSignin.html">Already have a player account? Sign-In</a>
+</div>
+</body>
 </html>
 
