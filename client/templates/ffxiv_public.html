@@ -2,6 +2,10 @@
   <h1>FFXIV Settings</h1>
 
   <section>
+    <p>Character: <a ng-href="{{FFXIVCtrl.profile.profileLink}}" target="_blank">{{FFXIVCtrl.profile.ign}}</a></p>
+  </section>
+
+  <section>
     <p>Summary: {{FFXIVCtrl.profile.summary}}</p>
   </section>
 
@@ -11,7 +15,7 @@
       <div class="col-sm-6">
         <label for="main">Main Job</label><br />
         <div ng-repeat="job in FFXIVCtrl.jobs">
-          <input type="radio" name="main" value="{{job}}" ng-model="FFXIVCtrl.profile.main" disabled="disabled"> {{job}}
+          <input type="radio" name="main" value="{{job.name}}" ng-model="FFXIVCtrl.profile.main" disabled="disabled"> {{job.name}}
         </div>
       </div>
 
@@ -19,7 +23,7 @@
       <div class="col-sm-6">
         <label for="jobs">Jobs they play</label><br />
         <div ng-repeat="job in FFXIVCtrl.jobs">
-          <input type="checkbox" name="jobs" value="{{job}}" ng-model="FFXIVCtrl.profile[job]" disabled="disabled"> {{job}}
+          <input type="checkbox" name="jobs" value="{{job.model}}" ng-model="FFXIVCtrl.profile[job.model]" disabled="disabled"> {{job.name}}
         </div>
       </div>
     </div>

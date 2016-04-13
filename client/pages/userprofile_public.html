@@ -1,28 +1,27 @@
 <html>
 <head>
   <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../lib/angularjs-slider/dist/rzslider.min.css">
   <link rel="stylesheet" href="../styles/userprofile.css">
 </head>
 <body>
   <div class="container">
    <body ng-app="app.PlayerProfile">
     <div class="userinfo">
-      <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
-        <img ng-src="{{ProfileCtrl.profile.profileImage}}" />
+      <div class="user-profile clearfix" ng-controller="ProfileController as ProfileCtrl">
+        <img ng-src="{{ProfileCtrl.profile.photo}}" />
         <p>Name: {{ProfileCtrl.profile.username}}</p>
         <p>Location: {{ProfileCtrl.profile.location}}</p>
         <p>Email: {{ProfileCtrl.profile.email}}</p>
-        <p>Active Game: {{ProfileCtrl.profile.activeGame}}</p>
       </div>
-
     </div>
 
-    <div class="clearfix"></div>
 
     <ffxiv-public />
   </div>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
+  <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
   <script src="../controllers/Profile.js"></script>
 </body>
 </html>
