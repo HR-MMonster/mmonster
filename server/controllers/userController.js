@@ -33,15 +33,8 @@ exports.signinUser = function(req, res, next) {
           .then(function(foundUser) {
             if (foundUser) {
               util.createSession(req, res, {_id: user._id});
-              // TODO: Add authentication check
-              // create a session for the user
-              // redirect to user profile page
-              //res.status(200).json(user._id);
             } else {
-              // Redirect user back to sign in
-              res.status(400).end();
-              //TODO: Confirm route for signin
-              // res.redirect('/signin');
+              res.status(400).end('User account password incorrect');
             }
           });
       }
@@ -66,7 +59,7 @@ exports.createUser = function(req, res, next) {
     .then(function(user) {
       if (!user) {
         next(new Error('User account not created'));
-        // TODO: Alert client that the accont was not created
+        // TODO: Alert client that the account was not created
       } else {
         // A generic FFIV character profile is created for a new user
         var characterProfile = {gameName: 'FFXIV', user: user._id};
@@ -75,10 +68,7 @@ exports.createUser = function(req, res, next) {
            if (!profile) {
              next(new Error('Character profile not created'));
            } else {
-            // res.redirect('/');
-             //res.redirect('/signin');
-             res.status(200).json(user);
-             //TODO: Confirm route for signin
+             util.createSession(req, res, {_id: user._id});
            }
          });
       }
