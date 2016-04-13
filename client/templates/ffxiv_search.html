@@ -25,16 +25,12 @@
       <br />
 
       <label for="startTime">Start Time</label>
-      <!-- <input type="time" name="startTime" id="startTime" ng-model="ffxivSearchCtrl.profile.startTime">         -->
-      <!-- <input type="range" name="startTime" min="0" max="24" ng-model="ffxivSearchCtrl.profile.startTime"> -->
       <rzslider
       rz-slider-model="ffxivSearchCtrl.profile.startTime"
       rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
       <br />
 
       <label for="endTime">End Time</label>
-      <!-- <input type="time" name="endTime" id="endTime" ng-model="ffxivSearchCtrl.profile.endTime">         -->
-      <!-- <input type="range" name="endTime" min="0" max="24" ng-model="ffxivSearchCtrl.profile.endTime"> -->
       <rzslider
       rz-slider-model="ffxivSearchCtrl.profile.endTime"
       rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
@@ -61,7 +57,7 @@
 
   <section>
     <h3>Results</h3>
-    <div ng-repeat="user in ffxivSearchCtrl.users.data">
+    <div ng-repeat="user in ffxivSearchCtrl.users.data" class="playercard">
     <img ng-src="{{user.user.photo}}" alt="">
       <!-- <span>{{user}}</span><br> -->
       <span>User: {{user._id}}</span><br>
