@@ -1,6 +1,7 @@
-angular.module('app.auth', [])
+angular.module('groupAuth', [])
 
 .controller('GroupAuthController', function ($window, $location, Auth) {
+  
   var GroupAuthCtrl = this;
   GroupAuthCtrl.group = {};
 
