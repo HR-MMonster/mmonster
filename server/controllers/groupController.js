@@ -43,31 +43,35 @@ exports.signinGroup = function(req, res, next) {
 
 exports.createGroup = function(req, res, next) {
   var newGroup = req.body;
-  findGroup({groupname: newGroup.groupname})
-    .then(function(group) {
-      if (group) {
-        next(new Error('Group account already exists'));
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  console.log('BODY:', req.body);
+
+  Group.findOne({groupname: newGroup.groupname})
+    .exec(function(err, group) {
+      if (err) {
+        console.error('error testing if groupname exists:', err);
+        next(err);
+      } else if (group) {
+        res.send('groupname ' + newGroup.groupname + ' already exists');
       } else {
-        return createGroup(newGroup);
-      }
-    })
-    .then(function(group) {
-      if (!group) {
-        next(new Error('Group account not created'));
-      } else {
-        var groupProfile = {gameName: 'FFXIV', group: group};
-        createGroupProfile(groupProfile)
-          .then(function(profile) {
-            if (!profile) {
-              next(new Error('Group profile not created'));
-            } else {
-              res.status(200).json(group);
+        Group.create(newGroup, function(err, createdGroup) {
+            if (err) {
+              console.error('error creating new group:', err)
+              return;
             }
+            // console.log('new group is:', createdGroup);
+            GroupProfile.create({gameName: 'FFXIV', group: createdGroup._id}, function(err, groupProfile) {
+                if (err) {
+                  console.error('error creating generic group profile');
+                  return;
+                }
+                util.createSession(req, res, {_id: createdGroup._id});
+                // res.status(200).send('success creating group ' + newGroup._id + ' including new generic group profile');
+              });
           });
       }
-    })
-    .fail(function(err) {
-      next(err);
     });
 };
 
@@ -139,11 +143,10 @@ exports.createGroupProfile= function(req, res, next) {
   if (newGroupProfile.group !== gid) {
     newGroupProfile.group = gid;
   }
-  GroupProfile.create(newGroupProfile)
-    .exec(function(err, groupProfile) {
+  GroupProfile.create(newGroupProfile, function(err, groupProfile) {
       if (err) {
         console.error('error creating group profile');
-        next(err);
+        return;
       }
       res.json(groupProfile);
     });
@@ -170,7 +173,7 @@ exports.findGroupProfile= function(req, res, next) {
     });
   };
 
-exports.findGroupProfiles= function(req, res, next) {
+exports.findGroupProfiles = function(req, res, next) {
   // TODO: this maybe unnecessary as there will only be one profile for each group
   var groupID = req.params.gid;
 
@@ -190,6 +193,22 @@ exports.findGroupProfiles= function(req, res, next) {
     });
 };
 
+exports.findGroupProfilesById = function(req, res, next) {
+  var groupID = req.params.gid;
+  GroupProfile.find({group: groupID})
+    .populate({
+      path: 'group',
+      select: '-password -salt'
+    })
+    .exec(function(err, foundProfiles) {
+      if (err) {
+        console.error('error finding profiles that match by id');
+        return;
+      }
+      res.json(foundProfiles);
+    })
+};
+
 exports.updateGroupProfile= function(req, res, next) {
   var updates = req.body;
   var gpid = req.params.gpid;
@@ -202,9 +221,25 @@ exports.updateGroupProfile= function(req, res, next) {
     .exec(function(err, profile) {
       if (err) {
         console.error('Error updating group profile:', err);
-        next(err);
+        return;
       }
       res.send('success updating group profile of ' + gpid);
+    });
+};
+
+exports.uploadPhoto = function(req, res, next) {
+  //TODO: NEEDS testing
+  var gid = req.params.gid;
+  var photoFileDescription = req.file;
+
+  var updates = {photo: '/uploads/' + photoFileDescription.filename};
+  Group.findOneAndUpdate({_id: gid}, updates)
+    .exec(function(err, group) {
+      if (err) {
+        console.error('Error adding group photo');
+        return;
+      }
+      res.send('success adding group photo');
     });
 };
 
