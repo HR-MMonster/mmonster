@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-var Group = require('./groupModel').model;
-var groupSchema = require('./groupModel').schema
+var Group = require('./groupModel');
 var Schema = mongoose.Schema;
 
 var groupProfileSchema = new Schema({
@@ -8,12 +7,13 @@ var groupProfileSchema = new Schema({
     type: String,
     required: true
   },
+  dps: Number,
   server: String,
   group: {
     type: Schema.Types.ObjectId,
     ref: 'Group'
   },
-  summary: String
+  summary: String,
 });
 
 module.exports = mongoose.model('GroupProfile', groupProfileSchema);

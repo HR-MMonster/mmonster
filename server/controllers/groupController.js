@@ -5,6 +5,8 @@ var Q = require('q');
 var mongoose = require('mongoose');
 var Group = require('../models/groupModel');
 var GroupProfile = require('../models/groupProfileModel');
+var dataGen = require('../data/testDataTemplates');
+var util = require('../lib/utility');
 
 var findGroup = Q.nbind(Group.findOne, Group);
 var findGroups = Q.nbind(Group.find, Group);
@@ -19,6 +21,7 @@ var createGroupProfile = Q.nbind(GroupProfile.create, GroupProfile);
 exports.signinGroup = function(req, res, next) {
   var groupname = req.body.groupname;
   var password = req.body.password;
+
   findGroup({groupname: groupname})
     .then(function(group) {
       if (!group) {
@@ -27,49 +30,62 @@ exports.signinGroup = function(req, res, next) {
       return group.comparePasswords(password)
         .then(function(foundGroup) {
           if (foundGroup) {
-            res.status(200).json(group);
+            util.createSession(req, res, {_id: group._id}); // is this user._id ???
           } else {
             res.status(400).end();
           }
         })
-    });
-};
-
-exports.createGroup = function(req, res, next) {
-  var newGroup = req.body;
-  findGroup({groupname: newGroup.groupname})
-    .then(function(group) {
-      if (group) {
-        next(new Error('Group account already exists'));
-      } else {
-        return createGroup(newGroup);
-      }
-    })
-    .then(function(group) {
-      if (!group) {
-        next(new Error('Group account not created'));
-      } else {
-        var groupProfile = {gameName: 'FFXIV', group: group};
-        createGroupProfile(groupProfile)
-          .then(function(profile) {
-            if (!profile) {
-              next(new Error('Group profile not created'));
-            } else {
-              res.status(200).json(group);
-            }
-          });
-      }
     })
     .fail(function(err) {
       next(err);
     });
 };
 
+exports.createGroup = function(req, res, next) {
+  var newGroup = req.body;
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  console.log('BODY:', req.body);
+
+  Group.findOne({groupname: newGroup.groupname})
+    .exec(function(err, group) {
+      if (err) {
+        console.error('error testing if groupname exists:', err);
+        next(err);
+      } else if (group) {
+        res.send('groupname ' + newGroup.groupname + ' already exists');
+      } else {
+        Group.create(newGroup, function(err, createdGroup) {
+            if (err) {
+              console.error('error creating new group:', err)
+              return;
+            }
+            // console.log('new group is:', createdGroup);
+            GroupProfile.create({gameName: 'FFXIV', group: createdGroup._id}, function(err, groupProfile) {
+                if (err) {
+                  console.error('error creating generic group profile');
+                  return;
+                }
+                util.createSession(req, res, {_id: createdGroup._id});
+                // res.status(200).send('success creating group ' + newGroup._id + ' including new generic group profile');
+              });
+          });
+      }
+    });
+};
+
 exports.findGroup = function(req, res, next) {
   var group = req.body;
-  var id = req.params.id;
+  var id = req.params.gid;
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  // console.log('BODY:', req.body);
+
   findGroup({_id: id})
     .then(function(group) {
+      console.log('found group:', group);
       if (!group) {
         next(new Error('Group', id, 'not found'));
       } else {
@@ -98,58 +114,72 @@ exports.findGroups = function(req, res, next) {
 
 exports.updateGroup = function(req, res, next) {
   var updates = req.body;
-  var id = req.params.id;
-  findGroupAndUpdate({_id: id}, updates)
-    .then(function(group) {
-      if (!group) {
-        next(new Error('group not updated'));
-      } else {
-        res.json(group);
+  var id = req.params.gid;
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  // console.log('BODY:', req.body);
+
+  Group.findOneAndUpdate({_id: id}, updates)
+    .exec(function(err, group) {
+      if (err) {
+        console.error('error finding group', err);
+        next(err);
       }
-    })
-    .fail(function(err) {
-      next(err);
+      res.send('success updating group '+ id);  // TODO: this is sending back unupdated object, although updates in DB
     });
 };
 
 exports.createGroupProfile= function(req, res, next) {
   var newGroupProfile = req.body;
-  var groupID = req.params.id;
+  var gid = req.params.gid;
 
-  if (newGroupProfile.user !== userID) {
-    newGroupProfile.user = userID;
+  // TODO: needs testing!
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  // console.log('BODY:', req.body);
+
+  if (newGroupProfile.group !== gid) {
+    newGroupProfile.group = gid;
   }
-  createGroupProfile(newGroupProfile)
-    .then(function(groupProfile) {
-      if (!groupProfile) {
-        next(new Error('Group profile not created'));
-      } else {
-        res.json(groupProfile);
+  GroupProfile.create(newGroupProfile, function(err, groupProfile) {
+      if (err) {
+        console.error('error creating group profile');
+        return;
       }
-    })
-    .fail(function(err) {
-      next(err);
+      res.json(groupProfile);
     });
 };
 
 exports.findGroupProfile= function(req, res, next) {
-  var groupID = req.params.id;
+  var gpid = req.params.gpid;
 
-  findGroupProfile({_id: groupID})
-    .then(function(groupProfile) {
-      if (!groupProfile) {
-        next(new Error('group profile not found'));
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', gpid);
+  // console.log('BODY:', req.body);
+
+  GroupProfile.find({_id: gpid})
+    .populate({
+      path: 'group',
+      select: '-password -salt'
+    })
+    .exec(function(err, groupProfile) {
+      if (err) {
+        console.error('error finding group profile:', err);
+        next(err);
       }
       res.json(groupProfile);
-    })
-    .fail(function(err) {
-      next(err);
     });
-};
+  };
 
-exports.findGroupProfiles= function(req, res, next) {
+exports.findGroupProfiles = function(req, res, next) {
   // TODO: this maybe unnecessary as there will only be one profile for each group
-  var groupID = req.params.id;
+  var groupID = req.params.gid;
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', groupID);
+  // console.log('BODY:', req.body);
 
   findGroupProfiles({_id: groupID})
     .then(function(groupProfiles) {
@@ -163,32 +193,76 @@ exports.findGroupProfiles= function(req, res, next) {
     });
 };
 
-exports.updateGroupProfile= function(req, res, next) {
-  var updates = req.body;
-  var groupID = req.params.id;
-
-  findGroupProfileAndUpdate({_id: id}, updates)
-    .then(function(updatedGroup) {
-      if (!updatedGroups) {
-        next(new Error('group not updated'));
-      }
-      res.json(updatedGroup);
+exports.findGroupProfilesById = function(req, res, next) {
+  var groupID = req.params.gid;
+  GroupProfile.find({group: groupID})
+    .populate({
+      path: 'group',
+      select: '-password -salt'
     })
-    .fail(function(err) {
-      next(err);
-    });
-};
-
-var seedGroups = function(groups) {
-  createGroup(groups)
-    .then(function(groups) {
-      if (!groups) {
-        console.error('error seeding groups into database');
+    .exec(function(err, foundProfiles) {
+      if (err) {
+        console.error('error finding profiles that match by id');
         return;
       }
-      console.log('success seeding groups into database');
+      res.json(foundProfiles);
     })
-    .fail(function(err) {
-      console.error(err);
+};
+
+exports.updateGroupProfile= function(req, res, next) {
+  var updates = req.body;
+  var gpid = req.params.gpid;
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GPID:', gpid);
+  // console.log('BODY:', req.body);
+
+  GroupProfile.findOneAndUpdate({_id: gpid}, updates)
+    .exec(function(err, profile) {
+      if (err) {
+        console.error('Error updating group profile:', err);
+        return;
+      }
+      res.send('success updating group profile of ' + gpid);
     });
 };
+
+exports.uploadPhoto = function(req, res, next) {
+  //TODO: NEEDS testing
+  var gid = req.params.gid;
+  var photoFileDescription = req.file;
+
+  var updates = {photo: '/uploads/' + photoFileDescription.filename};
+  Group.findOneAndUpdate({_id: gid}, updates)
+    .exec(function(err, group) {
+      if (err) {
+        console.error('Error adding group photo');
+        return;
+      }
+      res.send('success adding group photo');
+    });
+};
+
+
+var seedGroups = function() {
+  Group.find()
+    .exec(function(err, groups) {
+      if (err) {
+        console.error('error seeding groups');
+        return;
+      } else if (groups.length) {
+        console.log('already groups in database');
+      } else {
+        var groups = dataGen.generateGroups(20);
+        Group.create(groups, function(err, groups) {
+            if (err) {
+              console.error('error seeding groups:', err);
+              return;
+            }
+            return groups;
+          });
+      }
+    });
+};
+
+seedGroups();
