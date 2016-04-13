@@ -207,6 +207,19 @@ var names = [
   'Daniel'
 ];
 
+var randomProfilePhotos = [
+  '/assets/random_profile0.png',
+  '/assets/random_profile1.png',
+  '/assets/random_profile2.png',
+  '/assets/random_profile3.png',
+  '/assets/random_profile4.png',
+  '/assets/random_profile5.png',
+  '/assets/random_profile6.png',
+  '/assets/random_profile7.png',
+  '/assets/random_profile8.png',
+  '/assets/random_profile9.png',
+];
+
 var servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
 var boolean = [true, false];
 
@@ -247,6 +260,7 @@ function generateUsers(len) {
     user.password = randomUserPasswords[randomIndex(randomUserPasswords.length)];
     user.name = names[randomIndex(names.length)];
     user.email = user.name.toLowerCase() + '@gmail.com';
+    user.photo = randomProfilePhotos[randomIndex(randomProfilePhotos.length)];
     user.startTime = Math.floor(Math.random() * 23);
     user.endTime = ((user.startTime + Math.ceil(Math.random() * 7)) + 23) % 23;
     users.push(user);
@@ -285,6 +299,7 @@ function generateGroups(len) {
     group.password = randomGroupPasswords[randomIndex(randomGroupPasswords.length)];
     group.name = names[randomIndex(names.length)];
     group.email = group.name.toLowerCase() + '@me.com';
+    group.photo = randomProfilePhotos[randomIndex(randomProfilePhotos.length)];
     group.startTime = Math.floor(Math.random() * 23);
     group.endTime = ((group.startTime + Math.ceil(Math.random() * 7)) + 23) % 23;
     groups.push(group);
