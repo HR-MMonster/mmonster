@@ -2,63 +2,78 @@
 
   <h1>Search for Character</h1>
 
-  <div class="row">
-    <section class="col-sm-3">
-      <h3>Jobs</h3>
-      <div class="field">
-        <label for="main">Main Job</label><br />
-        <div ng-repeat="job in ffxivSearchCtrl.jobs">
-          <input type="radio" name="main" value="{{job}}" ng-model="ffxivSearchCtrl.profile.main"> {{job}}
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1" id="collapse-button"><span class="glyphicon glyphicon-chevron-down"></span> Search Criteria</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="row">
+            <section class="col-sm-3">
+              <h3>Jobs</h3>
+              <div class="field">
+                <label for="main">Main Job</label><br />
+                <div ng-repeat="job in ffxivSearchCtrl.jobs">
+                  <input type="radio" name="main" value="{{job}}" ng-model="ffxivSearchCtrl.profile.main"> {{job}}
+                </div>
+              </div>
+            </section>
+
+            <section class="col-sm-9">
+              <h3>Communication, Availability</h3>
+              <div class="field">
+                <label for="server">Server</label>
+                <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
+                  <option value="">Any Server</option>
+                  <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="mic">Has microphone and voice comm's software</label>
+                <input type="checkbox" name="mic" id="mic" ng-model="ffxivSearchCtrl.profile.mic" />
+              </div>
+
+              <div class="field">
+                <label for="startTime">Start Time</label>
+                <rzslider
+                rz-slider-model="ffxivSearchCtrl.profile.startTime"
+                rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+              </div>
+
+              <div class="field">
+                <label for="endTime">End Time</label>
+                <rzslider
+                rz-slider-model="ffxivSearchCtrl.profile.endTime"
+                rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+              </div>
+            </section>
+          </div>
+
+          <section>
+            <h3>Experience</h3>
+            <div class="field">
+              <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
+              <input type="text" ng-model="ffxivSearchCtrl.profile.dps"><br />
+            </div>
+
+            <div class="field">
+              <label for="main">Cleared Fights</label><br />
+              <div class="row">
+                <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
+                  <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
-    </section>
-
-    <section class="col-sm-9">
-      <h3>Communication, Availability</h3>
-      <div class="field">
-        <label for="server">Server</label>
-        <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
-          <option value="">Any Server</option>
-          <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="mic">Has microphone and voice comm's software</label>
-        <input type="checkbox" name="mic" id="mic" ng-model="ffxivSearchCtrl.profile.mic" />
-      </div>
-
-      <div class="field">
-        <label for="startTime">Start Time</label>
-        <rzslider
-        rz-slider-model="ffxivSearchCtrl.profile.startTime"
-        rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
-      </div>
-
-      <div class="field">
-        <label for="endTime">End Time</label>
-        <rzslider
-        rz-slider-model="ffxivSearchCtrl.profile.endTime"
-        rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
-      </div>
-    </section>
+    </div>
   </div>
 
-  <section>
-    <h3>Experience</h3>
-    <div class="field">
-      <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
-      <input type="text" ng-model="ffxivSearchCtrl.profile.dps"><br />
-    </div>
 
-    <div class="field">
-      <label for="main">Cleared Fights</label><br />
-      <div class="row">
-        <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
-          <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
-        </div>
-      </div>
-    </div>
-  </section>
 
   <a href="#" class="button" ng-click="ffxivSearchCtrl.search()">Search</a>
 
