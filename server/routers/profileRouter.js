@@ -58,8 +58,8 @@ profileRouter
 
 profileRouter
   .route('/groups/:gid/groupProfiles')
-  .get(groupController.findGroupProfiles) // problem here
-  .post(groupController.createGroupProfile); // should create one
+  .get(groupController.findGroupProfiles) // should return the group profile for a given group
+  .post(groupController.createGroupProfile); // should create a group profile for a given group
 
 profileRouter
   .route('/groups/:gid/groupProfiles/:gpid')

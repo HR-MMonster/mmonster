@@ -112,9 +112,9 @@ exports.updateGroup = function(req, res, next) {
   var updates = req.body;
   var id = req.params.gid;
 
-  console.log('PARAMS:', req.params);
-  console.log('GID:', id);
-  console.log('BODY:', req.body);
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  // console.log('BODY:', req.body);
 
   Group.findOneAndUpdate({_id: id}, updates)
     .exec(function(err, group) {
@@ -122,64 +122,61 @@ exports.updateGroup = function(req, res, next) {
         console.error('error finding group', err);
         next(err);
       }
-      res.json(group);  // TODO: this is sending back unupdated object, although updates in DB
+      res.send('success updating group '+ id);  // TODO: this is sending back unupdated object, although updates in DB
     });
-
-  // findGroupAndUpdate({_id: id}, updates)
-  //   .then(function(group) {
-  //     console.log('found Group:', group);
-  //     if (!group) {
-  //       next(new Error('group not updated'));
-  //     } else {
-  //       res.json(group);
-  //     }
-  //   })
-  //   .fail(function(err) {
-  //     next(err);
-  //   });
 };
 
 exports.createGroupProfile= function(req, res, next) {
   var newGroupProfile = req.body;
-  var groupID = req.params.gid;
+  var gid = req.params.gid;
 
-  if (newGroupProfile.group !== groupID) {
-    newGroupProfile.group = groupID;
+  // TODO: needs testing!
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  // console.log('BODY:', req.body);
+
+  if (newGroupProfile.group !== gid) {
+    newGroupProfile.group = gid;
   }
-  createGroupProfile(newGroupProfile)
-    .then(function(groupProfile) {
-      if (!groupProfile) {
-        next(new Error('Group profile not created'));
-      } else {
-        res.json(groupProfile);
+  GroupProfile.create(newGroupProfile)
+    .exec(function(err, groupProfile) {
+      if (err) {
+        console.error('error creating group profile');
+        next(err);
       }
-    })
-    .fail(function(err) {
-      next(err);
+      res.json(groupProfile);
     });
 };
 
 exports.findGroupProfile= function(req, res, next) {
-  var groupProfileID = req.params.gpid;
-  console.log(req.params);
-  findGroupProfile({_id: groupProfileID})
-    .then(function(groupProfile) {
-      if (!groupProfile) {
-        next(new Error('group profile not found'));
+  var gpid = req.params.gpid;
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', gpid);
+  // console.log('BODY:', req.body);
+
+  GroupProfile.find({_id: gpid})
+    .populate({
+      path: 'group',
+      select: '-password -salt'
+    })
+    .exec(function(err, groupProfile) {
+      if (err) {
+        console.error('error finding group profile:', err);
+        next(err);
       }
       res.json(groupProfile);
-    })
-    .fail(function(err) {
-      next(err);
     });
-};
+  };
 
 exports.findGroupProfiles= function(req, res, next) {
   // TODO: this maybe unnecessary as there will only be one profile for each group
   var groupID = req.params.gid;
-  console.log('PARAMS:', req.params);
-  console.log('GID:', groupID);
-  console.log('BODY:', req.body);
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', groupID);
+  // console.log('BODY:', req.body);
 
   findGroupProfiles({_id: groupID})
     .then(function(groupProfiles) {
@@ -195,20 +192,22 @@ exports.findGroupProfiles= function(req, res, next) {
 
 exports.updateGroupProfile= function(req, res, next) {
   var updates = req.body;
-  var groupProfileID = req.params.gpid;
+  var gpid = req.params.gpid;
 
-  findGroupProfileAndUpdate({_id: groupProfileID}, updates)
-    .then(function(updatedGroup) {
-      console.log(updatedGroup);
-      if (!updatedGroup) {
-        next(new Error('group not updated'));
+  // console.log('PARAMS:', req.params);
+  // console.log('GPID:', gpid);
+  // console.log('BODY:', req.body);
+
+  GroupProfile.findOneAndUpdate({_id: gpid}, updates)
+    .exec(function(err, profile) {
+      if (err) {
+        console.error('Error updating group profile:', err);
+        next(err);
       }
-      res.json(updatedGroup);
-    })
-    .fail(function(err) {
-      next(err);
+      res.send('success updating group profile of ' + gpid);
     });
 };
+
 
 var seedGroups = function() {
   Group.find()
