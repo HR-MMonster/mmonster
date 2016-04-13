@@ -48,6 +48,10 @@ profileRouter
   .get(characterProfileController.findCharacterProfiles);
 
 profileRouter
+  .route('/characterProfiles/:cpid')
+  .get(characterProfileController.findCharacterProfileByProfileId);
+
+profileRouter
   .route('/groups')
   .get(groupController.findGroups);
 
@@ -55,6 +59,10 @@ profileRouter
   .route('/groups/:gid')
   .get(groupController.findGroup)
   .put(groupController.updateGroup);
+
+profileRouter
+  .route('/groups/:gid/photos')
+  .post(util.restrictUserOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
 
 profileRouter
   .route('/groups/:gid/groupProfiles')
@@ -67,12 +75,12 @@ profileRouter
   .put(groupController.updateGroupProfile);
 
 profileRouter
-  .route('/groups/:gid/photos')
-  .post(util.restrictUserOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
-
-profileRouter
   .route('/groupProfiles')
   .get(groupProfileController.findGroupProfiles);
+
+profileRouter
+  .route('/groupProfiles/:gpid')
+  .get(groupProfileController.findGroupProfileByProfileId);
 
 mimeExtension = {
   'image/jpeg': 'jpeg',

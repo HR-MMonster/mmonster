@@ -104,6 +104,23 @@ exports.findGroupProfiles = function(req, res, next) {
   }
 };
 
+exports.findGroupProfileByProfileId = function(req, res, next) {
+  var gpid = req.params.gpid;
+
+  console.log('PARAMS:', req.params);
+  console.log('GPID:', gpid);
+  console.log('BODY:', req.body);
+
+  GroupProfile.find({_id: gpid})
+    .exec(function(err, profile) {
+      if (err) {
+        console.error('error finding group profile by id:', err);
+        return;
+      }
+      res.json(profile);
+    });
+};
+
 var seedGroupProfiles = function() {
   GroupProfile.find()
     .exec(function(err, profiles) {
