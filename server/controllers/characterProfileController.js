@@ -105,6 +105,23 @@ exports.findCharacterProfiles = function(req, res, next) {
 
 };
 
+exports.findCharacterProfileByProfileId = function(req, res, next) {
+  var cpid = req.params.cpid;
+
+  console.log('PARAMS:', req.params);
+  console.log('CPID:', cpid);
+  console.log('BODY:', req.body);
+
+  CharacterProfile.find({_id: cpid})
+    .exec(function(err, profile) {
+      if (err) {
+        console.error('error finding char profile by id:', err);
+        return;
+      }
+      res.json(profile);
+    });
+};
+
 // Helps to seed database for testing:
 var seedCharProfiles = function() {
   CharacterProfile.find()
