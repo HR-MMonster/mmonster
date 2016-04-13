@@ -73,9 +73,15 @@ exports.createGroup = function(req, res, next) {
 
 exports.findGroup = function(req, res, next) {
   var group = req.body;
-  var id = req.params.id;
+  var id = req.params.gid;
+
+  // console.log('PARAMS:', req.params);
+  // console.log('GID:', id);
+  // console.log('BODY:', req.body);
+
   findGroup({_id: id})
     .then(function(group) {
+      console.log('found group:', group);
       if (!group) {
         next(new Error('Group', id, 'not found'));
       } else {
@@ -104,26 +110,41 @@ exports.findGroups = function(req, res, next) {
 
 exports.updateGroup = function(req, res, next) {
   var updates = req.body;
-  var id = req.params.id;
-  findGroupAndUpdate({_id: id}, updates)
-    .then(function(group) {
-      if (!group) {
-        next(new Error('group not updated'));
-      } else {
-        res.json(group);
+  var id = req.params.gid;
+
+  console.log('PARAMS:', req.params);
+  console.log('GID:', id);
+  console.log('BODY:', req.body);
+
+  Group.findOneAndUpdate({_id: id}, updates)
+    .exec(function(err, group) {
+      if (err) {
+        console.error('error finding group', err);
+        next(err);
       }
-    })
-    .fail(function(err) {
-      next(err);
+      res.json(group);  // TODO: this is sending back unupdated object, although updates in DB
     });
+
+  // findGroupAndUpdate({_id: id}, updates)
+  //   .then(function(group) {
+  //     console.log('found Group:', group);
+  //     if (!group) {
+  //       next(new Error('group not updated'));
+  //     } else {
+  //       res.json(group);
+  //     }
+  //   })
+  //   .fail(function(err) {
+  //     next(err);
+  //   });
 };
 
 exports.createGroupProfile= function(req, res, next) {
   var newGroupProfile = req.body;
-  var groupID = req.params.id;
+  var groupID = req.params.gid;
 
-  if (newGroupProfile.user !== userID) {
-    newGroupProfile.user = userID;
+  if (newGroupProfile.group !== groupID) {
+    newGroupProfile.group = groupID;
   }
   createGroupProfile(newGroupProfile)
     .then(function(groupProfile) {
@@ -139,9 +160,9 @@ exports.createGroupProfile= function(req, res, next) {
 };
 
 exports.findGroupProfile= function(req, res, next) {
-  var groupID = req.params.id;
-
-  findGroupProfile({_id: groupID})
+  var groupProfileID = req.params.gpid;
+  console.log(req.params);
+  findGroupProfile({_id: groupProfileID})
     .then(function(groupProfile) {
       if (!groupProfile) {
         next(new Error('group profile not found'));
@@ -155,7 +176,10 @@ exports.findGroupProfile= function(req, res, next) {
 
 exports.findGroupProfiles= function(req, res, next) {
   // TODO: this maybe unnecessary as there will only be one profile for each group
-  var groupID = req.params.id;
+  var groupID = req.params.gid;
+  console.log('PARAMS:', req.params);
+  console.log('GID:', groupID);
+  console.log('BODY:', req.body);
 
   findGroupProfiles({_id: groupID})
     .then(function(groupProfiles) {
@@ -171,11 +195,12 @@ exports.findGroupProfiles= function(req, res, next) {
 
 exports.updateGroupProfile= function(req, res, next) {
   var updates = req.body;
-  var groupID = req.params.id;
+  var groupProfileID = req.params.gpid;
 
-  findGroupProfileAndUpdate({_id: id}, updates)
+  findGroupProfileAndUpdate({_id: groupProfileID}, updates)
     .then(function(updatedGroup) {
-      if (!updatedGroups) {
+      console.log(updatedGroup);
+      if (!updatedGroup) {
         next(new Error('group not updated'));
       }
       res.json(updatedGroup);
