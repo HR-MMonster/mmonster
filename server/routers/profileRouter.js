@@ -52,17 +52,17 @@ profileRouter
   .get(groupController.findGroups);
 
 profileRouter
-  .route('/groups/:id')
+  .route('/groups/:gid')
   .get(groupController.findGroup)
   .put(groupController.updateGroup);
 
 profileRouter
-  .route('/groups/:id/groupProfile')
-  .get(groupController.findGroupProfiles)
-  .post(groupController.createGroupProfile);
+  .route('/groups/:gid/groupProfiles')
+  .get(groupController.findGroupProfiles) // problem here
+  .post(groupController.createGroupProfile); // should create one
 
 profileRouter
-  .route('/groups/:id/groupProfile/:id')
+  .route('/groups/:gid/groupProfiles/:gpid')
   .get(groupController.findGroupProfile)
   .put(groupController.updateGroupProfile);
 
