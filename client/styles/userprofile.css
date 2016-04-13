@@ -15,6 +15,7 @@ section {
 .container {
   max-width: 900px;
   width: 90%;
+  margin-bottom: 20px;
 }
 
 h1 {
@@ -62,9 +63,7 @@ nav.navbar-default {
 }
 
 .user-profile {
-  margin: 20px auto;
   background-color: white;
-  width: 500px;
   border: 1px solid grey;
   padding: 20px;
 }
@@ -88,9 +87,7 @@ nav.navbar-default {
 
 .game-profile {
   border: 1px solid grey;
-  margin-top: 30px;
   padding: 50px;
-  border-radius: 10px;
   background-color: white;
 }
 
@@ -146,6 +143,7 @@ input[type=file] {
   background-size: cover;
   position: relative;
   overflow: hidden;
+  margin: 0 auto 20px;
 }
 
 .profile-image .btn{
@@ -170,10 +168,6 @@ a.button {
   color: white;
   background-color: #3E8CE2;
   padding: 10px;
-  margin-top: 20px;
-}
-
-a {
   margin-top: 20px;
 }
 
