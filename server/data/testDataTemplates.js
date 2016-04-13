@@ -8,7 +8,54 @@ var randomUsernames = [
   'Emberfire',
   'Evilember',
   'Firespawn',
-  'Flameblow'
+  'Flameblow',
+  'Hellraiser',
+  'Grandmastermaggie',
+  'Thegreatest',
+  'Whothat',
+  'Canofwhoopass',
+  'ZeroReborn',
+  'TechHater',
+  'eGremlin',
+  'BinaryMan',
+  'AwesomeTucker',
+  'FastChef',
+  'JunkTop',
+  'PurpleCharger',
+  'CodeBuns',
+  'BunnyJinx',
+  'GoogleCat',
+  'StrangeWizard',
+  'Fuzzy_Logic',
+  'Cliche',
+  'Ignoramus',
+  'Stupify',
+  'whereismyname',
+  'Harmless_Venom',
+  'Lord_Tryzalot',
+  'Sir_Gallonhead',
+  'Boy_vs_Girl',
+  'MPmaster',
+  'King_Martha',
+  'Spamalot',
+  'Goldmember',
+  'girlDog',
+  'Evil_kitten',
+  'farquit',
+  'grandad',
+  'happy_sad',
+  'haveahappyday',
+  'SomethingNew',
+  '5mileys',
+  'takes2long',
+  'w8t4u',
+  'askme',
+  'Bidwell',
+  'massdebater',
+  'iluvmen',
+  'Inmate',
+  'idontknow',
+  'likme',
   ];
 
 var randomUserPasswords = [
@@ -21,7 +68,13 @@ var randomUserPasswords = [
   '8987497t0dhkaljg',
   '9yduhfkjdahfkah8',
   '78e7jhiugidufr7k',
-  '839eq86868q764r8'
+  '839eq86868q764r8',
+  'q455y67193y18797',
+  '4987530fd79t830t8',
+  '84987530t8t0dfdfa',
+  '94987530tdf0t8ah8',
+  '74987530t8gid4fd8',
+  '83498753dffaiy64r8'
 ];
 
 var randomGroupNames = [
@@ -34,7 +87,25 @@ var randomGroupNames = [
   'BlogWobbles',
   'LuckyDusty',
   'RumChicken',
-  'StonedTime'
+  'StonedTime',
+  'HackySacky',
+  'VillageIdiots',
+  'BlatheringBlotts',
+  'Yadadada',
+  'Nojokur',
+  'Illusionz',
+  'Spazyfool',
+  'Supergrass',
+  'Dreamworx',
+  'Fried_Sushi',
+  'Stark_Naked',
+  'Need_TLC',
+  'Raving_Cute',
+  'Nude_Bikergirl',
+  'Lunatick',
+  'Garbage',
+  'Crazy_Nice',
+  'Booteefool'
 ];
 
 var randomGroupPasswords = [
@@ -47,7 +118,17 @@ var randomGroupPasswords = [
   '88197487787dkljg',
   '9y38987e9duhfkj8',
   '79172987eidufr7k',
-  '8947r970f8q764r8'
+  '8947r970f8q764r8',
+  'dlkfadjdghfiu237',
+  '989387rqf0a6g8ee',
+  'dfarq0gagf0afd78',
+  'jdf2aj45977rq0fi',
+  'kcbrq0gagf0a6dfg0',
+  '89nhn087rq0gagf06',
+  '9898uagf0a6g7787g',
+  '9y3898787rq0gagf0',
+  '7987rq0gaggeidufr',
+  '87rq0f8q87gf0a6r8'
 ];
 
 var ffxivJobs = [
@@ -160,11 +241,14 @@ function generateCharProfiles(len, gameName) {
 function generateUsers(len) {
   var users = [];
   var user = Object.create(null);
+  var randUsernames = randomUsernames.slice();
   while (len > 0) {
-    user.username = randomUsernames[randomIndex(randomUsernames.length)];
+    user.username = randUsernames.splice(randomIndex(randomUsernames.length), 1)[0];
     user.password = randomUserPasswords[randomIndex(randomUserPasswords.length)];
     user.name = names[randomIndex(names.length)];
     user.email = user.name.toLowerCase() + '@gmail.com';
+    user.startTime = Math.floor(Math.random() * 23);
+    user.endTime = ((user.startTime + Math.ceil(Math.random() * 7)) + 23) % 23;
     users.push(user);
     user = Object.create(null);
     len--;
@@ -184,6 +268,7 @@ function generateGroupProfiles(len, gameName) {
     profile.mic = boolean[randomIndex(boolean.length)];
     profile.server = servers[randomIndex(servers.length)];
     profile.summary = summaries[randomIndex(summaries.length)];
+    profile.dps = Math.floor(Math.random() * 100);
     groupProfiles.push(profile);
     profile = Object.create(null);
     len--;
@@ -194,11 +279,14 @@ function generateGroupProfiles(len, gameName) {
 function generateGroups(len) {
   var groups = [];
   var group = Object.create(null);
+  var randGroupNames = randomGroupNames.slice();
   while (len > 0) {
-    group.groupname = randomGroupNames[randomIndex(randomGroupNames.length)];
+    group.groupname = randomGroupNames.splice(randomIndex(randomGroupNames.length), 1)[0];
     group.password = randomGroupPasswords[randomIndex(randomGroupPasswords.length)];
     group.name = names[randomIndex(names.length)];
     group.email = group.name.toLowerCase() + '@me.com';
+    group.startTime = Math.floor(Math.random() * 23);
+    group.endTime = ((group.startTime + Math.ceil(Math.random() * 7)) + 23) % 23;
     groups.push(group);
     group = Object.create(null);
     len--;
@@ -212,6 +300,7 @@ module.exports = {
   generateGroups: generateGroups,
   generateGroupProfiles: generateGroupProfiles
 };
+
 // console.log(generateGroupProfiles(2, 'FFXIV'));
 // console.log(generateGroups(2));
 
