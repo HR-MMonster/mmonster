@@ -1,7 +1,41 @@
+.container {
+  max-width: 900px;
+  width: 90%;
+}
+
+nav.navbar-default {
+  background-color: rgba(100, 100, 100, 0.5);
+  border: none;
+  border-radius: 0;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-nav {
+  float: right;
+}
+
+.navbar-brand {
+  font-size: 28px;
+}
+
 .rz-bubble:after {
   content: ":00";
 }
 
 rzslider .rz-pointer {
   background-color: #1B88D8;
+}
+
+.center {
+  text-align: center;
+}
+
+a.button {
+  display: inline-block;
+  color: white;
+  background-color: #3E8CE2;
+  padding: 10px;
 }

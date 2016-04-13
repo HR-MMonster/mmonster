@@ -5,23 +5,36 @@
   <link rel="stylesheet" href="../styles/userprofile.css">
 </head>
 <body>
-  <div class="container">
-   <body ng-app="app.PlayerProfile">
-    <div class="userinfo">
-      <div class="user-profile clearfix" ng-controller="ProfileController as ProfileCtrl">
-        <img ng-src="{{ProfileCtrl.profile.photo}}" />
-        <p>Name: {{ProfileCtrl.profile.username}}</p>
-        <p>Location: {{ProfileCtrl.profile.location}}</p>
-        <p>Email: {{ProfileCtrl.profile.email}}</p>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">MMOnster</a>
       </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/pages/playerSearch.html">Search</a></li>
+        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
+        <li><a href="/pages/playerSignin.html">Log In</a></li>
+      </ul>
     </div>
-
-
-    <ffxiv-public />
   </div>
-  <script src="../lib/angular/angular.min.js"></script>
-  <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
-  <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
-  <script src="../controllers/Profile.js"></script>
+</nav>
+<div class="container">
+ <body ng-app="app.PlayerProfile">
+  <div class="userinfo">
+    <div class="user-profile clearfix" ng-controller="ProfileController as ProfileCtrl">
+      <img ng-src="{{ProfileCtrl.profile.photo}}" />
+      <p>Name: {{ProfileCtrl.profile.username}}</p>
+      <p>Location: {{ProfileCtrl.profile.location}}</p>
+      <p>Email: {{ProfileCtrl.profile.email}}</p>
+    </div>
+  </div>
+
+
+  <ffxiv-public />
+</div>
+<script src="../lib/angular/angular.min.js"></script>
+<script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
+<script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
+<script src="../controllers/Profile.js"></script>
 </body>
 </html>
