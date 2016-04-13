@@ -3,6 +3,7 @@
  */
 var signinRouter = require('express').Router();
 var userController = require('../controllers/userController');
+var groupController = require('../controllers/groupController');
 
 signinRouter
   .route('/')
