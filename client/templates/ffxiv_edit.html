@@ -1,5 +1,5 @@
 <div class="game-profile ffxiv-profile">
-<h1>FFXIV Info</h1>
+  <h1>FFXIV Info</h1>
 
   <section>
     <div class="field">
@@ -62,9 +62,12 @@
     </div>
 
     <div class="field">
-      <label for="main">Cleared Fights</label><br />
-      <div ng-repeat="fight in FFXIVCtrl.fights" class="col-sm-6">
-        <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+      <label for="main">Cleared Fights</label>
+      <div class="row">
+        <div ng-repeat="fight in FFXIVCtrl.fights" class="col-sm-6">
+          <input type="checkbox" name="clears" ng-model= "FFXIVCtrl.profile[fight.abr]" value="{{fight.abr}}">
+            {{fight.name}}
+        </div>
       </div>
     </div>
     <a class="button" href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a>
