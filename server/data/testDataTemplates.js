@@ -256,7 +256,7 @@ function generateUsers(len) {
   var user = Object.create(null);
   var randUsernames = randomUsernames.slice();
   while (len > 0) {
-    user.username = randUsernames.splice(randomIndex(randomUsernames.length), 1)[0];
+    user.username = randUsernames.splice(randomIndex(randUsernames.length), 1)[0];
     user.password = randomUserPasswords[randomIndex(randomUserPasswords.length)];
     user.name = names[randomIndex(names.length)];
     user.email = user.name.toLowerCase() + '@gmail.com';

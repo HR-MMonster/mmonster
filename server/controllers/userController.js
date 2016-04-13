@@ -220,12 +220,12 @@ var seedUsers = function() {
       } else {
         var newUsers = dataGen.generateUsers(20);
         User.create(newUsers, function(err, users) {
-        if (err) {
-          console.error('<><> Error seeding users:', err);
-          return;
-        }
-        console.log('<><> success seeding users');
-        // seedCharProfiles(testCharProfiles);
+          if (err) {
+            console.error('<><> Error seeding users:', err);
+            return;
+          }
+          console.log('<><> success seeding users');
+          // seedCharProfiles(testCharProfiles);
         });
       }
     })

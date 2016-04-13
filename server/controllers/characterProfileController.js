@@ -152,5 +152,6 @@ var seedCharProfiles = function() {
     });
 };
 
+// setTimeout(seedCharProfiles, 1000);
 seedCharProfiles();
 
