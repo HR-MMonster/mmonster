@@ -1,13 +1,13 @@
 <div class="game-search ffxiv-search-temp">
 
-  <h1>Search for Character</h1>
+  <h1>Search for Group</h1>
 
   <div class="row">
     <section class="col-sm-3">
       <h3>Jobs</h3>
-      <label for="main">Main Job</label><br />
+      <label for="jobs">Recruiting For</label><br />
       <div ng-repeat="job in ffxivSearchCtrl.jobs">
-        <input type="radio" name="main" value="{{job}}" ng-model="ffxivSearchCtrl.profile.main"> {{job}}
+        <input type="checkbox" name="jobs" value="{{job}}" ng-model="ffxivSearchCtrl.profile.jobs[job]"> {{job}}
       </div>
     </section>
 
@@ -20,17 +20,13 @@
       </select>
       <br />
 
-      <label for="mic">Has microphone and voice comm's software</label>
-      <input type="checkbox" name="mic" id="mic" ng-model="ffxivSearchCtrl.profile.mic" />
-      <br />
-
-      <label for="startTime">Start Time</label>
+      <label for="startTime">Group Start Time</label>
       <rzslider
       rz-slider-model="ffxivSearchCtrl.profile.startTime"
       rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
       <br />
 
-      <label for="endTime">End Time</label>
+      <label for="endTime">Group End Time</label>
       <rzslider
       rz-slider-model="ffxivSearchCtrl.profile.endTime"
       rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
@@ -39,12 +35,9 @@
   </div>
 
   <section>
-    <h3>Experience</h3>
+    <h3>Group Experience</h3>
 
-    <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
-    <input type="text" ng-model="ffxivSearchCtrl.profile.dps"><br />
-
-    <label for="main">Cleared Fights</label><br />
+    <label for="fights">Cleared Fights</label><br />
     <div class="row">
       <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
         <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
@@ -63,7 +56,7 @@
       <span>User: {{user._id}}</span><br>
       <!-- <span>{{user.gameName}}</span><br> -->
       <!-- <span>{{user.ign}}</span><br> -->
-      <span>Main Job: {{user.main}}</span><br>
+      <span>Main Job: {{user.jobs}}</span><br>
       <span>Server: {{user.server}}</span><br>
       <span>Dummy DPS: {{user.dps}}</span><br>
       <span>Start Time: {{user.user.startTime}}</span><br>

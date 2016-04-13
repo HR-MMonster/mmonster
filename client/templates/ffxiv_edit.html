@@ -6,6 +6,12 @@
     <textarea id="ffxivSummary" name="ffxivSummary" ng-model="FFXIVCtrl.profile.summary"></textarea>
   </section>
 
+  <label for="ign">Character Name</label>
+  <input type="text" id="ign" name="ign" ng-model="FFXIVCtrl.profile.ign">
+
+  <label for="profileLink">Link to Lodestone Profile</label>
+  <input type="url" id="profileLink" name="profileLink" ng-model="FFXIVCtrl.profile.profileLink">
+
   <section>
     <h3>Jobs</h3>
     <div class="row">
@@ -51,7 +57,7 @@
     </div>
 
     <a href="#" ng-click="FFXIVCtrl.test()">Test button</a>
-    <a href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a>
+    <a class="button" href="#" ng-click="FFXIVCtrl.update()">Save Profile Changes</a>
   </section>
 </div>
 

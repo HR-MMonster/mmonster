@@ -5,50 +5,63 @@
   <link rel="stylesheet" href="../styles/userprofile.css">
 </head>
 <body>
-  <div class="container">
-   <body ng-app="app.PlayerProfile">
-    <div class="userinfo">
-      <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="profile-image" ng-style="{'background-image': 'url(' + ProfileCtrl.profile.photo + ')'}">
-              <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
-                Update
-              </span>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <h4>Basic Info:</h4>
-            <label for="realname">Name</label>
-            <input type="text" id="username" ng-model='ProfileCtrl.profile.username'>
-            <label for="location">Location</label>
-            <input type="text" id="location" ng-model='ProfileCtrl.profile.location'>
-            <label for="location">Email</label>
-            <input type="text" id="Email" ng-model='ProfileCtrl.profile.email'>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      <a class="navbar-brand" href="/">MMOnster</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/pages/playerSearch.html">Search</a></li>
+        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
+        <li><a href="/pages/playerSignin.html">Log In</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+ <body ng-app="app.PlayerProfile">
+  <div class="userinfo">
+    <div class="user-profile" ng-controller="ProfileController as ProfileCtrl">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="profile-image" ng-style="{'background-image': 'url(' + ProfileCtrl.profile.photo + ')'}">
+            <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
+              Update
+            </span>
           </div>
         </div>
-        <h4>Availability</h4>
-        <label for="starttime">Start Time</label>
-        <rzslider
-         rz-slider-model="ProfileCtrl.profile.startTime"
-         rz-slider-options="ProfileCtrl.slider"></rzslider>
-         <label for="endtime">End Time</label>
-        <rzslider
-         rz-slider-model="ProfileCtrl.profile.endTime"
-         rz-slider-options="ProfileCtrl.slider"></rzslider>
-        <a href="#" ng-click="ProfileCtrl.update()">Update Profile</a>
-        <a href="#" ng-click="ProfileCtrl.test()"></a>
+        <div class="col-sm-6">
+          <h4>Basic Info:</h4>
+          <label for="realname">Name</label>
+          <input type="text" id="username" ng-model='ProfileCtrl.profile.username'>
+          <label for="location">Location</label>
+          <input type="text" id="location" ng-model='ProfileCtrl.profile.location'>
+          <label for="location">Email</label>
+          <input type="text" id="Email" ng-model='ProfileCtrl.profile.email'>
+        </div>
       </div>
-
+      <h4>Availability</h4>
+      <label for="starttime">Start Time</label>
+      <rzslider
+      rz-slider-model="ProfileCtrl.profile.startTime"
+      rz-slider-options="ProfileCtrl.slider"></rzslider>
+      <label for="endtime">End Time</label>
+      <rzslider
+      rz-slider-model="ProfileCtrl.profile.endTime"
+      rz-slider-options="ProfileCtrl.slider"></rzslider>
+      <a href="#" ng-click="ProfileCtrl.update()">Update Profile</a>
+      <a href="#" ng-click="ProfileCtrl.test()"></a>
     </div>
 
-    <div class="clearfix"></div>
-
-    <ffxiv-edit />
   </div>
-  <script src="../lib/angular/angular.min.js"></script>
-  <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
-  <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
-  <script src="../controllers/Profile.js"></script>
+
+  <div class="clearfix"></div>
+
+  <ffxiv-edit />
+</div>
+<script src="../lib/angular/angular.min.js"></script>
+<script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
+<script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
+<script src="../controllers/Profile.js"></script>
 </body>
 </html>
