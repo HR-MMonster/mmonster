@@ -24,7 +24,7 @@ angular.module('app.characterSearch', ['rzModule'])
     //sanitize the falses -> loop through the user object and set any falses to undefined
     console.log('QUERY 1: ', query);
     for(var prop in query) {
-      if(query[prop] === false) {
+      if(query[prop] === false || query[prop] === '') {
         query[prop] = undefined;
       }
     }

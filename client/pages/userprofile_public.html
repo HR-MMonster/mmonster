@@ -18,23 +18,32 @@
     </div>
   </div>
 </nav>
-<div class="container">
- <body ng-app="app.PlayerProfile">
-  <div class="userinfo">
-    <div class="user-profile clearfix" ng-controller="ProfileController as ProfileCtrl">
-      <img ng-src="{{ProfileCtrl.profile.photo}}" />
-      <p>Name: {{ProfileCtrl.profile.username}}</p>
-      <p>Location: {{ProfileCtrl.profile.location}}</p>
-      <p>Email: {{ProfileCtrl.profile.email}}</p>
+<body ng-app="app.PlayerProfile">
+  <div class="container">
+    <div class="userinfo col-sm-4">
+      <div class="user-profile clearfix" ng-controller="ProfileController as ProfileCtrl">
+        <img ng-src="{{ProfileCtrl.profile.photo}}" />
+        <p>Name: {{ProfileCtrl.profile.username}}</p>
+        <p>Location: {{ProfileCtrl.profile.location}}</p>
+        <p>Email: {{ProfileCtrl.profile.email}}</p>
+        <h4>Availability:</h4>
+        <label for="starttime">Start Time</label>
+        <rzslider
+        rz-slider-model="ProfileCtrl.profile.startTime"
+        rz-slider-options="ProfileCtrl.slider"></rzslider>
+        <label for="endtime">End Time</label>
+        <rzslider
+        rz-slider-model="ProfileCtrl.profile.endTime"
+        rz-slider-options="ProfileCtrl.slider"></rzslider>
+      </div>
     </div>
+
+
+    <ffxiv-public class="col-sm-8" />
   </div>
-
-
-  <ffxiv-public />
-</div>
-<script src="../lib/angular/angular.min.js"></script>
-<script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
-<script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
-<script src="../controllers/Profile.js"></script>
+  <script src="../lib/angular/angular.min.js"></script>
+  <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
+  <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
+  <script src="../controllers/Profile.js"></script>
 </body>
 </html>

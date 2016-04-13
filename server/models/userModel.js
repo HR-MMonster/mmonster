@@ -15,6 +15,7 @@ var userSchema = new Schema({
     required: true
   },
   salt: String,
+  location: String,
   name: String,
   email: String,
   photo: String, // store path to file location
