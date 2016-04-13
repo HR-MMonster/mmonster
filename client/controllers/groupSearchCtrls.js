@@ -1,7 +1,3 @@
-//Need to restructure query object to latest notation for user objects
-//nested
-
-
 angular.module('app.characterSearch', ['rzModule'])
 
 .controller('ffxivSearchChar', function ($window, $location, $http) {
@@ -12,13 +8,7 @@ angular.module('app.characterSearch', ['rzModule'])
   };
 
 
-  // ffxivSearchCtrl.test = function() {
-  //   console.log(ffxivSearchCtrl.profile)
-  //   console.log('inside test');
-  // };
-
   ffxivSearchCtrl.search = function() {
-    //capture the user profile stats from a button click
     var query = ffxivSearchCtrl.profile;
     //reformat the object according to DB team's standard
     //sanitize the falses -> loop through the user object and set any falses to undefined
