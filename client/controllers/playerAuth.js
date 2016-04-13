@@ -1,4 +1,4 @@
-angular.module('app.auth', [])
+angular.module('playerAuth', [])
 
 .controller('PlayerAuthController', function ($window, $location, Auth) {
   // console.log('can you see this?');
