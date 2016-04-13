@@ -5,7 +5,7 @@ var SALT_WORK_FACTOR = 10; // required for salt gen
 var Schema = mongoose.Schema;
 
 
-exports.schema = groupSchema = new Schema({
+var groupSchema = new Schema({
   groupname: {
     type: String,
     required: true,
@@ -18,7 +18,11 @@ exports.schema = groupSchema = new Schema({
   salt: String,
   name: String,
   email: String,
-  photo: String,
+  photo: {
+    type: String,
+    default: '/assets/default.png'
+  },
+  location: String,
   startTime: {
     type: Number,
     default: 12
@@ -53,12 +57,12 @@ groupSchema.pre('save', function(next) {
     if (err) {
       return next(err);
     } else {
-      bcrypt.hash(user.password, salt, null, function (err, hash) {
+      bcrypt.hash(group.password, salt, null, function (err, hash) {
         if (err) {
           return next(err);
         } else {
-          user.password = hash;
-          user.salt = salt;
+          group.password = hash;
+          group.salt = salt;
           next();
         }
       });
@@ -67,4 +71,4 @@ groupSchema.pre('save', function(next) {
 });
 
 // export the group model
-exports.model = mongoose.model('Group', groupSchema);
+module.exports = mongoose.model('Group', groupSchema);

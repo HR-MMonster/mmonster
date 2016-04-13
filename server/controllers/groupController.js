@@ -5,6 +5,7 @@ var Q = require('q');
 var mongoose = require('mongoose');
 var Group = require('../models/groupModel');
 var GroupProfile = require('../models/groupProfileModel');
+var dataGen = require('../data/testDataTemplates');
 
 var findGroup = Q.nbind(Group.findOne, Group);
 var findGroups = Q.nbind(Group.find, Group);
@@ -179,16 +180,26 @@ exports.updateGroupProfile= function(req, res, next) {
     });
 };
 
-var seedGroups = function(groups) {
-  createGroup(groups)
-    .then(function(groups) {
-      if (!groups) {
-        console.error('error seeding groups into database');
+var seedGroups = function() {
+  Group.find({})
+    .exec(function(err, groups) {
+      if (err) {
+        console.error('error seeding groups');
         return;
+      } else if (groups.length) {
+        console.log('already groups in database');
+      } else {
+        var groups = dataGen.generateGroups(5);
+        Group.create(groups)
+          .exec(function(err, groups) {
+            if (err) {
+              console.error('error seeding groups:', err);
+              return;
+            }
+            return groups;
+          });
       }
-      console.log('success seeding groups into database');
-    })
-    .fail(function(err) {
-      console.error(err);
     });
 };
+
+seedGroups();

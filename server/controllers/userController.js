@@ -2,7 +2,7 @@
  * Handle rest request for user.
  */
 var Q = require('q');
-var User = require('../models/userModel').model;
+var User = require('../models/userModel');
 var CharacterProfile = require('../models/characterProfileModel');
 var util = require('../lib/utility');
 
@@ -15,9 +15,8 @@ var findCharacterProfiles = Q.nbind(CharacterProfile.find, CharacterProfile);
 var findCharacterProfileAndUpdate = Q.nbind(CharacterProfile.findOneAndUpdate, CharacterProfile);
 var createCharacterProfile = Q.nbind(CharacterProfile.create, CharacterProfile);
 
-var testUsers = require('../data/testData').users;
-var testCharProfiles = require('../data/testData').characterProfiles;
-var seedCharProfiles = CharacterProfile.seedCharProfiles;
+var dataGen = require('../data/testDataTemplates');
+
 
 exports.signinUser = function(req, res, next) {
   var username = req.body.username;
@@ -211,15 +210,26 @@ exports.uploadPhoto = function(req, res, next) {
     });
 };
 
-var seedUsers = function(users) {
-  User.create(users, function(err, users) {
-    if (err) {
-      console.error('<><> Error seeding users:', err);
-      return;
-    }
-    console.log('<><> success seeding users');
-    // seedCharProfiles(testCharProfiles);
-  });
+var seedUsers = function() {
+  User.find()
+    .exec(function(err, users) {
+      if (err) {
+        console.error(err);
+        return;
+      } else if (users.length) {
+        console.log('already users in database');
+      } else {
+        var newUsers = dataGen.generateUsers(5);
+        User.create(newUsers, function(err, users) {
+        if (err) {
+          console.error('<><> Error seeding users:', err);
+          return;
+        }
+        console.log('<><> success seeding users');
+        // seedCharProfiles(testCharProfiles);
+        });
+      }
+    })
 };
 
-// seedUsers(testUsers);
+seedUsers();
