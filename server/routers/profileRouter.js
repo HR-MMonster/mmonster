@@ -58,13 +58,17 @@ profileRouter
 
 profileRouter
   .route('/groups/:gid/groupProfiles')
-  .get(groupController.findGroupProfiles) // should return the group profile for a given group
-  .post(groupController.createGroupProfile); // should create a group profile for a given group
+  .get(groupController.findGroupProfilesById)
+  .post(groupController.createGroupProfile);
 
 profileRouter
   .route('/groups/:gid/groupProfiles/:gpid')
   .get(groupController.findGroupProfile)
   .put(groupController.updateGroupProfile);
+
+profileRouter
+  .route('/groups/:gid/photos')
+  .post(util.restrictUserOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
 
 profileRouter
   .route('/groupProfiles')
