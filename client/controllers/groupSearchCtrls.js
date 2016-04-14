@@ -1,6 +1,6 @@
-angular.module('app.characterSearch', ['rzModule'])
+angular.module('app.groupSearch', ['rzModule'])
 
-.controller('ffxivSearchChar', function ($window, $location, $http) {
+.controller('ffxivSearchGroup', function ($window, $location, $http) {
   var ffxivSearchCtrl = this;
   ffxivSearchCtrl.profile = {
     startTime: 0,
@@ -23,14 +23,14 @@ angular.module('app.characterSearch', ['rzModule'])
     // post request with query object as body
     return $http({
       method: 'GET',
-      url: '../profile/characterProfiles',
+      url: '../profile/groupProfiles',
       params: query
     })
-    .then(function(users) {
-      console.log('inside then');
-      console.log(users.data);
-      ffxivSearchCtrl.users = users;
-      // console.log(ffxivSearchCtrl.users);
+    .then(function(groups) {
+      // console.log('inside then');
+      console.log(groups.data);
+      ffxivSearchCtrl.groups = groups;
+      // console.log(ffxivSearchCtrl.groups);
     })
     .catch(function (error) {
       console.log('inside catch')
@@ -140,11 +140,11 @@ angular.module('app.characterSearch', ['rzModule'])
   ffxivSearchCtrl.search()
 })
 
-.directive('ffxivSearchTemp', function() {
+.directive('ffxivSearchGroupTemp', function() {
   return {
     restrict: 'E',
     templateUrl: '../templates/ffxiv_search.html',
-    controller: 'ffxivSearchChar',
+    controller: 'ffxivSearchGroup',
     controllerAs: 'ffxivSearchCtrl'
   };
 })
