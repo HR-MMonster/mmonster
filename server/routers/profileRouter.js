@@ -62,17 +62,17 @@ profileRouter
 
 profileRouter
   .route('/groups/:gid/photos')
-  .post(util.restrictUserOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
+  .post(util.restrictGroupOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
 
 profileRouter
   .route('/groups/:gid/groupProfiles')
   .get(groupController.findGroupProfilesById)
-  .post(groupController.createGroupProfile);
+  .post(util.restrictGroupOwnerOnly, groupController.createGroupProfile);
 
 profileRouter
   .route('/groups/:gid/groupProfiles/:gpid')
   .get(groupController.findGroupProfile)
-  .put(groupController.updateGroupProfile);
+  .put(util.restrictGroupOwnerOnly, groupController.updateGroupProfile);
 
 profileRouter
   .route('/groupProfiles')

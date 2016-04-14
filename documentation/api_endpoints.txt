@@ -55,12 +55,12 @@
             |
             +--- groupProfiles
                 |--- GET
-                |___ POST - session required //TODO
+                |___ POST - session required
                 |
                 +--- /:id
                     |--- GET
                     |--- DELETE //TODO
-                    |___ PUT - session required  //TODO
+                    |___ PUT - session required
     |
     +--- /characterProfiles
         |___ GET
