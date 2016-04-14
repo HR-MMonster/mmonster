@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="auth">
+    <head>
+        <meta charset="utf-8" />
+        <title>MMONSTER | Account Sign In</title>
+        <link type="text/css" href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+        <script src="../lib/angular/angular.min.js"></script>
+        <script src="../controllers/auth.js"></script>
+    </head>
+    <body ng-controller="AuthTabController as AuthTabCtrl">
+        <div class="container" id='signin'>
+            <div class="col-md-6">
+                <h1>Account Sign In</h1>
+                <!-- Navigation for choosing group or user sign in -->
+                <nav>
+                    <ul class="nav nav-pills">
+                        <li role="presentation" ng-class="{active: AuthTabCtrl.isSet('user')}"><a href ng-click="AuthTabCtrl.setTab('user')">User</a></li>
+                        <li role="presentation" ng-class="{active: AuthTabCtrl.isSet('group')}"><a href ng-click="AuthTabCtrl.setTab('group')">Group</a></li>
+                    </ul>
+                </nav>
+                <!-- load appropriate page based on choice -->
+                <div ng-show="AuthTabCtrl.isSet('user')">
+                    <form ng-controller="PlayerAuthController as PlayerAuthCtrl" class="form-inline" name="signinForm" ng-submit="PlayerAuthCtrl.signin()">
+                        <div class="form-group">
+                            <label for="username creation">Username:</label>
+                            <input type="text" class="form-control" id="user-username-creation" ng-model="PlayerAuthCtrl.player.username">
+                            <label for="user password creation">Password:</label>
+                            <input type="password" class="form-control" id="user-password-creation" ng-model="PlayerAuthCtrl.player.password">
+                            <button class="btn btn-default">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+                <div ng-show="AuthTabCtrl.isSet('group')">
+                    <form ng-controller="GroupAuthController as GroupAuthCtrl" class="form-inline" name="signinForm" ng-submit='GroupAuthCtrl.signin()'>
+                        <div class="form-group">
+                            <label for="groupname creation">Groupname:</label>
+                            <input type="text" class="form-control" id="group-groupname-creation" ng-model='GroupAuthCtrl.group.groupname'>
+                            <label for="group password creation">Password:</label>
+                            <input type="password" class="form-control" id="group-password-creation" ng-model='GroupAuthCtrl.group.password'>
+                            <button class="btn btn-default">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+                <a href="/pages/signup.html">Already have an account? Sign up</a>
+            </div>
+        </div>
+    </body>
+</html>
