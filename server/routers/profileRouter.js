@@ -48,27 +48,40 @@ profileRouter
   .get(characterProfileController.findCharacterProfiles);
 
 profileRouter
+  .route('/characterProfiles/:cpid')
+  .get(characterProfileController.findCharacterProfileByProfileId);
+
+profileRouter
   .route('/groups')
   .get(groupController.findGroups);
 
 profileRouter
-  .route('/groups/:id')
+  .route('/groups/:gid')
   .get(groupController.findGroup)
   .put(groupController.updateGroup);
 
 profileRouter
-  .route('/groups/:id/groupProfile')
-  .get(groupController.findGroupProfiles)
-  .post(groupController.createGroupProfile);
+  .route('/groups/:gid/photos')
+  .post(util.restrictGroupOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
+
 
 profileRouter
-  .route('/groups/:id/groupProfile/:id')
+  .route('/groups/:gid/groupProfiles')
+  .get(groupController.findGroupProfilesById)
+  .post(util.restrictGroupOwnerOnly, groupController.createGroupProfile);
+
+profileRouter
+  .route('/groups/:gid/groupProfiles/:gpid')
   .get(groupController.findGroupProfile)
-  .put(groupController.updateGroupProfile);
+  .put(util.restrictGroupOwnerOnly, groupController.updateGroupProfile);
 
 profileRouter
   .route('/groupProfiles')
   .get(groupProfileController.findGroupProfiles);
+
+profileRouter
+  .route('/groupProfiles/:gpid')
+  .get(groupProfileController.findGroupProfileByProfileId);
 
 mimeExtension = {
   'image/jpeg': 'jpeg',

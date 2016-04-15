@@ -4,16 +4,23 @@
 +--- /signup
     |
     +--- /user
-        |--- GET
+        |--- GET (served statically)
         |___ POST -> success: /signin | failure: /signup (post user image on signup)
     |
     +--- /group
-        |--- GET
+        |--- GET (served statically)
         |___ POST -> success: /signin | failure: /signup
 |
 +--- /signin
-    |--- GET
-    |___ POST -> success: /? | failure: /signin
+    |
+    +--- /user
+        |--- GET (served statically)
+        |___ POST -> success: /signin | failure: /signup ???(post user image on signup)
+    |
+    +--- /group
+        |--- GET (served statically)
+        |___ POST -> success: /signin | failure: /signup
+
 |
 +--- /profile
     |
@@ -39,24 +46,22 @@
     +--- /groups
         |___ GET
 
-        +--- /images
+        +--- /photos
             |___ POST
-            |
-            +--- /:id
-                |___ GET
         |
         +--- /:id
             |--- GET
             |___ PUT - session required
             |
-            +--- characterProfiles
+            +--- groupProfiles
                 |--- GET
-                |___ POST - session required
+                |___ POST - session required //TODO
                 |
                 +--- /:id
                     |--- GET
-                    |--- DELETE
+                    |--- DELETE //TODO
                     |___ PUT - session required
+
     |
     +--- /characterProfiles
         |___ GET
@@ -65,15 +70,20 @@
                 |--- startTime
                 |--- endTime
                 +--- user
-                    |--- [nested user document properties]
         |
         +---/:id
             |___ GET
     |
     +---- /groupProfiles
         |___ GET
-            |____ (query params)
-                |----TODO
+            |___ (query parameters)
+                |--- dps
+                |--- startTime
+                |--- endTime
+                +--- group
+        |
+        +---/:id
+            |___ GET
 
 |
 +--- /logout

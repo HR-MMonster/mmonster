@@ -1,0 +1,66 @@
+<div class="game-search ffxiv-search-temp">
+
+  <h1>Search for Group</h1>
+
+  <div class="row">
+    <section class="col-sm-3">
+      <h3>Jobs</h3>
+      <label for="jobs">Recruiting For</label><br />
+      <div ng-repeat="job in ffxivSearchCtrl.jobs">
+        <input type="checkbox" name="jobs" value="{{job}}" ng-model="ffxivSearchCtrl.profile.jobs[job]"> {{job}}
+      </div>
+    </section>
+
+    <section class="col-sm-9">
+      <h3>Communication, Availability</h3>
+
+      <label for="server">Server</label>
+      <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
+        <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
+      </select>
+      <br />
+
+      <label for="startTime">Group Start Time</label>
+      <rzslider
+      rz-slider-model="ffxivSearchCtrl.profile.startTime"
+      rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+      <br />
+
+      <label for="endTime">Group End Time</label>
+      <rzslider
+      rz-slider-model="ffxivSearchCtrl.profile.endTime"
+      rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+      <br />
+    </section>
+  </div>
+
+  <section>
+    <h3>Group Experience</h3>
+
+    <label for="fights">Cleared Fights</label><br />
+    <div class="row">
+      <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
+        <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+      </div>
+    </div>
+    <br />
+  </section>
+
+  <a href="#" class="button" ng-click="ffxivSearchCtrl.search()">RUN SEARCH</a>
+
+  <section>
+    <h3>Results</h3>
+    <div ng-repeat="user in ffxivSearchCtrl.users.data" class="playercard">
+    <img ng-src="{{user.user.photo}}" alt="">
+      <!-- <span>{{user}}</span><br> -->
+      <span>User: {{user._id}}</span><br>
+      <!-- <span>{{user.gameName}}</span><br> -->
+      <!-- <span>{{user.ign}}</span><br> -->
+      <span>Main Job: {{user.jobs}}</span><br>
+      <span>Server: {{user.server}}</span><br>
+      <span>Dummy DPS: {{user.dps}}</span><br>
+      <span>Start Time: {{user.user.startTime}}</span><br>
+      <span>End Time: {{user.user.endTime}}</span><br>
+    </div>
+  </section>
+</div>

@@ -18,7 +18,11 @@ var userSchema = new Schema({
   location: String,
   name: String,
   email: String,
-  photo: String, // store path to file location
+  photo: {
+    type: String,
+    default: '/assets/default.png'
+  }, // store path to file location
+  location: String,
   startTime: {
     type: Number,
     default: 12
@@ -66,5 +70,4 @@ userSchema.pre('save', function(next) {
   });
 });
 
-exports.model = mongoose.model('User', userSchema);
-exports.schema = userSchema;
+module.exports = mongoose.model('User', userSchema);

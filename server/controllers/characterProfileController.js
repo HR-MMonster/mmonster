@@ -1,9 +1,9 @@
 /**
  * Controller for all gamer profiles.
  */
-var User = require('../models/userModel').model;
+var User = require('../models/userModel');
 var CharacterProfile = require('../models/characterProfileModel');
-var testData = require('../data/testData').characterProfiles;
+var dataGen = require('../data/testDataTemplates');
 
 var timeDiff = function(start, end) {
   var diff;
@@ -22,7 +22,7 @@ var timeDiff = function(start, end) {
 
 exports.findCharacterProfiles = function(req, res, next) {
   // find by query parameters
-  console.log(req.query);
+  // console.log(req.query);
   if (req.query.dps) {
     req.query.dps = { $gte: req.query.dps };
   }
@@ -105,15 +105,54 @@ exports.findCharacterProfiles = function(req, res, next) {
 
 };
 
-// Helps to seed database for testing:
-var seedDatabase = function(data) {
-  CharacterProfile.create(data, function(err, newCharProfiles) {
-    if (err) {
-      console.error('><>< Error seeding database with char profiles:', err);
-      return;
-    }
-    console.log('><>< Success seeding char profiles');
-  });
+exports.findCharacterProfileByProfileId = function(req, res, next) {
+  var cpid = req.params.cpid;
+
+  console.log('PARAMS:', req.params);
+  console.log('CPID:', cpid);
+  console.log('BODY:', req.body);
+
+  CharacterProfile.find({_id: cpid})
+    .exec(function(err, profile) {
+      if (err) {
+        console.error('error finding char profile by id:', err);
+        return;
+      }
+      res.json(profile);
+    });
 };
 
+// Helps to seed database for testing:
+var seedCharProfiles = function() {
+  CharacterProfile.find()
+    .exec(function(err, profiles) {
+      if (err) {
+        console.error(err);
+        return;
+      } else if (profiles.length) {
+        console.log('already char profiles in the database')
+      } else {
+        User.find()
+          .select('_id')
+          .exec(function(err, userIds) {
+            var newCharProfiles = dataGen.generateCharProfiles(userIds.length, 'FFXIV');
+            newCharProfiles.forEach(function(profile, i) {
+              profile.user = userIds[i];
+            });
+            CharacterProfile.create(newCharProfiles, function(err, newCharProfiles) {
+              if (err) {
+                console.error('><>< Error seeding database with char profiles:', err);
+                return;
+              }
+              console.log('><>< Success seeding char profiles');
+              return newCharProfiles;
+              });
+            });
+        }
+    });
+};
+
+
+// setTimeout(seedCharProfiles, 1000);
+seedCharProfiles();
 
