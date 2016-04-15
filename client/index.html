@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app='app'>
+<html>
 <head>
   <meta charset="utf-8" />
   <title>MMONSTER</title>
@@ -7,24 +7,19 @@
   <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">MMOnster</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="/pages/playerSearch.html">Search</a></li>
-        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
-        <li><a href="/pages/playerSignin.html">Log In</a></li>
-      </ul>
+  <div ng-app="app">
+    <navbar />
+  </div>
+  <div class="container">
+    <div class="well">
+      <h1>Adventure Together</h1>
+      <a href="/pages/playerSearch.html" class="btn btn-primary">Find Players</a>
     </div>
   </div>
-</nav>
-<div class="container">
-  <div class="well">
-    <h1>Adventure Together</h1>
-    <a href="/pages/playerSearch.html" class="btn btn-primary">Find Players</a>
-  </div>
-</div>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angularjs-slider/dist/rzslider.min.js"></script>
+  <script src="lib/ng-file-upload/ng-file-upload-all.js"></script>
+  <script src="app.js"></script>
+  <script src="controllers/Nav.js"></script>
 </body>
 </html>
