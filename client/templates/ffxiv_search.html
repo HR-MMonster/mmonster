@@ -5,69 +5,78 @@
   <div class="row">
     <section class="col-sm-3">
       <h3>Jobs</h3>
-      <label for="main">Main Job</label><br />
-      <div ng-repeat="job in ffxivSearchCtrl.jobs">
-        <input type="radio" name="main" value="{{job}}" ng-model="ffxivSearchCtrl.profile.main"> {{job}}
+      <div class="field">
+        <label for="main">Main Job</label><br />
+        <div ng-repeat="job in ffxivSearchCtrl.jobs">
+          <input type="radio" name="main" value="{{job}}" ng-model="ffxivSearchCtrl.profile.main"> {{job}}
+        </div>
       </div>
     </section>
 
     <section class="col-sm-9">
       <h3>Communication, Availability</h3>
+      <div class="field">
+        <label for="server">Server</label>
+        <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
+          <option value="">Any Server</option>
+          <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="mic">Has microphone and voice comm's software</label>
+        <input type="checkbox" name="mic" id="mic" ng-model="ffxivSearchCtrl.profile.mic" />
+      </div>
 
-      <label for="server">Server</label>
-      <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
-        <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
-      </select>
-      <br />
+      <div class="field">
+        <label for="startTime">Start Time</label>
+        <rzslider
+        rz-slider-model="ffxivSearchCtrl.profile.startTime"
+        rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+      </div>
 
-      <label for="mic">Has microphone and voice comm's software</label>
-      <input type="checkbox" name="mic" id="mic" ng-model="ffxivSearchCtrl.profile.mic" />
-      <br />
-
-      <label for="startTime">Start Time</label>
-      <rzslider
-      rz-slider-model="ffxivSearchCtrl.profile.startTime"
-      rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
-      <br />
-
-      <label for="endTime">End Time</label>
-      <rzslider
-      rz-slider-model="ffxivSearchCtrl.profile.endTime"
-      rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
-      <br />
+      <div class="field">
+        <label for="endTime">End Time</label>
+        <rzslider
+        rz-slider-model="ffxivSearchCtrl.profile.endTime"
+        rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+      </div>
     </section>
   </div>
 
   <section>
     <h3>Experience</h3>
+    <div class="field">
+      <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
+      <input type="text" ng-model="ffxivSearchCtrl.profile.dps"><br />
+    </div>
 
-    <label for="dps">Dummy DPS (Incl. food, pots, party buff)</label>
-    <input type="text" ng-model="ffxivSearchCtrl.profile.dps"><br />
-
-    <label for="main">Cleared Fights</label><br />
-    <div class="row">
-      <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
-        <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+    <div class="field">
+      <label for="main">Cleared Fights</label><br />
+      <div class="row">
+        <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
+          <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+        </div>
       </div>
     </div>
-    <br />
   </section>
 
-  <a href="#" class="button" ng-click="ffxivSearchCtrl.search()">RUN SEARCH</a>
+  <a href="#" class="button" ng-click="ffxivSearchCtrl.search()">Search</a>
 
-  <section>
+  <section class="searchresults">
     <h3>Results</h3>
-    <div ng-repeat="user in ffxivSearchCtrl.users.data" class="playercard">
-    <img ng-src="{{user.user.photo}}" alt="">
-      <!-- <span>{{user}}</span><br> -->
-      <span>User: {{user._id}}</span><br>
-      <!-- <span>{{user.gameName}}</span><br> -->
-      <!-- <span>{{user.ign}}</span><br> -->
-      <span>Main Job: {{user.main}}</span><br>
-      <span>Server: {{user.server}}</span><br>
-      <span>Dummy DPS: {{user.dps}}</span><br>
-      <span>Start Time: {{user.user.startTime}}</span><br>
-      <span>End Time: {{user.user.endTime}}</span><br>
+    <div ng-repeat="user in ffxivSearchCtrl.users.data" class="col-sm-6">
+      <a ng-href="/pages/userprofile_public.html#{{user.user._id}}">
+        <div class="playercard clearfix">
+          <img ng-src="{{user.user.photo}}" alt="">
+          <div class="info">
+            <p>{{user.ign}}</p>
+            <p>{{user.main}}</p>
+            <p>{{user.server}}</p>
+            <p>DPS: {{user.dps}}</p>
+            <p>Available: {{user.user.startTime}}:00 - {{user.user.endTime}}:00</p>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 </div>

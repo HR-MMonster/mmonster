@@ -60,7 +60,8 @@
                 +--- /:id
                     |--- GET
                     |--- DELETE //TODO
-                    |___ PUT - session required  //TODO
+                    |___ PUT - session required
+
     |
     +--- /characterProfiles
         |___ GET

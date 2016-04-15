@@ -1,0 +1,75 @@
+<div class="game-profile ffxiv-profile">
+<h1>FFXIV Info</h1>
+
+  <section>
+    <div class="field">
+      <label for="servergroupname">Group Name</label>
+      <input type="text" id="servergroupname" name="servergroupname" ng-model="FFXIVGroupCtrl.profile.servergroupname">
+    </div>
+
+    <div class="field">
+      <label for="profileLink">Link to Lodestone Profile</label>
+      <input type="url" id="profileLink" name="profileLink" ng-model="FFXIVGroupCtrl.profile.profileLink">
+    </div>
+
+    <div class="field">
+      <label for="summary">Summary</label>
+      <textarea id="ffxivSummary" name="ffxivSummary" ng-model="FFXIVGroupCtrl.profile.summary"></textarea>
+    </div>
+
+  </section>
+
+
+  <section>
+    <h3>Jobs</h3>
+    <div class="row">
+      <!-- <div class="col-sm-6">
+        <label for="main">Main Job</label><br />
+        <div ng-repeat="job in FFXIVCtrl.jobs">
+          <input type="radio" name="main" value="{{job.name}}" ng-model="FFXIVCtrl.profile.main"> {{job.name}}
+        </div>
+      </div> -->
+
+
+      <div class="col-sm-6">
+        <label for="jobs">Jobs your group needs?</label><br />
+        <div ng-repeat="job in FFXIVGroupCtrl.jobs">
+          <input type="checkbox" name="jobs" value="{{job.model}}" ng-model="FFXIVGroupCtrl.profile[job.model]"> {{job.name}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Communication, Availability</h3>
+    <div class="field">
+      <label for="server">Server</label>
+      <select id="server" name="server" ng-model="FFXIVGroupCtrl.profile.server">
+        <option ng-repeat="s in FFXIVGroupCtrl.servers" value="{{s}}">{{s}}</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="mic">Has microphone and voice comm's software</label>
+      <input type="checkbox" name="mic" id="mic" ng-model="FFXIVGroupCtrl.profile.mic" />
+    </div>
+  </section>
+
+
+  <section>
+    <h3>Experience</h3>
+    <div class="field">
+      <label for="dps">Minimum Dummy DPS (please enter a number)</label>
+      <input type="text" ng-model="FFXIVGroupCtrl.profile.dps"><br />
+    </div>
+
+    <div class="field">
+      <label for="main">Cleared Fights</label><br />
+      <div ng-repeat="fight in FFXIVGroupCtrl.fights" class="col-sm-6">
+        <input type="checkbox" name="clears" ng-model= "FFXIVGroupCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+      </div>
+    </div>
+    <a class="button" href="#" ng-click="FFXIVGroupCtrl.update()">Save Profile Changes</a>
+  </section>
+</div>
+
+

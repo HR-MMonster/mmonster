@@ -12,18 +12,18 @@
       </div>
       <ul class="nav navbar-nav">
         <li><a href="/pages/playerSearch.html">Search</a></li>
-        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
-        <li><a href="/pages/playerSignin.html">Log In</a></li>
+        <li><a href="/pages/groupprofile_edit.html">Profile</a></li>
+        <li><a href="/pages/groupSignin.html">Log In</a></li>
       </ul>
     </div>
   </div>
 </nav>
-<body ng-app="app.PlayerProfile">
+<body ng-app="app.GroupProfile">
   <div class="container">
     <div class="userinfo col-sm-4">
-      <div class="user-profile clearfix" ng-controller="ProfileController as ProfileCtrl">
+      <div class="user-profile clearfix" ng-controller="GroupProfileController as ProfileCtrl">
         <img ng-src="{{ProfileCtrl.profile.photo}}" />
-        <p>Name: {{ProfileCtrl.profile.username}}</p>
+        <p>Name: {{ProfileCtrl.profile.groupname}}</p>
         <p>Location: {{ProfileCtrl.profile.location}}</p>
         <p>Email: {{ProfileCtrl.profile.email}}</p>
         <h4>Availability:</h4>
@@ -39,11 +39,11 @@
     </div>
 
 
-    <ffxiv-public class="col-sm-8" />
+    <ffxiv-group-public class="col-sm-8" />
   </div>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
   <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
-  <script src="../controllers/Profile.js"></script>
+  <script src="../controllers/GroupProfile.js"></script>
 </body>
 </html>

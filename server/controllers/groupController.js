@@ -253,7 +253,7 @@ var seedGroups = function() {
       } else if (groups.length) {
         console.log('already groups in database');
       } else {
-        var groups = dataGen.generateGroups(20);
+        var groups = dataGen.generateGroups(350);
         Group.create(groups, function(err, groups) {
             if (err) {
               console.error('error seeding groups:', err);

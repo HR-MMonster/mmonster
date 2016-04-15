@@ -12,15 +12,15 @@
       </div>
       <ul class="nav navbar-nav">
         <li><a href="/pages/playerSearch.html">Search</a></li>
-        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
-        <li><a href="/pages/playerSignin.html">Log In</a></li>
+        <li><a href="/pages/groupprofile_edit.html">Profile</a></li>
+        <li><a href="/pages/groupSignin.html">Log In</a></li>
       </ul>
     </div>
   </div>
 </nav>
-<body ng-app="app.PlayerProfile">
+<body ng-app="app.GroupProfile">
   <div class="container">
-    <div class="user-profile col-sm-4" ng-controller="ProfileController as ProfileCtrl">
+    <div class="user-profile col-sm-4" ng-controller="GroupProfileController as ProfileCtrl">
       <div class="profile-image" ng-style="{'background-image': 'url(' + ProfileCtrl.profile.photo + ')'}">
         <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
           Update
@@ -30,7 +30,7 @@
         <h4>Basic Info:</h4>
         <div class="field">
           <label for="realname">Name</label>
-          <input type="text" id="username" ng-model='ProfileCtrl.profile.username'>
+          <input type="text" id="groupname" ng-model='ProfileCtrl.profile.groupname'>
         </div>
         <div class="field">
           <label for="location">Location</label>
@@ -58,11 +58,11 @@
 
     <!-- <div class="clearfix"></div> -->
 
-    <ffxiv-edit class="col-sm-8" />
+    <ffxiv-group-edit class="col-sm-8" />
   </div>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
   <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
-  <script src="../controllers/Profile.js"></script>
+  <script src="../controllers/GroupProfile.js"></script>
 </body>
 </html>

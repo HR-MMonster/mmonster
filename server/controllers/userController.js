@@ -218,14 +218,14 @@ var seedUsers = function() {
       } else if (users.length) {
         console.log('already users in database');
       } else {
-        var newUsers = dataGen.generateUsers(20);
+        var newUsers = dataGen.generateUsers(350);
         User.create(newUsers, function(err, users) {
-        if (err) {
-          console.error('<><> Error seeding users:', err);
-          return;
-        }
-        console.log('<><> success seeding users');
-        // seedCharProfiles(testCharProfiles);
+          if (err) {
+            console.error('<><> Error seeding users:', err);
+            return;
+          }
+          console.log('<><> success seeding users');
+          // seedCharProfiles(testCharProfiles);
         });
       }
     })
