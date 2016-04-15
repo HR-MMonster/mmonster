@@ -2,9 +2,7 @@
 //nested
 
 
-angular.module('app.characterSearch', ['rzModule'])
-
-.controller('ffxivSearchChar', function ($window, $location, $http) {
+app.controller('ffxivSearchChar', function ($window, $location, $http) {
   var ffxivSearchCtrl = this;
   ffxivSearchCtrl.profile = {
     startTime: 0,
