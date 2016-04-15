@@ -1,6 +1,4 @@
-angular.module('playerAuth', [])
-
-.controller('PlayerAuthController', function ($window, $location, Auth) {
+app.controller('PlayerAuthController', function ($window, $location, Auth) {
   // console.log('can you see this?');
   var PlayerAuthCtrl = this;
   PlayerAuthCtrl.player = {};
@@ -30,7 +28,7 @@ angular.module('playerAuth', [])
         $window.localStorage.setItem('com.app', resp);
         $window.localStorage.setItem('id', resp.data._id);
         $window.location.assign('/');
-        
+
         // $location.path('/index.html');
       })
       .catch(function (error) {
