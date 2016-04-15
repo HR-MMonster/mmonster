@@ -101,32 +101,48 @@ angular.module('app.GroupProfile', ['ngFileUpload', 'rzModule'])
     GroupProfile.update(ProfileCtrl.profile);
   };
 }])
-.directive('ffxivEdit', function() {
+.directive('ffxivGroupEdit', function() {
   return {
     restrict: 'E',
-    templateUrl: '../templates/ffxiv_edit.html',
-    controller: 'FFXIVController',
-    controllerAs: 'FFXIVCtrl'
+    templateUrl: '../templates/ffxiv_group_edit.html',
+    controller: 'FFXIVGroupController',
+    controllerAs: 'FFXIVGroupCtrl'
   };
 })
-.directive('ffxivPublic', function() {
+.directive('ffxivGroupPublic', function() {
   return {
     restrict: 'E',
-    templateUrl: '../templates/ffxiv_public.html',
-    controller: 'FFXIVController',
-    controllerAs: 'FFXIVCtrl'
+    templateUrl: '../templates/ffxiv_group_public.html',
+    controller: 'FFXIVGroupController',
+    controllerAs: 'FFXIVGroupCtrl'
   };
 })
-.controller('FFXIVController', function(GroupProfile) {
-  var FFXIVCtrl = this;
-  FFXIVCtrl.profile = GroupProfile.getFFXIV().then(function(profile) {
+.controller('FFXIVGroupController', function(GroupProfile) {
+  var FFXIVGroupCtrl = this;
+  FFXIVGroupCtrl.profile = GroupProfile.getFFXIV().then(function(profile) {
     console.log(profile);
-    FFXIVCtrl.profile = profile;
+    FFXIVGroupCtrl.profile = profile;
   });
 
-  FFXIVCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
+  FFXIVGroupCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
 
-  FFXIVCtrl.fights = [
+  FFXIVGroupCtrl.jobs = [
+    {name: 'Paladin', model: 'Paladin'},
+    {name: 'Warrior', model: 'Warrior'},
+    {name: 'Dark Knight', model: 'DarkKnight'},
+    {name: 'White Mage', model: 'WhiteMage'},
+    {name: 'Scholar', model: 'Scholar'},
+    {name: 'Astrologian', model: 'Astrologian'},
+    {name: 'Monk', model: 'Monk'},
+    {name: 'Dragoon', model: 'Dragoon'},
+    {name: 'Ninja', model: 'Ninja'},
+    {name: 'Black Mage', model: 'BlackMage'},
+    {name: 'Summoner', model: 'Summoner'},
+    {name: 'Bard', model: 'Bard'},
+    {name: 'Machinist', model: 'Machinist'}
+  ];
+
+  FFXIVGroupCtrl.fights = [
   {
     name: 'The Binding Coil of Bahamut: Turn 1',
     abr: 'T1'
@@ -213,11 +229,11 @@ angular.module('app.GroupProfile', ['ngFileUpload', 'rzModule'])
   },
   ];
 
-  FFXIVCtrl.test = function() {
-    console.log(FFXIVCtrl.profile);
+  FFXIVGroupCtrl.test = function() {
+    console.log(FFXIVGroupCtrl.profile);
   };
 
-  FFXIVCtrl.update = function() {
-    Profile.updateFFXIV(FFXIVCtrl.profile);
+  FFXIVGroupCtrl.update = function() {
+    Profile.updateFFXIV(FFXIVGroupCtrl.profile);
   };
 });
