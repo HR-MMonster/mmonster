@@ -64,6 +64,7 @@ profileRouter
   .route('/groups/:gid/photos')
   .post(util.restrictGroupOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
 
+
 profileRouter
   .route('/groups/:gid/groupProfiles')
   .get(groupController.findGroupProfilesById)

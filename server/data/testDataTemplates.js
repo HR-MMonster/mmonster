@@ -603,8 +603,8 @@ function generateUsers(len) {
   return users;
 }
 
-console.log(generateCharProfiles(2, 'FFXIV'));
-console.log(generateUsers(2));
+// console.log(generateCharProfiles(2, 'FFXIV'));
+// console.log(generateUsers(2));
 
 
 function generateGroupProfiles(len, gameName) {
@@ -640,6 +640,7 @@ function generateGroups(len) {
     group.name = names[randomIndex(names.length)];
     group.email = group.name.toLowerCase() + '@me.com';
     group.photo = randomProfilePhotos[randomIndex(randomProfilePhotos.length)];
+
     group.startTime = Math.floor(Math.random() * 23);
     group.endTime = ((group.startTime + Math.ceil(Math.random() * 7)) + 23) % 23;
     groups.push(group);
@@ -659,5 +660,6 @@ module.exports = {
 // console.log(generateGroupProfiles(2, 'FFXIV'));
 // console.log(generateGroups(2));
 // console.log(randomUsernames.length);
+
 
 

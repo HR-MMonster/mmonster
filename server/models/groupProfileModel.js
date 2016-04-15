@@ -9,12 +9,6 @@ var groupProfileSchema = new Schema({
   },
   dps: Number,
   mic: Boolean,
-  server: String,
-  group: {
-    type: Schema.Types.ObjectId,
-    ref: 'Group'
-  },
-  summary: String,
   serverGroupName: String,
   Paladin: Boolean,
   Warrior: Boolean,
