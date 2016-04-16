@@ -1,6 +1,6 @@
-angular.module('app.groupSearch', ['rzModule'])
+// angular.module('app.groupSearch', ['rzModule'])
 
-.controller('ffxivSearchGroup', function ($window, $location, $http) {
+app.controller('ffxivSearchGroup', function ($window, $location, $http) {
   var ffxivSearchCtrl = this;
   ffxivSearchCtrl.profile = {
     startTime: 0,
@@ -10,7 +10,6 @@ angular.module('app.groupSearch', ['rzModule'])
 
   ffxivSearchCtrl.search = function() {
     var query = ffxivSearchCtrl.profile;
-    //reformat the object according to DB team's standard
     //sanitize the falses -> loop through the user object and set any falses to undefined
     console.log('QUERY 1: ', query);
     for(var prop in query) {
@@ -27,7 +26,7 @@ angular.module('app.groupSearch', ['rzModule'])
       params: query
     })
     .then(function(groups) {
-      // console.log('inside then');
+      console.log('inside then');
       console.log(groups.data);
       ffxivSearchCtrl.groups = groups;
       // console.log(ffxivSearchCtrl.groups);

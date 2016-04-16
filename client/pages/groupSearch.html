@@ -1,33 +1,40 @@
-<html ng-app="app.groupSearch" ng-controller="ffxivSearchGroup as ffxivSearchCtrl">
-<head>
-  <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../styles/groupsearch.css">
-  <link rel="stylesheet" href="../lib/angularjs-slider/dist/rzslider.min.css">
-</head>
+<!-- <html ng-app="app.groupSearch" ng-controller="ffxivSearchGroup as ffxivSearchCtrl"> -->
+<html>
+  <head>
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/groupsearch.css">
+    <link rel="stylesheet" href="../lib/angularjs-slider/dist/rzslider.min.css">
+  </head>
 
-<body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">MMOnster</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="/pages/groupSearch.html">Search</a></li>
-        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
-        <li><a href="/pages/groupSignin.html">Log In</a></li>
-      </ul>
+  <body>
+  <body ng-app="app">
+    <navbar></navbar>
+    <div class="container" ng-controller="ffxivSearchGroup as ffxivSearchCtrl">
+      <!-- nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">MMOnster</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="/pages/groupSearch.html">Search</a></li>
+            <li><a href="/pages/userprofile_edit.html">Profile</a></li>
+            <li><a href="/pages/groupSignin.html">Log In</a></li>
+          </ul>
+        </div>
+      </nav> -->
+      <ffxiv-search-group-temp></ffxiv-search-group-temp>
     </div>
-  </div>
-</nav>
-<div class="container">
-<ffxiv-search-group-temp />
-</ffxiv-search-group-temp>
 
+    <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="../lib/angular/angular.min.js"></script>
-<script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
-<script src="../controllers/searchCtrls.js"></script>
-</body>
+    <script src="../lib/angular/angular.min.js"></script>
+    <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
+    <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
+    <script src="../app.js"></script>
+    <script src="../controllers/Nav.js"></script>
+    <script src="../controllers/groupSearchCtrls.js"></script>
+  </body>
 
 </html>
 
