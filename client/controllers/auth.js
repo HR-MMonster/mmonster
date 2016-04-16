@@ -1,8 +1,7 @@
 /**
  * Replaces groupAuth and playerAuth.
  */
-angular.module('auth', [])
-  .controller('AuthTabController', function($window, $location) {
+app.controller('AuthTabController', function($window, $location) {
     var AuthTabCtrl = this;
     AuthTabCtrl.group = {};
 

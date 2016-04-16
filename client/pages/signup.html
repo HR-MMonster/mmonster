@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="auth">
+<html lang="en" ng-app="app">
     <head>
         <meta charset="utf-8" />
         <title>MMONSTER | Account Sign Up</title>
         <link type="text/css" href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></link>
         <script src="../lib/angular/angular.min.js"></script>
+        <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
+        <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
+        <script src="../app.js"></script>
+        <script src="../controllers/Nav.js"></script>
         <script src="../controllers/auth.js"></script>
     </head>
     <body ng-controller="AuthTabController as AuthTabCtrl">
+        <navbar></navbar>
         <div class="container" id='signup'>
             <div class="col-md-6">
                 <h1>Account Sign Up</h1>
