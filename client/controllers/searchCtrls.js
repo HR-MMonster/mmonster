@@ -2,20 +2,20 @@
 //nested
 
 
-angular.module('app.characterSearch', ['rzModule'])
-
-.controller('ffxivSearchChar', function ($window, $location, $http) {
+app.controller('ffxivSearchChar', function ($window, $location, $http) {
   var ffxivSearchCtrl = this;
   ffxivSearchCtrl.profile = {
     startTime: 0,
     endTime: 23
   };
 
-
-  // ffxivSearchCtrl.test = function() {
-  //   console.log(ffxivSearchCtrl.profile)
-  //   console.log('inside test');
-  // };
+  var collapseButton;
+  $(document).ready(function() {
+    collapseButton = $('#collapse-button');
+    setTimeout(function() {
+      collapseButton.click();
+    }, 500);
+  });
 
   ffxivSearchCtrl.search = function() {
     //capture the user profile stats from a button click
@@ -41,6 +41,7 @@ angular.module('app.characterSearch', ['rzModule'])
       console.log(users.data);
       ffxivSearchCtrl.users = users;
       // console.log(ffxivSearchCtrl.users);
+      collapseButton.click();
     })
     .catch(function (error) {
       console.log('inside catch')
@@ -48,6 +49,7 @@ angular.module('app.characterSearch', ['rzModule'])
     });
       //angular get request with query
     // receive response and display directly to html
+
   };
 
 
@@ -147,7 +149,6 @@ angular.module('app.characterSearch', ['rzModule'])
   }
   ];
 
-  ffxivSearchCtrl.search()
 })
 
 .directive('ffxivSearchTemp', function() {
@@ -157,4 +158,4 @@ angular.module('app.characterSearch', ['rzModule'])
     controller: 'ffxivSearchChar',
     controllerAs: 'ffxivSearchCtrl'
   };
-})
+});

@@ -4,9 +4,7 @@ angular.module('groupAuth', [])
   
   var GroupAuthCtrl = this;
   GroupAuthCtrl.group = {};
-
-
-
+  
   GroupAuthCtrl.signin = function () {
     Auth.signin(GroupAuthCtrl.group)
       .then(function (resp) {
@@ -37,7 +35,7 @@ angular.module('groupAuth', [])
         console.error(error);
       });
   };
-});
+})
 
 
 .factory('Auth', function ($http, $location, $window) {

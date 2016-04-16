@@ -4,21 +4,8 @@
   <link rel="stylesheet" href="../lib/angularjs-slider/dist/rzslider.min.css">
   <link rel="stylesheet" href="../styles/userprofile.css">
 </head>
-<body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">MMOnster</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="/pages/playerSearch.html">Search</a></li>
-        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
-        <li><a href="/pages/playerSignin.html">Log In</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<body ng-app="app.PlayerProfile">
+<body ng-app="app">
+  <navbar></navbar>
   <div class="container">
     <div class="user-profile col-sm-4" ng-controller="ProfileController as ProfileCtrl">
       <div class="profile-image" ng-style="{'background-image': 'url(' + ProfileCtrl.profile.photo + ')'}">
@@ -30,7 +17,7 @@
         <h4>Basic Info:</h4>
         <div class="field">
           <label for="realname">Name</label>
-          <input type="text" id="username" ng-model='ProfileCtrl.profile.username'>
+          <input type="text" id="name" ng-model='ProfileCtrl.profile.name'>
         </div>
         <div class="field">
           <label for="location">Location</label>
@@ -56,13 +43,13 @@
       </section>
     </div>
 
-    <!-- <div class="clearfix"></div> -->
-
-    <ffxiv-edit class="col-sm-8" />
+    <ffxiv-edit class="col-sm-8"></ffxiv-edit>
   </div>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
   <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
+  <script src="../app.js"></script>
+  <script src="../controllers/Nav.js"></script>
   <script src="../controllers/Profile.js"></script>
 </body>
 </html>

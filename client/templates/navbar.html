@@ -1,0 +1,13 @@
+<nav class="navbar navbar-default" ng-app="app.Navbar" ng-controller="NavController as NavCtrl">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">MMOnster</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/pages/playerSearch.html">Search</a></li>
+      <li ng-show="NavCtrl.isLoggedIn"><a href="/pages/userprofile_edit.html">Profile</a></li>
+      <li ng-hide="NavCtrl.isLoggedIn"><a href="/pages/playerSignin.html">Log In</a></li>
+      <li ng-show="NavCtrl.isLoggedIn"><a href="#" ng-click="NavCtrl.logOut()">Logout</a></li>
+    </ul>
+  </div>
+</nav>
