@@ -1,10 +1,6 @@
-//Need to restructure query object to latest notation for user objects
-//nested
+// angular.module('app.groupSearch', ['rzModule'])
 
-
-angular.module('app.characterSearch', ['rzModule'])
-
-.controller('ffxivSearchChar', function ($window, $location, $http) {
+app.controller('ffxivSearchGroup', function ($window, $location, $http) {
   var ffxivSearchCtrl = this;
   ffxivSearchCtrl.profile = {
     startTime: 0,
@@ -12,15 +8,8 @@ angular.module('app.characterSearch', ['rzModule'])
   };
 
 
-  // ffxivSearchCtrl.test = function() {
-  //   console.log(ffxivSearchCtrl.profile)
-  //   console.log('inside test');
-  // };
-
   ffxivSearchCtrl.search = function() {
-    //capture the user profile stats from a button click
     var query = ffxivSearchCtrl.profile;
-    //reformat the object according to DB team's standard
     //sanitize the falses -> loop through the user object and set any falses to undefined
     console.log('QUERY 1: ', query);
     for(var prop in query) {
@@ -33,17 +22,17 @@ angular.module('app.characterSearch', ['rzModule'])
     // post request with query object as body
     return $http({
       method: 'GET',
-      url: '../profile/characterProfiles',
+      url: '../profile/groupProfiles',
       params: query
     })
-    .then(function(users) {
+    .then(function(groups) {
       console.log('inside then');
-      console.log(users.data);
-      ffxivSearchCtrl.users = users;
-      // console.log(ffxivSearchCtrl.users);
+      console.log(groups.data);
+      ffxivSearchCtrl.groups = groups;
+      // console.log(ffxivSearchCtrl.groups);
     })
     .catch(function (error) {
-      console.log('inside catch')
+      console.log('inside catch');
       console.error(error);
     });
       //angular get request with query
@@ -150,11 +139,11 @@ angular.module('app.characterSearch', ['rzModule'])
   ffxivSearchCtrl.search()
 })
 
-.directive('ffxivSearchTemp', function() {
+.directive('ffxivSearchGroupTemp', function() {
   return {
     restrict: 'E',
-    templateUrl: '../templates/ffxiv_search.html',
-    controller: 'ffxivSearchChar',
+    templateUrl: '../templates/ffxiv_group_search.html',
+    controller: 'ffxivSearchGroup',
     controllerAs: 'ffxivSearchCtrl'
   };
 })

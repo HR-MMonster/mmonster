@@ -13,6 +13,23 @@
           Update
         </span>
       </div>
+
+      <ul class="nav navbar-nav">
+        <li><a href="/pages/playerSearch.html">Search</a></li>
+        <li><a href="/pages/userprofile_edit.html">Profile</a></li>
+        <li><a href="/pages/playerSignin.html">Log In</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<body ng-app="app.PlayerProfile">
+  <div class="container">
+    <div class="user-profile col-sm-4" ng-controller="ProfileController as ProfileCtrl">
+      <div class="profile-image" ng-style="{'background-image': 'url(' + ProfileCtrl.profile.photo + ')'}">
+        <span class="btn btn-primary btn-file" ngf-select="ProfileCtrl.upload($file)" name="file" >
+          Update
+        </span>
+      </div>
       <section>
         <h4>Basic Info:</h4>
         <div class="field">
@@ -43,7 +60,10 @@
       </section>
     </div>
 
-    <ffxiv-edit class="col-sm-8"></ffxiv-edit>
+
+    <!-- <div class="clearfix"></div> -->
+
+    <ffxiv-edit class="col-sm-8" />
   </div>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
