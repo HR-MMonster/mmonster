@@ -4,17 +4,7 @@ angular.module('groupAuth', [])
   
   var GroupAuthCtrl = this;
   GroupAuthCtrl.group = {};
-
-  GroupAuthCtrl.tab = 'user';
-
-  GroupAuthCtrl.isSet = function(tab) {
-    return GroupAuthCtrl.tab === tab;
-  };
-
-  GroupAuthCtrl.setTab = function(newTab) {
-    GroupAuthCtrl.tab = newTab;
-  };
-
+  
   GroupAuthCtrl.signin = function () {
     Auth.signin(GroupAuthCtrl.group)
       .then(function (resp) {
