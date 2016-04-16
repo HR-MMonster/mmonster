@@ -33,7 +33,7 @@ angular.module('app.groupSearch', ['rzModule'])
       // console.log(ffxivSearchCtrl.groups);
     })
     .catch(function (error) {
-      console.log('inside catch')
+      console.log('inside catch');
       console.error(error);
     });
       //angular get request with query
@@ -143,7 +143,7 @@ angular.module('app.groupSearch', ['rzModule'])
 .directive('ffxivSearchGroupTemp', function() {
   return {
     restrict: 'E',
-    templateUrl: '../templates/ffxiv_search.html',
+    templateUrl: '../templates/ffxiv_group_search.html',
     controller: 'ffxivSearchGroup',
     controllerAs: 'ffxivSearchCtrl'
   };
