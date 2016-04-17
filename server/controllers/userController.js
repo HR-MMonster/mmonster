@@ -79,7 +79,7 @@ exports.createUser = function(req, res, next) {
 exports.findUser = function(req, res, next) {
   var user = req.body;
   var userID = req.params.uid;
-  findUser({_id: userID})
+  findUser({_id: userID}, {password: 0, salt: 0})
     .then(function(user) {
       if (!user) {
         next(new Error('User ' + userID + ' not found'));
@@ -93,7 +93,7 @@ exports.findUser = function(req, res, next) {
 };
 
 exports.findUsers = function(req, res, next) {
-  findUsers()
+  findUsers({}, {password: 0, salt: 0})
     .then(function(users) {
       if (!users) {
         next(new Error('No users found'));
@@ -113,7 +113,7 @@ exports.findUsers = function(req, res, next) {
 exports.updateUser = function(req, res, next) {
   var updates = req.body;
   var userID = req.params.uid;
-  findUserAndUpdate({_id: userID}, updates)
+  findUserAndUpdate({_id: userID}, updates, {new: true, fields: '-password -salt'})
     .then(function (user) {
     if (!user) {
       next( new Error('User not found'));
@@ -180,7 +180,7 @@ exports.updateCharacterProfile = function(req, res, next) {
   var characterID = req.params.cpid;
   var updates = req.body;
 
-  findCharacterProfileAndUpdate({_id: characterID}, updates)
+  findCharacterProfileAndUpdate({_id: characterID}, updates, {new: true})
     .then(function(profile) {
       if (!profile) {
         next( new Error('Character profile not found'));
