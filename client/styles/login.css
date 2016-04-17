@@ -20,3 +20,8 @@ nav.navbar-default {
 .navbar-brand {
   font-size: 28px;
 }
+
+img.logo {
+  height: 40px;
+  transform: translateY(-25%);
+}

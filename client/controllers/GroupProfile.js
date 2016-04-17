@@ -1,5 +1,4 @@
-angular.module('app.GroupProfile', ['ngFileUpload', 'rzModule'])
-.factory('GroupProfile', function($http, $location, $window, Upload) {
+app.factory('GroupProfile', function($http, $location, $window, Upload) {
   var urlID = $location.absUrl().split('#');
   if (urlID.length > 1) {
     urlID = urlID[1].slice(1);
@@ -234,6 +233,6 @@ angular.module('app.GroupProfile', ['ngFileUpload', 'rzModule'])
   };
 
   FFXIVGroupCtrl.update = function() {
-    Profile.updateFFXIV(FFXIVGroupCtrl.profile);
+    GroupProfile.updateFFXIV(FFXIVGroupCtrl.profile);
   };
 });

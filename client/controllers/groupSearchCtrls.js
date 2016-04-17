@@ -7,13 +7,20 @@ app.controller('ffxivSearchGroup', function ($window, $location, $http) {
     endTime: 23
   };
 
+  var collapseButton;
+  $(document).ready(function() {
+    collapseButton = $('#collapse-button');
+    setTimeout(function() {
+      collapseButton.click();
+    }, 500);
+  });
 
   ffxivSearchCtrl.search = function() {
     var query = ffxivSearchCtrl.profile;
     //sanitize the falses -> loop through the user object and set any falses to undefined
     console.log('QUERY 1: ', query);
     for(var prop in query) {
-      if(query[prop] === false) {
+      if(query[prop] === false || query[prop] === '') {
         query[prop] = undefined;
       }
     }
@@ -30,6 +37,7 @@ app.controller('ffxivSearchGroup', function ($window, $location, $http) {
       console.log(groups.data);
       ffxivSearchCtrl.groups = groups;
       // console.log(ffxivSearchCtrl.groups);
+      collapseButton.click();
     })
     .catch(function (error) {
       console.log('inside catch');
@@ -135,8 +143,6 @@ app.controller('ffxivSearchGroup', function ($window, $location, $http) {
     abr: 'A8S'
   }
   ];
-
-  ffxivSearchCtrl.search()
 })
 
 .directive('ffxivSearchGroupTemp', function() {
@@ -146,4 +152,4 @@ app.controller('ffxivSearchGroup', function ($window, $location, $http) {
     controller: 'ffxivSearchGroup',
     controllerAs: 'ffxivSearchCtrl'
   };
-})
+});

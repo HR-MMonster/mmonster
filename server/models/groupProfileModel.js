@@ -7,9 +7,14 @@ var groupProfileSchema = new Schema({
     type: String,
     required: true
   },
+  group: {
+    type: Schema.Types.ObjectId,
+    ref: 'Group'
+  },
+  summary: String,
   dps: Number,
-  mic: Boolean,
   serverGroupName: String,
+  server: String,
   Paladin: Boolean,
   Warrior: Boolean,
   DarkKnight: Boolean,

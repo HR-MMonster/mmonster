@@ -2,7 +2,7 @@
   <h1>FFXIV Group Settings</h1>
 
   <section>
-    <p>Group Name: {{FFXIVGroupCtrl.profile.servergroupname}}</p>
+    <p>Group Name: {{FFXIVGroupCtrl.profile.serverGroupName}}</p>
   </section>
 
   <section>
@@ -12,14 +12,6 @@
   <section>
     <h3>Jobs</h3>
     <div class="row">
-     <!--  <div class="col-sm-6">
-        <label for="main">Main Job</label><br />
-        <div ng-repeat="job in FFXIVCtrl.jobs">
-          <input type="radio" name="main" value="{{job.name}}" ng-model="FFXIVCtrl.profile.main" disabled="disabled"> {{job.name}}
-        </div>
-      </div> -->
-
-
       <div class="col-sm-6">
         <label for="jobs">Do you play these jobs?</label><br />
         <div ng-repeat="job in FFXIVGroupCtrl.jobs">
@@ -32,9 +24,6 @@
   <section>
     <h3>Communication, Availability</h3>
     <p>Server: {{FFXIVGroupCtrl.profile.server}}</p>
-    <br />
-    <label for="mic">Has microphone and voice comm's software</label>
-    <input type="checkbox" name="mic" id="mic" ng-model="FFXIVGroupCtrl.profile.mic" disabled="disabled"/>
   </section>
 
 

@@ -2,65 +2,81 @@
 
   <h1>Search for Group</h1>
 
-  <div class="row">
-    <section class="col-sm-3">
-      <h3>Jobs</h3>
-      <label for="jobs">Recruiting For</label><br />
-      <div ng-repeat="job in ffxivSearchCtrl.jobs">
-        <input type="checkbox" name="jobs" value="{{job}}" ng-model="ffxivSearchCtrl.profile.jobs[job]"> {{job}}
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1" id="collapse-button"><span class="glyphicon glyphicon-chevron-down"></span> Search Criteria</a>
+        </h4>
       </div>
-    </section>
+      <div id="collapse1" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div class="row">
+            <section class="col-sm-3">
+              <h3>Jobs</h3>
+              <label for="jobs">Recruiting For</label><br />
+              <div ng-repeat="job in ffxivSearchCtrl.jobs">
+                <input type="checkbox" name="jobs" value="{{job}}" ng-model="ffxivSearchCtrl.profile.jobs[job]"> {{job}}
+              </div>
+            </section>
 
-    <section class="col-sm-9">
-      <h3>Communication, Availability</h3>
+            <section class="col-sm-9">
+              <h3>Communication, Availability</h3>
 
-      <label for="server">Server</label>
-      <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
-        <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
-      </select>
-      <br />
+              <label for="server">Server</label>
+              <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
+                <option value="">Any Server</option>
+                <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
+              </select>
+              <br />
 
-      <label for="startTime">Group Start Time</label>
-      <rzslider
-      rz-slider-model="ffxivSearchCtrl.profile.startTime"
-      rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
-      <br />
+              <label for="startTime">Group Start Time</label>
+              <rzslider
+              rz-slider-model="ffxivSearchCtrl.profile.startTime"
+              rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+              <br />
 
-      <label for="endTime">Group End Time</label>
-      <rzslider
-      rz-slider-model="ffxivSearchCtrl.profile.endTime"
-      rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
-      <br />
-    </section>
-  </div>
+              <label for="endTime">Group End Time</label>
+              <rzslider
+              rz-slider-model="ffxivSearchCtrl.profile.endTime"
+              rz-slider-options="ffxivSearchCtrl.slider"></rzslider>
+              <br />
+            </section>
+          </div>
 
-  <section>
-    <h3>Group Experience</h3>
+          <section>
+            <h3>Group Experience</h3>
 
-    <label for="fights">Cleared Fights</label><br />
-    <div class="row">
-      <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
-        <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+            <label for="fights">Cleared Fights</label><br />
+            <div class="row">
+              <div ng-repeat="fight in ffxivSearchCtrl.fights" class="col-sm-6">
+                <input type="checkbox" name="clears" ng-model= "ffxivSearchCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+              </div>
+            </div>
+            <br />
+          </section>
+        </div>
       </div>
     </div>
-    <br />
-  </section>
+  </div>
 
-  <a href="#" class="button" ng-click="ffxivSearchCtrl.search()">RUN SEARCH</a>
 
-  <section>
+
+  <a href="#" class="button" ng-click="ffxivSearchCtrl.search()">Search</a>
+
+  <section class="searchresults">
     <h3>Results</h3>
-    <div ng-repeat="group in ffxivSearchCtrl.groups.data" class="groupcard">
-    <img ng-src="{{group.group.photo}}" alt="">
-      <!-- <span>{{group}}</span><br> -->
-      <span>Group: {{group._id}}</span><br>
-      <!-- <span>{{group.gameName}}</span><br> -->
-      <!-- <span>{{group.ign}}</span><br> -->
-      <span>Main Job: {{group.jobs}}</span><br>
-      <span>Server: {{group.server}}</span><br>
-      <span>Dummy DPS: {{group.dps}}</span><br>
-      <span>Start Time: {{group.group.startTime}}</span><br>
-      <span>End Time: {{group.group.endTime}}</span><br>
+    <div ng-repeat="group in ffxivSearchCtrl.groups.data" class="col-sm-6">
+      <a ng-href="/pages/groupprofile_public.html#{{group.group._id}}">
+        <div class="playercard clearfix">
+          <img ng-src="{{group.group.photo}}" alt="">
+          <div class="info">
+            <p>{{group.serverGroupName}}</p>
+            <p>{{group.server}}</p>
+            <p>Available: {{group.group.startTime}}:00 - {{group.group.endTime}}:00</p>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 </div>

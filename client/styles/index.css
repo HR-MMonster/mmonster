@@ -26,6 +26,7 @@ h1 {
 
 nav.navbar-default {
   background-color: rgba(100, 100, 100, 0.5);
+  /*background-color: rgba(255, 255, 255, 0.5);*/
   border: none;
   border-radius: 0;
 }
@@ -47,4 +48,9 @@ nav.navbar-default {
   margin: 30px auto 0;
   padding: 12px 20px;
   font-size: 16px;
+}
+
+img.logo {
+  height: 40px;
+  transform: translateY(-25%);
 }
