@@ -46,6 +46,14 @@ nav.navbar-default {
   font-size: 28px;
 }
 
+img.logo {
+  height: 40px;
+  width: auto;
+  transform: translateY(-25%);
+  border: none;
+  margin: 0;
+}
+
 /* Query Styles */
 .rz-bubble:after {
   content: ":00";
