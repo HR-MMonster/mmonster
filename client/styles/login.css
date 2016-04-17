@@ -25,3 +25,17 @@ img.logo {
   height: 40px;
   transform: translateY(-25%);
 }
+
+/* Form styles */
+.nav-pills {
+  margin-bottom: 20px
+}
+
+input {
+  margin-right: 20px;
+}
+
+button.btn {
+  margin: 10px 0;
+  display: block;
+}
