@@ -233,6 +233,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
   };
 
   FFXIVGroupCtrl.update = function() {
-    Profile.updateFFXIV(FFXIVGroupCtrl.profile);
+    GroupProfile.updateFFXIV(FFXIVGroupCtrl.profile);
   };
 });
