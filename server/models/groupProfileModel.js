@@ -14,6 +14,7 @@ var groupProfileSchema = new Schema({
   summary: String,
   dps: Number,
   serverGroupName: String,
+  server: String,
   Paladin: Boolean,
   Warrior: Boolean,
   DarkKnight: Boolean,
