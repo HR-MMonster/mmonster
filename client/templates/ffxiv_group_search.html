@@ -63,7 +63,7 @@
 
   <a href="#" class="button" ng-click="ffxivSearchCtrl.search()">Search</a>
 
-  <section>
+  <section class="searchresults">
     <h3>Results</h3>
     <div ng-repeat="group in ffxivSearchCtrl.groups.data" class="col-sm-6">
       <a ng-href="/pages/groupprofile_public.html#{{group.group._id}}">

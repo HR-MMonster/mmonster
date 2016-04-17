@@ -1,0 +1,22 @@
+{
+  "name": "mmonster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/travisbaratcart/mmonster.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/travisbaratcart/mmonster/issues"
+  },
+  "homepage": "https://github.com/travisbaratcart/mmonster#readme",
+  "devDependencies": {
+    "karma-jasmine": "^0.3.8"
+  }
+}
