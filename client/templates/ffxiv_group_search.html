@@ -25,6 +25,7 @@
 
               <label for="server">Server</label>
               <select id="server" name="server" ng-model="ffxivSearchCtrl.profile.server">
+                <option value="">Any Server</option>
                 <option ng-repeat="s in ffxivSearchCtrl.servers" value="{{s}}">{{s}}</option>
               </select>
               <br />
