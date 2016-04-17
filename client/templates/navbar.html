@@ -4,9 +4,10 @@
       <a class="navbar-brand" href="/">MMOnster</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/pages/playerSearch.html">Search</a></li>
-      <li ng-show="NavCtrl.isLoggedIn"><a href="/pages/userprofile_edit.html">Profile</a></li>
-      <li ng-hide="NavCtrl.isLoggedIn"><a href="/pages/playerSignin.html">Log In</a></li>
+      <li><a href="/pages/playerSearch.html">Search For Players</a></li>
+      <li><a href="/pages/groupSearch.html">Search For Groups</a></li>
+      <li ng-show="NavCtrl.isLoggedIn"><a ng-href="{{NavCtrl.profileLink}}">Profile</a></li>
+      <li ng-hide="NavCtrl.isLoggedIn"><a href="/pages/signin.html">Log In</a></li>
       <li ng-show="NavCtrl.isLoggedIn"><a href="#" ng-click="NavCtrl.logOut()">Logout</a></li>
     </ul>
   </div>

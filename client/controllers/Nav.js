@@ -5,6 +5,13 @@ app.controller('NavController', function($window, $http) {
 
   NavCtrl.isLoggedIn = id ? true : false;
 
+  var accountType = $window.localStorage.getItem('type');
+  if (accountType === 'user') {
+    NavCtrl.profileLink = "/pages/userprofile_edit.html";
+  } else {
+    NavCtrl.profileLink = "/pages/groupprofile_edit.html";
+  }
+
   NavCtrl.logOut = function() {
     $http({
       method: 'GET',
