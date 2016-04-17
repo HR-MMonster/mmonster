@@ -2,3 +2,4 @@ server/node_modules
 client/uploads
 client/lib
 node_modules
+.DS_Store
