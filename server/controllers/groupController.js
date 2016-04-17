@@ -239,7 +239,7 @@ exports.uploadPhoto = function(req, res, next) {
         console.error('Error adding group photo');
         return;
       }
-      res.send('success adding group photo');
+      res.send(updates);
     });
 };
 
