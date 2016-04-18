@@ -39,3 +39,9 @@ module.exports.endSession = function(req, res, next) {
   res.status(200).end();
 };
 
+// TODO: Handle types that are not listed below
+module.exports.mimeExtension = {
+  'image/jpeg': 'jpeg',
+  'image/png': 'png',
+  'image/gif': 'gif'
+};
