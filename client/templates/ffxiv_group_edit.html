@@ -1,5 +1,5 @@
 <div class="game-profile ffxiv-profile">
-<h1>FFXIV Info</h1>
+  <h1>FFXIV Info</h1>
 
   <section>
     <div class="field">
@@ -43,24 +43,17 @@
         <option ng-repeat="s in FFXIVGroupCtrl.servers" value="{{s}}">{{s}}</option>
       </select>
     </div>
-    <div class="field">
-      <label for="mic">Has microphone and voice comm's software</label>
-      <input type="checkbox" name="mic" id="mic" ng-model="FFXIVGroupCtrl.profile.mic" />
-    </div>
   </section>
 
 
   <section>
     <h3>Experience</h3>
     <div class="field">
-      <label for="dps">Minimum Dummy DPS (please enter a number)</label>
-      <input type="text" ng-model="FFXIVGroupCtrl.profile.dps"><br />
-    </div>
-
-    <div class="field">
-      <label for="main">Cleared Fights</label><br />
-      <div ng-repeat="fight in FFXIVGroupCtrl.fights" class="col-sm-6">
-        <input type="checkbox" name="clears" ng-model= "FFXIVGroupCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+      <label for="main">Cleared Fights</label>
+      <div class="row">
+        <div ng-repeat="fight in FFXIVGroupCtrl.fights" class="col-sm-6">
+          <input type="checkbox" name="clears" ng-model= "FFXIVGroupCtrl.profile[fight.abr]" value="{{fight.abr}}"> {{fight.name}}
+        </div>
       </div>
     </div>
     <a class="button" href="#" ng-click="FFXIVGroupCtrl.update()">Save Profile Changes</a>

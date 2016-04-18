@@ -16,7 +16,7 @@
               <h3>Jobs</h3>
               <label for="jobs">Recruiting For</label><br />
               <div ng-repeat="job in ffxivSearchCtrl.jobs">
-                <input type="checkbox" name="jobs" value="{{job}}" ng-model="ffxivSearchCtrl.profile.jobs[job]"> {{job}}
+                <input type="checkbox" name="jobs" value="{{job.model}}" ng-model="ffxivSearchCtrl.profile[job.model]"> {{job.name}}
               </div>
             </section>
 
@@ -73,7 +73,7 @@
           <div class="info">
             <p>{{group.serverGroupName}}</p>
             <p>{{group.server}}</p>
-            <p>Available: {{group.group.startTime}}:00 - {{group.group.endTime}}:00</p>
+            <p>Raid Times: {{group.group.startTime}}:00 - {{group.group.endTime}}:00</p>
           </div>
         </div>
       </a>

@@ -13,7 +13,7 @@
     <h3>Jobs</h3>
     <div class="row">
       <div class="col-sm-6">
-        <label for="jobs">Do you play these jobs?</label><br />
+        <label for="jobs">Looking for the following jobs</label><br />
         <div ng-repeat="job in FFXIVGroupCtrl.jobs">
           <input type="checkbox" name="jobs" value="{{job.model}}" ng-model="FFXIVGroupCtrl.profile[job.model]" disabled="disabled"> {{job.name}}
         </div>
@@ -29,8 +29,7 @@
 
   <section>
     <h3>Experience</h3>
-    <p>Minimum Dummy DPS: {{FFXIVGroupCtrl.profile.dps}}</p>
-    <label for="main">Our Group Has Cleared These Fights</label><br />
+    <label for="main">Cleared Fights</label><br />
     <div ng-repeat="fight in FFXIVGroupCtrl.fights">
     <input type="checkbox" name="clears" ng-model= "FFXIVGroupCtrl.profile[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
     </div>

@@ -7,7 +7,7 @@
 <body ng-app="app">
   <navbar></navbar>
   <div class="container">
-    <div class="userinfo col-sm-4">
+    <div class="userinfo col-md-4">
       <div class="user-profile clearfix" ng-controller="GroupProfileController as ProfileCtrl">
         <img ng-src="{{ProfileCtrl.profile.photo}}" />
         <p>Name: {{ProfileCtrl.profile.groupname}}</p>
@@ -26,7 +26,7 @@
     </div>
 
 
-    <ffxiv-group-public class="col-sm-8" />
+    <ffxiv-group-public class="col-md-8" />
   </div>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
