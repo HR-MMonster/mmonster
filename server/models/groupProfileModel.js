@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Group = require('./groupModel');
 var Schema = mongoose.Schema;
+var messageSchema = require('./messageModel').schema;
 
 var groupProfileSchema = new Schema({
   gameName: {
@@ -48,7 +49,8 @@ var groupProfileSchema = new Schema({
   A5S: Boolean,
   A6S: Boolean,
   A7S: Boolean,
-  A8S: Boolean
+  A8S: Boolean,
+  messages: [messageSchema],
 });
 
 module.exports = mongoose.model('GroupProfile', groupProfileSchema);
