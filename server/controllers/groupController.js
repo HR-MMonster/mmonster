@@ -193,6 +193,7 @@ exports.updateGroupProfile= function(req, res, next) {
 };
 
 exports.uploadPhoto = function(req, res, next) {
+  console.log(req.file);
   var gid = req.params.gid;
   var photoFileDescription = req.file;
 

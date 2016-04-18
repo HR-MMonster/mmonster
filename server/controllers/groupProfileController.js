@@ -39,7 +39,6 @@ exports.findGroupProfiles = function(req, res, next) {
     // remove start and end time to query only charProfile params
     var queryStartTime = +req.query.startTime;
     var queryEndTime = +req.query.endTime;
-    console.log('start:', queryStartTime, 'and end:', queryEndTime);
     delete req.query.startTime;
     delete req.query.endTime;
 
@@ -94,10 +93,6 @@ exports.findGroupProfiles = function(req, res, next) {
 exports.findGroupProfileByProfileId = function(req, res, next) {
   var gpid = req.params.gpid;
 
-  console.log('PARAMS:', req.params);
-  console.log('GPID:', gpid);
-  console.log('BODY:', req.body);
-
   GroupProfile.find({_id: gpid})
     .exec(function(err, profile) {
       if (err) {
@@ -105,6 +100,26 @@ exports.findGroupProfileByProfileId = function(req, res, next) {
         return;
       }
       res.json(profile);
+    });
+};
+
+exports.postMessage = function(req, res, next) {
+  var gpid = req.params.gpid;
+  var message = req.body.message;
+
+  GroupProfile.find({_id: gpid}, {new: true})
+    .exec(function(err, profile) {
+      if (err) {
+        console.error('<><> Error posting message');
+        return;
+      }
+      profile.messages.create(message)
+        .exec(function(err, messages) {
+          if (err) {
+            console.error('<><> Error creating message');
+          }
+          res.json(profile);
+        });
     });
 };
 
