@@ -46,19 +46,19 @@ exports.createGroup = function(req, res, next) {
   Group.findOne({groupname: newGroup.groupname})
     .exec(function(err, group) {
       if (err) {
-        console.error('error testing if groupname exists:', err);
+        console.error('<><> Error testing if groupname exists:', err);
         next(err);
       } else if (group) {
         res.send('groupname ' + newGroup.groupname + ' already exists');
       } else {
         Group.create(newGroup, function(err, createdGroup) {
             if (err) {
-              console.error('error creating new group:', err)
+              console.error('<><> Error creating new group:', err)
               return;
             }
             GroupProfile.create({gameName: 'FFXIV', group: createdGroup._id}, function(err, groupProfile) {
                 if (err) {
-                  console.error('error creating generic group profile');
+                  console.error('<><> Error creating generic group profile');
                   return;
                 }
                 util.createSession(req, res, {_id: createdGroup._id});
@@ -72,9 +72,8 @@ exports.findGroup = function(req, res, next) {
   var group = req.body;
   var id = req.params.gid;
 
-  findGroup({_id: id})
+  findGroup({_id: id}, {password: 0, salt: 0})
     .then(function(group) {
-      console.log('found group:', group);
       if (!group) {
         next(new Error('Group', id, 'not found'));
       } else {
@@ -105,13 +104,13 @@ exports.updateGroup = function(req, res, next) {
   var updates = req.body;
   var id = req.params.gid;
 
-  Group.findOneAndUpdate({_id: id}, updates)
+  Group.findOneAndUpdate({_id: id}, updates, {new: true})
     .exec(function(err, group) {
       if (err) {
         console.error('error finding group', err);
         next(err);
       }
-      res.send('success updating group '+ id);  // TODO: this is sending back unupdated object, although updates in DB
+      res.json(group);
     });
 };
 
@@ -183,13 +182,13 @@ exports.updateGroupProfile= function(req, res, next) {
   var updates = req.body;
   var gpid = req.params.gpid;
 
-  GroupProfile.findOneAndUpdate({_id: gpid}, updates)
+  GroupProfile.findOneAndUpdate({_id: gpid}, updates, {new: true})
     .exec(function(err, profile) {
       if (err) {
         console.error('Error updating group profile:', err);
         return;
       }
-      res.send('success updating group profile of ' + gpid);
+      res.json(profile);
     });
 };
 

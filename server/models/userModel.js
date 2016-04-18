@@ -35,7 +35,6 @@ var userSchema = new Schema({
 
 userSchema.methods.comparePasswords = function(passwordAttempt) {
   var savedPassword = this.password;
-  // should return a promise that compares passwords
   return Q.promise(function(resolve, reject) {
     bcrypt.compare(passwordAttempt, savedPassword, function(err, isMatch) {
       if (err) {
@@ -50,7 +49,7 @@ userSchema.methods.comparePasswords = function(passwordAttempt) {
 userSchema.pre('save', function(next) {
   var user = this;
   if (!user.isModified('password')) {
-    return next(); // perform next middleware action on the controller
+    return next();
   }
 
   bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
