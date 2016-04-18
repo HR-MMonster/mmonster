@@ -55,4 +55,18 @@
   </section>
 </div>
 
+<div class="discussion">
+  <h1>Dicussion</h1>
+  <div class="post">
+    <textarea ng-model="FFXIVCtrl.newMessage"></textarea>
+    <a href="" class="button" ng-click="FFXIVCtrl.postMessage()">Post Message</a>
+  </div>
+  <div class="messages">
+    <div class="message clearfix" ng-repeat="message in FFXIVCtrl.profile.messages">
+      <img ng-src="{{message.photo}}" class="poster-photo" alt="">
+      <a class="profile-redirect" ng-href="/pages/{{message.type === 'user' ? 'userprofile_public.html' : 'groupprofile_public.html'}}#{{message.typeId}}">{{message.name}}</a>
+      <p>{{message.content}}</p>
+    </div>
+  </div>
+</div>
 

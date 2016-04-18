@@ -1,15 +1,17 @@
 app.factory('GroupProfile', function($http, $location, $window, Upload) {
-  var urlID = $location.absUrl().split('#');
-  if (urlID.length > 1) {
-    urlID = urlID[1].slice(1);
+  var groupID = $location.absUrl().split('#');
+  if (groupID.length > 1) {
+    groupID = groupID[1].slice(1);
   } else {
-    urlID = $window.localStorage.getItem('id');
+    groupID = $window.localStorage.getItem('id');
   }
+
+  var groupGameID;
 
   var get = function() {
     return $http({
       method: 'GET',
-      url: '/profile/groups/' + urlID
+      url: '/profile/groups/' + groupID
     }).then(function(resp) {
       return resp.data;
     });
@@ -18,7 +20,7 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
   var update = function(profile) {
     $http({
       method: 'PUT',
-      url: '/profile/groups/' + urlID,
+      url: '/profile/groups/' + groupID,
       data: profile
     });
     console.log('running update');
@@ -27,16 +29,18 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
   var getFFXIV = function() {
     return $http({
       method: 'GET',
-      url: '/profile/groups/' + urlID + '/groupProfiles'
+      url: '/profile/groups/' + groupID + '/groupProfiles'
     }).then(function(resp) {
-      return resp.data[0];
+      var FFXIVProfile = resp.data[0];
+      groupGameID = FFXIVProfile._id;
+      return FFXIVProfile;
     });
   };
 
   var updateFFXIV = function(profile) {
     $http({
       method: 'PUT',
-      url: '/profile/groups/' + urlID + '/groupProfiles/' + profile._id,
+      url: '/profile/groups/' + groupID + '/groupProfiles/' + groupGameID,
       data: profile
     }).then(function(resp) {
       console.log(resp.data);
@@ -47,7 +51,7 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
 
   var updatePhoto = function(photo) {
     return Upload.upload({
-      url: '/profile/groups/' + urlID + '/photos',
+      url: '/profile/groups/' + groupID + '/photos',
       data: {groupPhoto: photo}
     }).then(function (resp) {
       return resp.data.photo;
@@ -56,12 +60,45 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
     });
   };
 
+  var postMessage = function(message) {
+    var posterID = $window.localStorage.getItem('id');
+    var posterType = $window.localStorage.getItem('type');
+    if (posterID) {
+      return $http({
+        method: 'POST',
+        url: '/profile/groupProfiles/' + groupGameID + '/messages',
+        data: {
+          message: {
+            type: posterType,
+            typeId: posterID,
+            content: message
+          }
+        }
+      });
+    }
+  };
+
+  var getMessageAssets = function(message) {
+    var url;
+    var extension = message.type === 'user' ? 'users' : 'groups';
+    $http({
+      method: 'GET',
+      url: '/profile/' + extension + '/' + message.typeId
+    }).then(function(resp) {
+      var posterProfile = resp.data;
+      message.photo = posterProfile.photo;
+      message.name = message.type === 'user' ? posterProfile.username : posterProfile.groupname;
+    });
+  };
+
   return {
     get: get,
     update: update,
     updatePhoto: updatePhoto,
     getFFXIV: getFFXIV,
-    updateFFXIV: updateFFXIV
+    updateFFXIV: updateFFXIV,
+    postMessage: postMessage,
+    getMessageAssets: getMessageAssets
   };
 })
 .controller('GroupProfileController', ['GroupProfile', function(GroupProfile) {
@@ -73,11 +110,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
     ceil: 23
   };
 
-  ProfileCtrl.test = function() {
-    console.log(ProfileCtrl.profile);
-    console.log(ProfileCtrl.startTime);
-  };
-
   ProfileCtrl.upload = function(file) {
     GroupProfile.updatePhoto(file).then(function(img) {
       if (img) ProfileCtrl.profile.photo = img;
@@ -85,7 +117,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
   };
 
   GroupProfile.get().then(function(profile) {
-    console.log(profile);
     ProfileCtrl.profile = profile;
   });
 
@@ -111,27 +142,44 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
 })
 .controller('FFXIVGroupController', function(GroupProfile) {
   var FFXIVGroupCtrl = this;
-  FFXIVGroupCtrl.profile = GroupProfile.getFFXIV().then(function(profile) {
-    console.log(profile);
-    FFXIVGroupCtrl.profile = profile;
+
+  $(document).ready(function() {
+    $('body').on('click', '.profile-redirect', function() {
+      window.location.reload();
+    });
   });
+
+  FFXIVGroupCtrl.getProfile = function() {
+    FFXIVGroupCtrl.profile = GroupProfile.getFFXIV().then(function(profile) {
+      FFXIVGroupCtrl.profile = profile;
+      FFXIVGroupCtrl.profile.messages.forEach(GroupProfile.getMessageAssets);
+    });
+  };
+
+  FFXIVGroupCtrl.getProfile();
+
+
+  FFXIVGroupCtrl.postMessage = function() {
+    GroupProfile.postMessage(FFXIVGroupCtrl.newMessage)
+    .then(FFXIVGroupCtrl.getProfile);
+  };
 
   FFXIVGroupCtrl.servers = ['Aegis', 'Atomos', 'Carbuncle', 'Garuda', 'Gungnir', 'Kujata', 'Ramuh', 'Tonberry', 'Typhon', 'Unicorn', 'Alexander', 'Bahamut', 'Durandal', 'Fenrir', 'Ifrit', 'Ridill', 'Tiamat', 'Ultima', 'Valefor', 'Yojimbo', 'Zeromus', 'Anima', 'Asura', 'Belias', 'Chocobo', 'Hades', 'Ixion', 'Mandragora', 'Masamune', 'Pandaemonium', 'Shinryu', 'Titan', 'Adamantoise', 'Balmung', 'Cactuar', 'Coeurl', 'Faerie', 'Gilgamesh', 'Goblin', 'Jenova', 'Mateus', 'Midgardsormr', 'Sargatanas', 'Siren', 'Zalera', 'Behemoth', 'Brynhildr', 'Diabolos', 'Excalibur', 'Exodus', 'Famfrit', 'Hyperion', 'Lamia', 'Leviathan', 'Malboro', 'Ultros', 'Cerberus', 'Lich', 'Moogle', 'Odin', 'Phoenix', 'Ragnarok', 'Shiva', 'Zodiark'];
 
   FFXIVGroupCtrl.jobs = [
-    {name: 'Paladin', model: 'Paladin'},
-    {name: 'Warrior', model: 'Warrior'},
-    {name: 'Dark Knight', model: 'DarkKnight'},
-    {name: 'White Mage', model: 'WhiteMage'},
-    {name: 'Scholar', model: 'Scholar'},
-    {name: 'Astrologian', model: 'Astrologian'},
-    {name: 'Monk', model: 'Monk'},
-    {name: 'Dragoon', model: 'Dragoon'},
-    {name: 'Ninja', model: 'Ninja'},
-    {name: 'Black Mage', model: 'BlackMage'},
-    {name: 'Summoner', model: 'Summoner'},
-    {name: 'Bard', model: 'Bard'},
-    {name: 'Machinist', model: 'Machinist'}
+  {name: 'Paladin', model: 'Paladin'},
+  {name: 'Warrior', model: 'Warrior'},
+  {name: 'Dark Knight', model: 'DarkKnight'},
+  {name: 'White Mage', model: 'WhiteMage'},
+  {name: 'Scholar', model: 'Scholar'},
+  {name: 'Astrologian', model: 'Astrologian'},
+  {name: 'Monk', model: 'Monk'},
+  {name: 'Dragoon', model: 'Dragoon'},
+  {name: 'Ninja', model: 'Ninja'},
+  {name: 'Black Mage', model: 'BlackMage'},
+  {name: 'Summoner', model: 'Summoner'},
+  {name: 'Bard', model: 'Bard'},
+  {name: 'Machinist', model: 'Machinist'}
   ];
 
   FFXIVGroupCtrl.fights = [
@@ -220,10 +268,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
     abr: 'A8S'
   },
   ];
-
-  FFXIVGroupCtrl.test = function() {
-    console.log(FFXIVGroupCtrl.profile);
-  };
 
   FFXIVGroupCtrl.update = function() {
     GroupProfile.updateFFXIV(FFXIVGroupCtrl.profile);
