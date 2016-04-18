@@ -4,7 +4,7 @@
   "description": "Server-side code for launching public client site and store data in server database.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
     "test": "mocha test/serverTest.js"
   },
   "author": "MMonster dev team",
