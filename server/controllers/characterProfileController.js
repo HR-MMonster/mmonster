@@ -88,10 +88,6 @@ exports.findCharacterProfiles = function(req, res, next) {
 exports.findCharacterProfileByProfileId = function(req, res, next) {
   var cpid = req.params.cpid;
 
-  console.log('PARAMS:', req.params);
-  console.log('CPID:', cpid);
-  console.log('BODY:', req.body);
-
   CharacterProfile.find({_id: cpid})
     .exec(function(err, profile) {
       if (err) {
@@ -99,6 +95,27 @@ exports.findCharacterProfileByProfileId = function(req, res, next) {
         return;
       }
       res.json(profile);
+    });
+};
+
+exports.postMessage = function(req, res, next) {
+  var cpid = req.params.cpid;
+  var message = req.body.message;
+
+  // make sure user matches user posting message
+  if (message.typeId !== req.session.user) {
+    message.typeId = req.session.user;
+  }
+
+  CharacterProfile.update(
+    {_id: cpid},
+    {'$push': {'messages': message}},
+    function(err, numAffected) {
+      if (err) {
+        console.error('<><> Error adding message');
+        return;
+      }
+      res.send('posted message to ' + cpid);
     });
 };
 

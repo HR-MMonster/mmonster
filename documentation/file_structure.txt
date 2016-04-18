@@ -16,14 +16,17 @@ mmonser
 |    |   |___ userController
 |    |
 |    +--- data
-|    |   |--- testData
 |    |   |___ testDataTemplates
+|    |
+|    +--- lib
+|    |   |___ utility
 |    |
 |    +--- models
 |    |   |--- characterProfileModel
 |    |   |--- groupModel
 |    |   |--- groupProfileModel
-|    |   |___ userModel
+|    |   |--- userModel
+|    |   |--- messageModel
 |    |
 |    +--- routers
 |    |   |--- profileRouter
