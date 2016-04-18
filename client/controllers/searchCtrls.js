@@ -1,9 +1,7 @@
-//Need to restructure query object to latest notation for user objects
-//nested
-
-
 app.controller('ffxivSearchChar', function ($window, $location, $http) {
+
   var ffxivSearchCtrl = this;
+
   ffxivSearchCtrl.profile = {
     startTime: 0,
     endTime: 23
@@ -18,38 +16,29 @@ app.controller('ffxivSearchChar', function ($window, $location, $http) {
   });
 
   ffxivSearchCtrl.search = function() {
-    //capture the user profile stats from a button click
     var query = ffxivSearchCtrl.profile;
-    //reformat the object according to DB team's standard
-    //sanitize the falses -> loop through the user object and set any falses to undefined
-    console.log('QUERY 1: ', query);
+    //This function prevents accidental falses from being passed in as queries
     for(var prop in query) {
       if(query[prop] === false || query[prop] === '') {
         query[prop] = undefined;
       }
     }
 
-    console.log('QUERY 2: ', query);
-    // post request with query object as body
+    console.log('QUERY BEING PASSED TO SERVER: ', query);
+
     return $http({
       method: 'GET',
       url: '../profile/characterProfiles',
       params: query
     })
     .then(function(users) {
-      console.log('inside then');
-      console.log(users.data);
       ffxivSearchCtrl.users = users;
-      // console.log(ffxivSearchCtrl.users);
       collapseButton.click();
     })
     .catch(function (error) {
       console.log('inside catch')
       console.error(error);
     });
-      //angular get request with query
-    // receive response and display directly to html
-
   };
 
 

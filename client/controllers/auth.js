@@ -1,6 +1,3 @@
-/**
- * Replaces groupAuth and playerAuth.
- */
 app.controller('AuthTabController', function($window, $location) {
     var AuthTabCtrl = this;
     AuthTabCtrl.group = {};
@@ -28,7 +25,6 @@ app.controller('AuthTabController', function($window, $location) {
 
           $window.localStorage.setItem('id', resp.data._id);
           $window.localStorage.setItem('type', 'group');
-          //$window.localStorage.setItem('session', resp.data._id);
 
 
           $window.location.assign('/');
@@ -105,7 +101,6 @@ app.controller('AuthTabController', function($window, $location) {
   })
 
   .controller('PlayerAuthController', function ($window, $location, AuthPlayer) {
-    // console.log('can you see this?');
     var PlayerAuthCtrl = this;
     PlayerAuthCtrl.player = {};
 
@@ -115,13 +110,9 @@ app.controller('AuthTabController', function($window, $location) {
       AuthPlayer.signin(PlayerAuthCtrl.player)
         .then(function (resp) {
           $window.localStorage.setItem('com.app', resp);
-          // use localStorage.setItem to add user id to local storage
-          // console.log(resp.data._id);
           $window.localStorage.setItem('id', resp.data._id);
           $window.localStorage.setItem('type', 'user');
-          // debugger;
           $window.location.assign('/');
-          // console.log('inside signin')
         })
         .catch(function (error) {
           console.error(error);
@@ -131,7 +122,6 @@ app.controller('AuthTabController', function($window, $location) {
     PlayerAuthCtrl.signup = function () {
       AuthPlayer.signup(PlayerAuthCtrl.player)
         .then(function (resp) {
-          // console.log('logging line 24');
           $window.localStorage.setItem('com.app', resp);
           $window.localStorage.setItem('id', resp.data._id);
           $window.localStorage.setItem('type', 'user');

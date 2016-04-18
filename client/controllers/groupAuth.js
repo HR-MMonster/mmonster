@@ -9,10 +9,7 @@ angular.module('groupAuth', [])
     Auth.signin(GroupAuthCtrl.group)
       .then(function (resp) {
         $window.localStorage.setItem('com.app', resp);
-
-
         $window.localStorage.setItem('id', resp.data._id);
-
         $window.location.assign('/');
 
       })
@@ -24,12 +21,9 @@ angular.module('groupAuth', [])
   GroupAuthCtrl.signup = function () {
     Auth.signup(GroupAuthCtrl.group)
       .then(function (resp) {
-
         $window.localStorage.setItem('com.app', resp);
         $window.localStorage.setItem('id', resp.data._id);
         $window.location.assign('/');
-
-
       })
       .catch(function (error) {
         console.error(error);

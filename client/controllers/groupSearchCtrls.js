@@ -1,7 +1,7 @@
-// angular.module('app.groupSearch', ['rzModule'])
-
 app.controller('ffxivSearchGroup', function ($window, $location, $http) {
+
   var ffxivSearchCtrl = this;
+
   ffxivSearchCtrl.profile = {
     startTime: 0,
     endTime: 23
@@ -17,34 +17,28 @@ app.controller('ffxivSearchGroup', function ($window, $location, $http) {
 
   ffxivSearchCtrl.search = function() {
     var query = ffxivSearchCtrl.profile;
-    //sanitize the falses -> loop through the user object and set any falses to undefined
-    console.log('QUERY 1: ', query);
+    //This function prevents accidental falses from being passed in as queries
     for(var prop in query) {
       if(query[prop] === false || query[prop] === '') {
         query[prop] = undefined;
       }
     }
 
-    console.log('QUERY 2: ', query);
-    // post request with query object as body
+    console.log('QUERY BEING PASSED TO SERVER: ', query);
+
     return $http({
       method: 'GET',
       url: '../profile/groupProfiles',
       params: query
     })
     .then(function(groups) {
-      console.log('inside then');
-      console.log(groups.data);
       ffxivSearchCtrl.groups = groups;
-      // console.log(ffxivSearchCtrl.groups);
       collapseButton.click();
     })
     .catch(function (error) {
       console.log('inside catch');
       console.error(error);
     });
-      //angular get request with query
-    // receive response and display directly to html
   };
 
 
