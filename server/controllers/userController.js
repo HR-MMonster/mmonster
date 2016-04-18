@@ -199,8 +199,8 @@ exports.updateCharacterProfile = function(req, res, next) {
 exports.uploadPhoto = function(req, res, next) {
   var userID = req.params.uid;
   var photoFileDescription = req.file;
-  console.log(req.file);
   var updates = {photo: '/uploads/' + photoFileDescription.filename};
+
   findUserAndUpdate({_id: userID}, updates)
     .then(function(profile) {
       if (!profile) {
