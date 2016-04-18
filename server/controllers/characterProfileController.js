@@ -102,6 +102,11 @@ exports.postMessage = function(req, res, next) {
   var cpid = req.params.cpid;
   var message = req.body.message;
 
+  // make sure user matches user posting message
+  if (message.typeId !== req.session.user) {
+    message.typeId = req.session.user;
+  }
+
   CharacterProfile.update(
     {_id: cpid},
     {'$push': {'messages': message}},

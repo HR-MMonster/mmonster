@@ -52,7 +52,7 @@ profileRouter
 
 profileRouter
   .route('/characterProfiles/:cpid/messages')
-  .post(characterProfileController.postMessage);
+  .post(util.checkUser, characterProfileController.postMessage);
 
 profileRouter
   .route('/groups')
@@ -87,7 +87,7 @@ profileRouter
 
 profileRouter
   .route('/groupProfiles/:gpid/messages')
-  .post(groupProfileController.postMessage);
+  .post(util.checkUser, groupProfileController.postMessage);
 
 mimeExtension = {
   'image/jpeg': 'jpeg',
