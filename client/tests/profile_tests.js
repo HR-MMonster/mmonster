@@ -1,6 +1,6 @@
 describe('Profile Editing', function() {
   beforeEach(function() {
-    browser.get('http://localhost:8000/pages/playerSignin.html');
+    browser.get('http://localhost:8000/pages/signin.html');
     element(by.id('username')).sendKeys('travis');
     element(by.id('password')).sendKeys('test');
     element(by.id('sign-in')).click();
