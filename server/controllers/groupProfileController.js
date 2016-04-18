@@ -107,6 +107,11 @@ exports.postMessage = function(req, res, next) {
   var gpid = req.params.gpid;
   var message = req.body.message;
 
+  // make sure user matches user posting message
+  if (message.typeId !== req.session.user) {
+    message.typeId = req.session.user;
+  }
+
   GroupProfile.update(
     {_id: gpid},
     {'$push': {'messages': message}},
