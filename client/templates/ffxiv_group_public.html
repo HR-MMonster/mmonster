@@ -31,9 +31,23 @@
     <h3>Experience</h3>
     <label for="main">Cleared Fights</label><br />
     <div ng-repeat="fight in FFXIVGroupCtrl.fights">
-    <input type="checkbox" name="clears" ng-model= "FFXIVGroupCtrl.profile[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
+      <input type="checkbox" name="clears" ng-model= "FFXIVGroupCtrl.profile[fight.abr]" value="{{fight.abr}}" disabled="disabled"> {{fight.name}}
     </div>
   </section>
 </div>
 
+<div class="discussion">
+  <h1>Dicussion</h1>
+  <div class="post">
+    <textarea ng-model="FFXIVGroupCtrl.newMessage"></textarea>
+    <a href="" class="button" ng-click="FFXIVGroupCtrl.postMessage()">Post Message</a>
+  </div>
+  <div class="messages">
+    <div class="message clearfix" ng-repeat="message in FFXIVGroupCtrl.profile.messages">
+      <img ng-src="{{message.photo}}" class="poster-photo" alt="">
+      <a class="profile-redirect" ng-href="/pages/{{message.type === 'user' ? 'userprofile_public.html' : 'groupprofile_public.html'}}#{{message.typeId}}">{{message.name}}</a>
+      <p>{{message.content}}</p>
+    </div>
+  </div>
+</div>
 

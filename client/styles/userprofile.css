@@ -91,10 +91,30 @@ img.logo {
   margin-bottom: 20px;
 }
 
-.game-profile {
+.game-profile, .discussion {
   border: 1px solid grey;
   padding: 50px;
   background-color: white;
+}
+
+.discussion {
+  margin-top: 20px;
+}
+
+.post {
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #333
+}
+
+.message {
+  margin-bottom: 15px;
+}
+
+img.poster-photo {
+  float: left;
+  height: 100px;
+  width: 100px;
 }
 
 .field:not(:last-child) {

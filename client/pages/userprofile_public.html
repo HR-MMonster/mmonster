@@ -7,7 +7,7 @@
 <body ng-app="app">
   <navbar></navbar>
   <div class="container">
-  <div class="userinfo col-md-4">
+    <div class="userinfo col-md-4">
       <div class="user-profile clearfix" ng-controller="ProfileController as ProfileCtrl">
         <img ng-src="{{ProfileCtrl.profile.photo}}" />
         <p>Name: {{ProfileCtrl.profile.username}}</p>
@@ -29,6 +29,7 @@
 
     <ffxiv-public class="col-md-8" />
   </div>
+  <script src="../lib/jquery/dist/jquery.min.js"></script>
   <script src="../lib/angular/angular.min.js"></script>
   <script src="../lib/ng-file-upload/ng-file-upload-all.js"></script>
   <script src="../lib/angularjs-slider/dist/rzslider.min.js"></script>
