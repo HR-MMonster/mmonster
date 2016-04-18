@@ -196,15 +196,26 @@ exports.uploadPhoto = function(req, res, next) {
   var gid = req.params.gid;
   var photoFileDescription = req.file;
 
-  var updates = {photo: '/uploads/' + photoFileDescription.filename};
-  Group.findOneAndUpdate({_id: gid}, updates)
-    .exec(function(err, group) {
+  if (!photoFileDescription) {
+    Group.findOne({_id: gid}, {password: 0, salt: 0}, function(err, group) {
       if (err) {
-        console.error('Error adding group photo');
+        console.error('Error on post to group photo');
         return;
+      } else {
+        res.json(group);
       }
-      res.send(updates);
     });
+  } else {
+    var updates = {photo: '/uploads/' + photoFileDescription.filename};
+    Group.findOneAndUpdate({_id: gid}, updates)
+      .exec(function (err, group) {
+        if (err) {
+          console.error('Error adding group photo');
+          return;
+        }
+        res.send(updates);
+      });
+  }
 };
 
 

@@ -199,17 +199,28 @@ exports.updateCharacterProfile = function(req, res, next) {
 exports.uploadPhoto = function(req, res, next) {
   var userID = req.params.uid;
   var photoFileDescription = req.file;
-  var updates = {photo: '/uploads/' + photoFileDescription.filename};
+  if (!photoFileDescription) {
+    findUser({_id: userID}, {password: 0, salt: 0})
+      .then(function(user) {
+        console.log(user);
+        res.json(user);
+      })
+      .fail(function(err) {
+        next(err);
+      });
+  } else {
+    var updates = {photo: '/uploads/' + photoFileDescription.filename};
 
-  findUserAndUpdate({_id: userID}, updates)
-    .then(function(profile) {
-      if (!profile) {
-        next(new Error('No user profile found for user ' + userID));
-        // TODO: Respond to client that user not found
-      } else {
-        res.json(updates);
-      }
-    });
+    findUserAndUpdate({_id: userID}, updates)
+      .then(function (profile) {
+        if (!profile) {
+          next(new Error('No user profile found for user ' + userID));
+          // TODO: Respond to client that user not found
+        } else {
+          res.json(updates);
+        }
+      });
+  }
 };
 
 // DATABASE SEEDING FUNCTIONALITY
