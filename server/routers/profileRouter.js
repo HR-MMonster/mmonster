@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
     callback(null, __dirname + '/../../client/uploads/');
   },
   filename: function(req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now() + '.' +  mimeExtension[file.mimetype])
+    callback(null, file.fieldname + '-' + Date.now() + '.' +  util.mimeExtension[file.mimetype])
   }
 });
 
@@ -82,11 +82,5 @@ profileRouter
 profileRouter
   .route('/groupProfiles/:gpid')
   .get(groupProfileController.findGroupProfileByProfileId);
-
-mimeExtension = {
-  'image/jpeg': 'jpeg',
-  'image/png': 'png',
-  'image/gif': 'gif'
-};
 
 module.exports = profileRouter;
