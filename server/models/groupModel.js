@@ -35,7 +35,6 @@ var groupSchema = new Schema({
 
 groupSchema.methods.comparePasswords = function(passwordAttempt) {
   var savedPassword = this.password;
-  // should return a promise that compares passwords
   return Q.promise(function(resolve, reject) {
     bcrypt.compare(passwordAttempt, savedPassword, function(err, isMatch) {
       if (err) {
@@ -50,7 +49,7 @@ groupSchema.methods.comparePasswords = function(passwordAttempt) {
 groupSchema.pre('save', function(next) {
   var group = this;
   if (!group.isModified('password')) {
-    return next(); // perform next middlewar action on the controller
+    return next();
   }
 
   bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
@@ -70,5 +69,4 @@ groupSchema.pre('save', function(next) {
   });
 });
 
-// export the group model
 module.exports = mongoose.model('Group', groupSchema);

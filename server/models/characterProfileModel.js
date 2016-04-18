@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var User = require('./userModel').model;
 var userSchema = require('./userModel').schema;
-var ffxivSchema = require('./ffxivModel').ffxivSchema;
 var Schema = mongoose.Schema;
 
 var characterProfileSchema = new Schema({
