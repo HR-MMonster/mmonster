@@ -171,7 +171,7 @@ exports.findGroupProfilesById = function(req, res, next) {
     })
     .exec(function(err, foundProfiles) {
       if (err) {
-        console.error('error finding profiles that match by id');
+        console.error('<><> Error finding profiles that match by id');
         return;
       }
       res.json(foundProfiles);
@@ -185,7 +185,7 @@ exports.updateGroupProfile= function(req, res, next) {
   GroupProfile.findOneAndUpdate({_id: gpid}, updates, {new: true})
     .exec(function(err, profile) {
       if (err) {
-        console.error('Error updating group profile:', err);
+        console.error('<><> Error updating group profile:', err);
         return;
       }
       res.json(profile);
@@ -199,7 +199,7 @@ exports.uploadPhoto = function(req, res, next) {
   if (!photoFileDescription) {
     Group.findOne({_id: gid}, {password: 0, salt: 0}, function(err, group) {
       if (err) {
-        console.error('Error on post to group photo');
+        console.error('<><> Error adding group photo');
         return;
       } else {
         res.json(group);
@@ -223,15 +223,15 @@ var seedGroups = function() {
   Group.find()
     .exec(function(err, groups) {
       if (err) {
-        console.error('error seeding groups');
+        console.error('<><> Error seeding groups');
         return;
       } else if (groups.length) {
-        console.log('already groups in database');
+        console.log('<><> Already groups in database');
       } else {
         var groups = dataGen.generateGroups(350);
         Group.create(groups, function(err, groups) {
             if (err) {
-              console.error('error seeding groups:', err);
+              console.error('<><> Error seeding groups:', err);
               return;
             }
             return groups;
