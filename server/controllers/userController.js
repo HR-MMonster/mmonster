@@ -25,7 +25,7 @@ exports.signinUser = function(req, res, next) {
     .then(function(user) {
       if (!user) {
         next(new Error('User does not exist'));
-        // TODO: Where should the user be redirected
+        // TODO: Verify client redirects on errors
       } else {
         return user.comparePasswords(password)
           .then(function(foundUser) {
@@ -49,7 +49,7 @@ exports.createUser = function(req, res, next) {
     .then(function(found) {
       if (found) {
         next(new Error('User already exists"'));
-        // TODO: Alert client that user exists
+        // TODO: Respond to client that user exists
       } else {
         return createUser(newUser);
       }
@@ -57,14 +57,15 @@ exports.createUser = function(req, res, next) {
     .then(function(user) {
       if (!user) {
         next(new Error('User account not created'));
-        // TODO: Alert client that the account was not created
+        // TODO: Respond to client that the account was not created
       } else {
-        // A generic FFIV character profile is created for a new user
+        // A generic FFIV character profile is created for a new user.
         var characterProfile = {gameName: 'FFXIV', user: user._id};
          createCharacterProfile(characterProfile)
          .then(function(profile) {
            if (!profile) {
              next(new Error('Character profile not created'));
+             // TODO: Respond to client that the character profile was not created
            } else {
              util.createSession(req, res, {_id: user._id});
            }
@@ -97,6 +98,7 @@ exports.findUsers = function(req, res, next) {
     .then(function(users) {
       if (!users) {
         next(new Error('No users found'));
+        // TODO: Respond to client that user does not exist
       } else {
         res.json(users);
       }
@@ -184,6 +186,7 @@ exports.updateCharacterProfile = function(req, res, next) {
     .then(function(profile) {
       if (!profile) {
         next( new Error('Character profile not found'));
+        // TODO: Respond to client that character profile is not found
       } else {
         res.json(profile);
       }
@@ -196,19 +199,20 @@ exports.updateCharacterProfile = function(req, res, next) {
 exports.uploadPhoto = function(req, res, next) {
   var userID = req.params.uid;
   var photoFileDescription = req.file;
-
-  // TODO: Determine file type and save correct extension
   var updates = {photo: '/uploads/' + photoFileDescription.filename};
+
   findUserAndUpdate({_id: userID}, updates)
     .then(function(profile) {
       if (!profile) {
         next(new Error('No user profile found for user ' + userID));
+        // TODO: Respond to client that user not found
       } else {
         res.json(updates);
       }
     });
 };
 
+// DATABASE SEEDING FUNCTIONALITY
 var seedUsers = function() {
   User.find()
     .exec(function(err, users) {
@@ -225,7 +229,6 @@ var seedUsers = function() {
             return;
           }
           console.log('<><> success seeding users');
-          // seedCharProfiles(testCharProfiles);
         });
       }
     })

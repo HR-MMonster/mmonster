@@ -9,7 +9,6 @@ signinRouter
   .route('/user')
   .post(userController.signinUser);
 
-// TODO:
 signinRouter
   .route('/group')
   .post(groupController.signinGroup);
