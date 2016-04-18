@@ -107,19 +107,15 @@ exports.postMessage = function(req, res, next) {
   var gpid = req.params.gpid;
   var message = req.body.message;
 
-  GroupProfile.find({_id: gpid}, {new: true})
-    .exec(function(err, profile) {
+  GroupProfile.update(
+    {_id: gpid},
+    {'$push': {'messages': message}},
+    function(err, numAffected) {
       if (err) {
-        console.error('<><> Error posting message');
+        console.error('<><> Error adding message');
         return;
       }
-      profile.messages.create(message)
-        .exec(function(err, messages) {
-          if (err) {
-            console.error('<><> Error creating message');
-          }
-          res.json(profile);
-        });
+      res.send('posted message');
     });
 };
 

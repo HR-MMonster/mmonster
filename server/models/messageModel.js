@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Shcema;
+var Schema = mongoose.Schema;
 
 var messageSchema = new Schema({
-  message: String,
+  content: String,
   type: String,  // indicates user or group account type
   typeId: Schema.Types.ObjectId, // user or group ID
   created: {
