@@ -73,6 +73,10 @@
         |
         +---/:id
             |___ GET
+            |
+            +--- /messages
+                |
+                +--- POST
     |
     +---- /groupProfiles
         |___ GET
@@ -84,6 +88,10 @@
         |
         +---/:id
             |___ GET
+            |
+            +--- /messages
+                |
+                +--- POST
 
 |
 +--- /logout

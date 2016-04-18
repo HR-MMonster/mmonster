@@ -42,7 +42,6 @@ profileRouter
   .route('/users/:uid/photos')
   .post(util.restrictUserOwnerOnly, upload.single('userPhoto'), userController.uploadPhoto);
 
-
 profileRouter
   .route('/characterProfiles')
   .get(characterProfileController.findCharacterProfiles);
@@ -50,6 +49,10 @@ profileRouter
 profileRouter
   .route('/characterProfiles/:cpid')
   .get(characterProfileController.findCharacterProfileByProfileId);
+
+profileRouter
+  .route('/characterProfiles/:cpid/messages')
+  .post(characterProfileController.postMessage);
 
 profileRouter
   .route('/groups')
@@ -63,7 +66,6 @@ profileRouter
 profileRouter
   .route('/groups/:gid/photos')
   .post(util.restrictGroupOwnerOnly, upload.single('groupPhoto'), groupController.uploadPhoto);
-
 
 profileRouter
   .route('/groups/:gid/groupProfiles')
@@ -82,5 +84,15 @@ profileRouter
 profileRouter
   .route('/groupProfiles/:gpid')
   .get(groupProfileController.findGroupProfileByProfileId);
+
+profileRouter
+  .route('/groupProfiles/:gpid/messages')
+  .post(groupProfileController.postMessage);
+
+mimeExtension = {
+  'image/jpeg': 'jpeg',
+  'image/png': 'png',
+  'image/gif': 'gif'
+};
 
 module.exports = profileRouter;

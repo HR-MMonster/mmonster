@@ -6,8 +6,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
     urlID = $window.localStorage.getItem('id');
   }
 
-  console.log(urlID);
-
   var get = function() {
     return $http({
       method: 'GET',
@@ -18,7 +16,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
   };
 
   var update = function(profile) {
-    console.log(profile);
     $http({
       method: 'PUT',
       url: '/profile/groups/' + urlID,
@@ -53,7 +50,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
       url: '/profile/groups/' + urlID + '/photos',
       data: {groupPhoto: photo}
     }).then(function (resp) {
-      console.log('Success');
       return resp.data.photo;
     }, function (resp) {
       console.log('Error status: ' + resp.status);
@@ -77,9 +73,6 @@ app.factory('GroupProfile', function($http, $location, $window, Upload) {
     ceil: 23
   };
 
-  // Profile.get().then(function(profile) {
-  //   ProfileCtrl.profile = profile;
-  // });
   ProfileCtrl.test = function() {
     console.log(ProfileCtrl.profile);
     console.log(ProfileCtrl.startTime);
