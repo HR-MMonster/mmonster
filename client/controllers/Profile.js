@@ -45,6 +45,8 @@ app.factory('Profile', function($http, $location, $window, Upload) {
     });
   };
 
+  // NOTE: Two post request are being sent to the server upon picture upload when it should only be one.
+  // This issue also occurs in the group profile.
   var updatePhoto = function(photo) {
     return Upload.upload({
       url: '/profile/users/' + urlID + '/photos',
