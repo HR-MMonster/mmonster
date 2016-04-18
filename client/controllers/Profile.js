@@ -6,8 +6,6 @@ app.factory('Profile', function($http, $location, $window, Upload) {
     urlID = $window.localStorage.getItem('id');
   }
 
-  console.log(urlID);
-
   var get = function() {
     return $http({
       method: 'GET',
@@ -18,7 +16,6 @@ app.factory('Profile', function($http, $location, $window, Upload) {
   };
 
   var update = function(profile) {
-    console.log(profile);
     $http({
       method: 'PUT',
       url: '/profile/users/' + urlID,
@@ -42,7 +39,7 @@ app.factory('Profile', function($http, $location, $window, Upload) {
       url: '/profile/users/' + urlID + '/characterProfiles/' + profile._id,
       data: profile
     }).then(function(resp) {
-      console.log(resp.data);
+      console.log('FFXIV Profile Updated');
     }, function(resp) {
       console.log('err status code: ' + resp.statusCode);
     });
@@ -53,7 +50,7 @@ app.factory('Profile', function($http, $location, $window, Upload) {
       url: '/profile/users/' + urlID + '/photos',
       data: {userPhoto: photo}
     }).then(function (resp) {
-      console.log('Success');
+      console.log('Photo Updated');
       return resp.data.photo;
     }, function (resp) {
       console.log('Error status: ' + resp.status);
@@ -77,14 +74,6 @@ app.factory('Profile', function($http, $location, $window, Upload) {
     ceil: 23
   };
 
-  // Profile.get().then(function(profile) {
-  //   ProfileCtrl.profile = profile;
-  // });
-  ProfileCtrl.test = function() {
-    console.log(ProfileCtrl.profile);
-    console.log(ProfileCtrl.startTime);
-  };
-
   ProfileCtrl.upload = function(file) {
     Profile.updatePhoto(file).then(function(img) {
       if (img) ProfileCtrl.profile.photo = img;
@@ -92,7 +81,6 @@ app.factory('Profile', function($http, $location, $window, Upload) {
   };
 
   Profile.get().then(function(profile) {
-    console.log(profile);
     ProfileCtrl.profile = profile;
   });
 
@@ -119,7 +107,6 @@ app.factory('Profile', function($http, $location, $window, Upload) {
 .controller('FFXIVController', function(Profile) {
   var FFXIVCtrl = this;
   FFXIVCtrl.profile = Profile.getFFXIV().then(function(profile) {
-    console.log(profile);
     FFXIVCtrl.profile = profile;
   });
 
@@ -226,10 +213,6 @@ app.factory('Profile', function($http, $location, $window, Upload) {
     abr: 'A8S'
   },
   ];
-
-  FFXIVCtrl.test = function() {
-    console.log(FFXIVCtrl.profile);
-  };
 
   FFXIVCtrl.update = function() {
     Profile.updateFFXIV(FFXIVCtrl.profile);

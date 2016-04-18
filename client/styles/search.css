@@ -87,6 +87,7 @@ a.button {
 .playercard {
   border: 2px solid black;
   margin-bottom: 20px;
+  background-color: #fff
 }
 
 .col-sm-6 {
