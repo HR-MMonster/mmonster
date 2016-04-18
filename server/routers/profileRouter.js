@@ -51,6 +51,10 @@ profileRouter
   .get(characterProfileController.findCharacterProfileByProfileId);
 
 profileRouter
+  .route('/characterProfiles/:cpid/messages')
+  .post(characterProfileController.postMessage);
+
+profileRouter
   .route('/groups')
   .get(groupController.findGroups);
 

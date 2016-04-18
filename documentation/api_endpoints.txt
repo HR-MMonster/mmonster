@@ -73,6 +73,10 @@
         |
         +---/:id
             |___ GET
+            |
+            +--- /messages
+                |
+                +--- POST
     |
     +---- /groupProfiles
         |___ GET

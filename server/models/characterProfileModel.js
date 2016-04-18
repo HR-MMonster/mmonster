@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var User = require('./userModel').model;
-var userSchema = require('./userModel').schema;
+var User = require('./userModel');
 var Schema = mongoose.Schema;
+var messageSchema = require('./messageModel').schema;
 
 var characterProfileSchema = new Schema({
   gameName: {
@@ -52,7 +52,8 @@ var characterProfileSchema = new Schema({
   A5S: Boolean,
   A6S: Boolean,
   A7S: Boolean,
-  A8S: Boolean
+  A8S: Boolean,
+  messages: [messageSchema]
 });
 
 module.exports = mongoose.model('CharacterProfile', characterProfileSchema);
