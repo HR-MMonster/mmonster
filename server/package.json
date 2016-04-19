@@ -4,8 +4,8 @@
   "description": "Server-side code for launching public client site and store data in server database.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha test/serverTest.js"
   },
   "author": "MMonster dev team",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "mongoose": "^4.4.11",
     "morgan": "^1.7.0",
     "multer": "^1.1.0",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "superagent": "^1.8.3"
   }
 }

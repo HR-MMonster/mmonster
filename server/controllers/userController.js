@@ -202,7 +202,6 @@ exports.uploadPhoto = function(req, res, next) {
   if (!photoFileDescription) {
     findUser({_id: userID}, {password: 0, salt: 0})
       .then(function(user) {
-        console.log(user);
         res.json(user);
       })
       .fail(function(err) {
