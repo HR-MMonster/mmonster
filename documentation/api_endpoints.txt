@@ -5,7 +5,7 @@
     |
     +--- /user
         |--- GET (served statically)
-        |___ POST -> success: /signin | failure: /signup (post user image on signup)
+        |___ POST -> success: /signin | failure: /signup (TODO: should signup allow a post of user image on signup)
     |
     +--- /group
         |--- GET (served statically)
@@ -15,7 +15,7 @@
     |
     +--- /user
         |--- GET (served statically)
-        |___ POST -> success: /signin | failure: /signup ???(post user image on signup)
+        |___ POST -> success: /signin | failure: /signup
     |
     +--- /group
         |--- GET (served statically)
@@ -29,7 +29,7 @@
         |
         +--- /:id
             |--- GET
-            |___ PUT (allow update of user image ??) - session required
+            |___ PUT (TODO: allow update of user image ) - session required, will allow updates to any attributes as described in schema
             |
             +--- characterProfiles
                 |--- GET
@@ -37,8 +37,8 @@
                 |
                 +--- /:id
                     |--- GET
-                    |--- DELETE //TODO
-                    |___ PUT - session required
+                    |--- DELETE //TODO: Create route
+                    |___ PUT - session required, will allow update to any attributes as described database schema
             |
             +--- photos
                 |___ POST {userPhoto: [form-data]}
