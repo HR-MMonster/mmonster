@@ -33,21 +33,21 @@
             |
             +--- characterProfiles
                 |--- GET
-                |___ POST - session required
+                |___ POST - session required, will post to any attributes described in database schema.
                 |
                 +--- /:id
                     |--- GET
-                    |--- DELETE
+                    |--- DELETE //TODO
                     |___ PUT - session required
             |
             +--- photos
-                |___ POST
+                |___ POST {userPhoto: [form-data]}
     |
     +--- /groups
         |___ GET
 
         +--- /photos
-            |___ POST
+            |___ POST {userPhoto: [form-data]}
         |
         +--- /:id
             |--- GET
@@ -55,7 +55,7 @@
             |
             +--- groupProfiles
                 |--- GET
-                |___ POST - session required //TODO
+                |___ POST - session required, will post to any attributes described in database schema.
                 |
                 +--- /:id
                     |--- GET
@@ -65,7 +65,7 @@
     |
     +--- /characterProfiles
         |___ GET
-            |___ (query parameters)
+            |___ (query parameters: searches greater than given DPS, duration of time, and any other matching attributes described in schema)
                 |--- dps
                 |--- startTime
                 |--- endTime
@@ -76,11 +76,14 @@
             |
             +--- /messages
                 |
-                +--- POST
+                +--- POST - {message: {
+                                content: [message],
+                                type: [user|group],
+                                typeId: [user|group ID]}}
     |
     +---- /groupProfiles
         |___ GET
-            |___ (query parameters)
+            |___ (query parameters: searches greater than given DPS, duration of time, and any other matching attributes described in schema)
                 |--- dps
                 |--- startTime
                 |--- endTime
@@ -91,7 +94,10 @@
             |
             +--- /messages
                 |
-                +--- POST
+                +--- POST - {message: {
+                                content: [message],
+                                type: [user|group],
+                                typeId: [user|group ID]}}
 
 |
 +--- /logout
